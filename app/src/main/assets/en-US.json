@@ -2010,6 +2010,10 @@
          "content": "INTIME2000"
       },
       {
+         "tag": "UI000730C014",
+         "content": "INTIME Comfort"
+      },
+      {
          "tag": "UI000740C001",
          "content": "自動運転詳細設定"
       },
