@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soft_blue"
+    tools:context=".ui.main.AutomaticOperationActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="55dp" />
+
+    <LinearLayout
+        android:id="@+id/sleepContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="22dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000740C002" />
+
+        <ImageView
+            android:id="@+id/btnSleep"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/frontarrow" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wakeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/white"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sleepContainer">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="22dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000740C003" />
+
+        <ImageView
+            android:id="@+id/btnWake"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/frontarrow" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

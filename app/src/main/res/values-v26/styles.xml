@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LoginInput" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@color/wireframe_dark_grey</item>
+        <item name="android:background">@drawable/login_edit_text</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+</resources>

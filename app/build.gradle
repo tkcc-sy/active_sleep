@@ -1,0 +1,136 @@
+apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.paramount.bed"
+        minSdkVersion 24
+        targetSdkVersion 29
+        versionCode 11102
+        versionName "1.1.1"
+        buildConfigField 'Integer', 'VERSION_MAJOR', '1'
+        buildConfigField 'Integer', 'VERSION_MINOR', '1'
+        buildConfigField 'Integer', 'VERSION_REVISION', '1'
+        buildConfigField 'Boolean', 'DEMO_MODE', 'false'
+        buildConfigField 'String', 'DEFAULT_LOCALE', '"jp-JP"'
+        buildConfigField 'String', 'FIRMWARE_NAME', '"NemuriScan_mattest.mot"'
+        buildConfigField 'String', 'FIRMWARE_CHECKSUM', '"061FE710"'
+        buildConfigField 'Integer', 'FIRMWARE_MAJOR', '1'
+        buildConfigField 'Integer', 'FIRMWARE_MINOR', '1'
+        buildConfigField 'Integer', 'FIRMWARE_REVISION', '1'
+        buildConfigField 'Integer', 'MAX_RETRY','2'
+        buildConfigField 'Integer', 'REQUEST_TIME_OUT','100'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++17"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.0.0-rc02'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    testImplementation 'junit:junit:4.12'
+
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
+
+    implementation 'me.relex:circleindicator:1.2.2@aar'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.gdacciaro:iosdialog:1.0.3'
+    implementation 'com.itlgl:iosdialog:1.0.1'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
+
+    implementation 'com.contrarywind:Android-PickerView:4.1.6'
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+
+
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:3.11.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.11.0"
+
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.0'
+
+    implementation 'joda-time:joda-time:2.10';
+
+
+    implementation 'com.bigkoo:svprogresshud:1.0.6';
+
+    implementation 'jp.wasabeef:blurry:2.1.1'
+    implementation 'jp.wasabeef:picasso-transformations:2.1.0'
+
+    implementation 'com.facebook.android:facebook-login:[5,6)'
+
+    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
+    implementation 'com.twitter.sdk.android:tweet-ui:3.1.1'
+    implementation 'com.twitter.sdk.android:tweet-composer:3.1.1'
+
+//    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
+
+    implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
+    implementation 'androidx.multidex:multidex:2.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.labo.kaji:fragmentanimations:0.1.1'
+
+    implementation 'com.google.firebase:firebase-core:18.0.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
+
+    implementation 'com.karumi:dexter:5.0.0'
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0'
+    implementation 'androidx.work:work-runtime:2.0.1'
+
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+}
+

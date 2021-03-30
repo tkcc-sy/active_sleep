@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context="com.paramount.bed.ui.main.HomeActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:gravity="center_horizontal"
+
+        android:orientation="vertical">
+
+        <ToggleButton
+            android:id="@+id/btnHamburger"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/drawer_toggle"
+            android:checked="true"
+            android:paddingTop="1dp"
+            android:paddingEnd="1dp"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@id/buttonAutoWrap"
+            app:layout_constraintStart_toEndOf="@id/btnHamburger"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ToggleButton
+                android:id="@+id/tbDay"
+                style="@style/DayMenuToggle"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:checked="true"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="ToggleButton"
+                android:textOff="UI000500C001"
+                android:textOn="UI000500C001"
+                android:textSize="13sp" />
+
+            <ToggleButton
+                android:id="@+id/tbWeek"
+                style="@style/WeekMenuToggle"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="ToggleButton"
+                android:textOff="UI000500C002"
+                android:textOn="UI000500C002"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonAutoWrap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btnAuto"
+                style="@style/RegistrationButton"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:ellipsize="middle"
+                android:paddingLeft="8dp"
+                android:paddingTop="0dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="0dp"
+                android:singleLine="true"
+                android:text="UI000500C003"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnAutoWhite"
+                style="@style/ButtonAutoOutlineText"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:ellipsize="middle"
+                android:paddingLeft="8dp"
+                android:paddingTop="0dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="0dp"
+                android:singleLine="true"
+                android:text="UI000500C003"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <WebView
+            android:id="@+id/wvHome"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnHamburger">
+
+        </WebView>
+
+
+        <ToggleButton
+            android:id="@+id/btnHomeMain"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/btn_home_main_toggle"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/contentMainMenu"
+            android:elevation="5dp" />
+
+        <LinearLayout
+            android:id="@+id/contentMainMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginBottom="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:elevation="5dp"
+            android:visibility="gone">
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_timer"
+                android:id="@+id/btnTimer"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"/>
+
+            <ImageButton
+                android:id="@+id/btn_snore"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_microphone"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contentBirdie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal"
+            android:gravity="top"
+            android:elevation="5dp"
+            android:padding="17.5dp"
+            android:background="@drawable/birdie_backgroud_message"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtMessageBirdie"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="メッセージ:%NAME%さんが見守りました"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"/>
+
+            <ImageButton
+                android:id="@+id/btnCloseBridie"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/close_birdie"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnRemote"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/selector_img_home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#996c6c6c"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <WebView
+            android:id="@+id/wvDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnHamburger"
+            android:elevation="10dp">
+
+        </WebView>
+
+        <include
+            android:id="@+id/dialogSettingAuto"
+            layout="@layout/dialog_setting_auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/dialogShare"
+            layout="@layout/dialog_share"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
+
+        <include
+            android:id="@+id/dialogTopNewsSingle"
+            layout="@layout/dialog_top_news_single"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/drawer"
+        layout="@layout/layout_home_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginRight="40dp"
+        android:gravity="center_horizontal" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

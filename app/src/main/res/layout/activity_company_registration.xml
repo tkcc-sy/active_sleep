@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.registration.CompanyRegistrationActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tiny_space"
+        android:layout_marginBottom="@dimen/small_space"
+        android:progressTint="@color/dot_active"
+        android:secondaryProgressTint="@color/dot_inactive" />
+
+    <TextView
+        android:layout_marginEnd="@dimen/medium_space"
+        android:layout_marginStart="@dimen/medium_space"
+        android:id="@+id/textView7"
+        style="@style/RegistrationHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="UI000250C003" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:text="UI000250C004" />
+
+        <EditText
+            android:id="@+id/etCompanyCode"
+            style="@style/InputNomargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="UI000250C011"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginTop="50dp"
+            android:text="UI000250C002" />
+
+        <TextView
+            android:id="@+id/tvGuideBottom"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginTop="@dimen/medium_space"
+            android:text="UI000250C005" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNext"
+        style="@style/RegistrationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:text="UI000250C006"
+        android:textSize="15sp" />
+</LinearLayout>

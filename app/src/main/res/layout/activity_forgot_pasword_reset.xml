@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.login.ForgotPaswordResetActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/header" />
+
+    <ProgressBar
+        android:max="1000"
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tiny_space"
+        android:layout_marginBottom="@dimen/small_space"
+        android:progressTint="@color/dot_active"
+        android:secondaryProgressTint="@color/dot_inactive" />
+
+    <TextView
+        android:id="@+id/headerTitle"
+        android:textStyle="bold"
+        style="@style/HeadingRegistration"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="UI000493C002"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/passwordHeader"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:text="UI000493C003" />
+
+        <EditText
+            android:hint="UI000493C013"
+            android:id="@+id/etPassword"
+            style="@style/InputNomargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingVertical="5dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/confirmPasswordHeader"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:text="UI000493C004" />
+
+        <EditText
+            android:hint="UI000493C014"
+            android:id="@+id/etConfirmPassword"
+            style="@style/InputNomargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingVertical="5dp"
+            android:text="" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSave"
+        style="@style/RegistrationButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:width="280dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:text="UI000493C005"
+        app:srcCompat="@color/dot_active" />
+
+</LinearLayout>

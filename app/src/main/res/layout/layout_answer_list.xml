@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ToggleButton
+    android:id="@+id/toggleButton"
+    android:layout_height="50dp"
+    android:layout_marginBottom="8dp"
+    style="@style/QuestionnaireButton"
+    xmlns:android="http://schemas.android.com/apk/res/android"  android:layout_width="match_parent"/>
+
+

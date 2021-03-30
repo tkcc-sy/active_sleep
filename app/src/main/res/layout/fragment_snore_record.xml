@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.SnoreRecordFragment"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/card_background"
+    android:elevation="5dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        tools:layout_editor_absoluteX="5dp">
+
+        <TextView
+            style="@style/HeaderSnoreDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:text="UI000560C009"
+            android:textColor="#49B89A"
+            android:textSize="24sp" />
+
+        <TextView
+            style="@style/SubHeaderSnoreDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UI000560C010"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/TitleSnoreDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="30dp"
+        android:text="UI000560C011"
+        android:textColor="#50b58d"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout17" />
+
+
+    <TextView
+        android:id="@+id/textView15"
+        style="@style/Body1SnoreDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="30dp"
+        android:text="UI000560C012"
+        android:textColor="#5E8DA9"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnStopSnore"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.493"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <LinearLayout
+        android:id="@+id/btnStopSnore"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/snore_button"
+        android:clickable="true"
+        android:gravity="center"
+        android:visibility="visible"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/txtStopSnore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UI000560C013"
+            android:textColor="@android:color/white"
+            android:textScaleX=".9"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/analyze_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="15dp"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="@color/background_light_transparent">
+
+        <com.github.rahatarmanahmed.cpv.CircularProgressView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/progress_view"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="4"
+            android:padding="15dp"
+            app:cpv_animAutostart="true"
+            app:cpv_color="#9C9C9C"
+            app:cpv_indeterminate="true"
+            app:cpv_thickness="2.5dp"
+            android:background="@drawable/border_corner"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

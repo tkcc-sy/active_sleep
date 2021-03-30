@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soft_blue"
+    android:visibility="visible"
+    android:orientation="vertical"
+    tools:context=".ui.main.SnoreSettingActivity">
+
+    <include
+        layout="@layout/header_snore"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"/>
+
+    <LinearLayout
+        android:id="@+id/wrap1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:textSize="14sp"
+            style="@style/TextDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000561C002" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/sbEnableStorage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            app:sb_checked_color="#00bed2"
+            app:sb_checkline_color="@android:color/transparent"
+            app:sb_uncheckcircle_color="@android:color/transparent" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/wrap2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:textSize="14sp"
+            style="@style/TextDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000561C003" />
+
+    </LinearLayout>
+
+</LinearLayout>

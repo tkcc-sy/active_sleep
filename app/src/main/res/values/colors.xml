@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#00576A</color>
+    <color name="colorPrimary">#6092af</color>
+    <color name="colorAccent">#4267b2</color>
+    <color name="colorNotification">#005264</color>
+    <color name="primary_disabled">#D8E2E6</color>
+    <color name="btn_disabled">#f3becdd6</color>
+
+    <color name="dot_active">#00c2d9</color>
+    <color name="dot_inactive">#cfdee7</color>
+
+    <color name="text_light">#bde0ea</color>
+    <color name="text_blue">#6092af</color>
+
+    <color name="text_primary">#00576a</color>
+    <color name="text_secondary">#6092af</color>
+
+    <color name="wireframe_blue">#29c0ff</color>
+    <color name="wireframe_dark_grey">#554f4b</color>
+    <color name="soft_grey">#dcdcdc</color>
+    <color name="wireframe_light_grey">#f9f9f9</color>
+
+    <color name="blue_facebook">#4267b2</color>
+    <color name="blue_twitter">#1da1f2</color>
+    <color name="red_google">#dc4e41</color>
+    <color name="red">#ff4f5d</color>
+    <color name="red_pressed">#c22532</color>
+
+    <color name="yellow">#FFEE58</color>
+
+    <color name="soft_blue">#ebf1f1</color>
+    <color name="light_blue">#00c2d9</color>
+    <color name="slight_blue">#b2cdd2</color>
+
+    <color name="white_trans">#41ffffff</color>
+    <color name="dark_grey_trans">#167e7e7e</color>
+
+    <color name="dashboard_accent">#80dfe9</color>
+    <color name="dashboard_accent2">#1a6879</color>
+    <color name="dialog_accent">#6092af</color>
+    <color name="matress_accent">#0f5988</color>
+    <color name="payment_solid_bg">#eff3f3</color>
+
+    <color name="button_active">#00bed2</color>
+
+    <color name="background_dark_transparent">#b4000000</color>
+    <color name="hint_color" >#c7c7c7</color>
+    <color name="separator_color" >#c7c7c7</color>
+
+    <color name="reg_gray" >#EBF1F1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="separator_gray">#aaaaaa</color>
+
+    <color name="status_bar_trans">#00fcfcfc</color>
+    <color name="dehumidifier_on_text_color">#FFFFFF</color>
+    <color name="dehumidifier_off_text_color">#00576A</color>
+
+    <color name="background_snore">#49B89A</color>
+    <color name="header_snore">#71dde5</color>
+    <color name="sub_header_snore">#b6ceda</color>
+    <color name="body1_snore">#0072ba</color>
+    <color name="title_snore">#48cad8</color>
+    <color name="background_light_transparent">#4D000000</color>
+
+    <color name="weekly_score_review_chart_1">#00dac9</color>
+    <color name="weekly_score_review_chart_2">#00e9aa</color>
+
+    <!-- Recommend fragment -->
+    <color name="recommend_font">#1CB3C5</color>
+
+    <!-- Recommend fragment -->
+    <color name="recommend_history_grey">#e2e9e5</color>
+    <color name="recommend_history_node">#5E8DA8</color>
+    <color name="recommend_history_font">#7090a0</color>
+
+    <color name="snore_status_bar">#49B89A</color>
+
+</resources>

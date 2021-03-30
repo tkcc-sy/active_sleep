@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_back_width">28dp</dimen>
+    <dimen name="header_back_height">15dp</dimen>
+    <dimen name="tiny_space">4dp</dimen>
+    <dimen name="medium_space">16dp</dimen>
+    <dimen name="header_top_margin">18dp</dimen>
+    <dimen name="small_space">8dp</dimen>
+    <dimen name="large_space">24dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="mattress_space">3dp</dimen>
+    <dimen name="mattress_height">17dp</dimen>
+    <dimen name="mattress_width">34dp</dimen>
+</resources>

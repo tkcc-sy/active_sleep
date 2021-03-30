@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soft_blue"
+    tools:context=".ui.main.MyAccountSaveActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/wrap1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            android:id="@+id/textNameCaption"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="UI000720C002" />
+
+        <TextView
+            android:id="@+id/textName"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="山田太郎" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wraps1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap1">
+
+        <TextView
+            android:id="@+id/textEmailCaption"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="left"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="UI000720C011" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:gravity="right|center_vertical">
+
+            <ImageView
+                android:id="@+id/SNSIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:gravity="right|center_vertical"
+                android:src="@drawable/icon_sns_facebook"
+                android:tint="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/textEmail"
+                style="@style/TextRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:layout_gravity="center_vertical"
+                android:gravity="right|center_vertical"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="taro.yassssssssssssssssmada@gmail.com" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wraps2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wraps1">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000720C012" />
+
+        <TextView
+            android:id="@+id/textPhone"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="010000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wrap3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wraps2">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000720C004" />
+
+        <TextView
+            android:id="@+id/textBirthday"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="1900年 12月 12日" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/wrap4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap3">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000720C005" />
+
+        <TextView
+            android:id="@+id/textGender"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="男性" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wrap5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap4">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000720C006" />
+
+        <TextView
+            android:id="@+id/textZip"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="520-0461" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wrap6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap5">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000720C007" />
+
+        <TextView
+            android:id="@+id/textHeight"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="170cm" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wrap7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap6">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000720C008" />
+
+        <TextView
+            android:id="@+id/textWeight"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="60kg" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wrap8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap7">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000720C009" />
+
+        <TextView
+            android:id="@+id/textCompanyCode"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="999999" />
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/mattressSettingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap8">
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000720C017" />
+
+        <TextView
+            android:id="@+id/textHardness"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="right" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnSaveAccount"
+        style="@style/RegistrationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
+        android:text="UI000720C010"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

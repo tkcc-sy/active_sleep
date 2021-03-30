@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/heading"
+        style="@style/RegistrationHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UI000410C002"
+        android:layout_marginTop="30dp"
+        android:lineSpacingExtra="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/heading">
+
+        <TextView
+            android:id="@+id/textview9"
+            style="@style/TextRegistration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="16dp"
+            android:text="UI000410C003"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            style="@style/InputNomargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="UI000410C004"
+            android:textColorHint="@color/hint_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview9"/>
+
+        <TextView
+            android:id="@+id/textview10"
+            style="@style/TextRegistration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:text="UI000410C005"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etEmail"/>
+
+
+        <EditText
+            android:id="@+id/etPassword"
+            style="@style/InputNomargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="UI000410C006"
+            android:inputType="textPassword"
+            android:text=""
+            android:textColorHint="@color/hint_color"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview10"/>
+
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            style="@style/InputNomargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_gray"
+            android:ems="10"
+            android:hint="UI000410C007"
+            android:inputType="textPassword"
+            android:textColorHint="@color/hint_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRegister"
+        style="@style/RegistrationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:textSize="15sp"
+        android:text="UI000410C008"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

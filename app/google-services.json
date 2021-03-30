@@ -1,0 +1,145 @@
+{
+  "project_info": {
+    "project_number": "622649747999",
+    "firebase_url": "https://active-sleep-sys-1547448817694.firebaseio.com",
+    "project_id": "active-sleep-sys-1547448817694",
+    "storage_bucket": "active-sleep-sys-1547448817694.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622649747999:android:e9c9aa8549fd3725",
+        "android_client_info": {
+          "package_name": "com.paramount.bed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622649747999-d0cl301ad3v303jf6grbnilonjeduhke.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paramount.bed",
+            "certificate_hash": "8d9c8921af186bc9c841dded79f61a05251da3b8"
+          }
+        },
+        {
+          "client_id": "622649747999-dfnm2cr8nof4mk0s930g6d27r886990j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paramount.bed",
+            "certificate_hash": "a5285d188cbe4bfbddab327a82c98d9dee02963d"
+          }
+        },
+        {
+          "client_id": "622649747999-qr1rul80mdc7mvh7a0g1tm47j58uojor.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paramount.bed",
+            "certificate_hash": "d2598e4ec7782f6cef6a2de0990d31e8df7aa369"
+          }
+        },
+        {
+          "client_id": "622649747999-4bkcoel0jd0qb6e53stmanicuntn8ops.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjwfnm3zdhSnnWVFU6ShvROBxo9DStbkE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622649747999-4bkcoel0jd0qb6e53stmanicuntn8ops.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "622649747999-beabmd38hostaqsktu05uqmoj9hiiaor.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.paramount.asseye"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622649747999:android:bc3c046e97023470",
+        "android_client_info": {
+          "package_name": "com.paramount.monitoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622649747999-hfi62g6ne7uvd4upodgra8ckg5l5e4ic.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paramount.monitoring",
+            "certificate_hash": "8d9c8921af186bc9c841dded79f61a05251da3b8"
+          }
+        },
+        {
+          "client_id": "622649747999-4nlncqpc6d52nqp7819n16qcum0jplg4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paramount.monitoring",
+            "certificate_hash": "a5285d188cbe4bfbddab327a82c98d9dee02963d"
+          }
+        },
+        {
+          "client_id": "622649747999-ja3bckev8s8achf43rcejjfokqbq70ku.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paramount.monitoring",
+            "certificate_hash": "d2598e4ec7782f6cef6a2de0990d31e8df7aa369"
+          }
+        },
+        {
+          "client_id": "622649747999-4bkcoel0jd0qb6e53stmanicuntn8ops.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjwfnm3zdhSnnWVFU6ShvROBxo9DStbkE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622649747999-4bkcoel0jd0qb6e53stmanicuntn8ops.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "622649747999-beabmd38hostaqsktu05uqmoj9hiiaor.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.paramount.asseye"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

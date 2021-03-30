@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/heading"
+        style="@style/HeadingRegistration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="UI000320C002"
+        android:textSize="16sp"
+        android:textColor="#00576A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview9"
+        style="@style/TextRegistration"
+        android:lines="2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="26dp"
+        android:textColor="#5D92AC"
+        android:text="UI000320C003"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:textSize="14dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heading" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/wifiList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview9"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/textView11"
+        style="@style/TextRegistration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="34dp"
+        android:textSize="12sp"
+        android:textColor="#5D92AC"
+        android:text="UI000320C004"
+        android:lineSpacingExtra="5dp"
+        app:layout_constraintBottom_toTopOf="@id/btnRescan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wifiList"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/btnRescan"
+        style="@style/RegistrationButton"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/slider_button"
+        android:paddingHorizontal="40dp"
+        android:text="UI000320C005"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/textView11"
+        app:layout_constraintBottom_toTopOf="@id/btnManualConfig"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/btnManualConfig"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        style="@style/HeadingRegistration"
+        android:text="UI000320C006"
+        android:textSize="15sp"
+        android:textColor="@drawable/selector_txt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

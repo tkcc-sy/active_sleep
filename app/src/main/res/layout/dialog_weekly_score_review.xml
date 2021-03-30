@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/dialog_weekly">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvWeeklyReviewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        android:background="@drawable/alarm_dialogue"
+        app:cardCornerRadius="7dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/ivClose"
+                        android:src="@drawable/popup_modal_close1" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    style="@style/RegistrationSubHeader"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00576A"
+                    android:textSize="20sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:lines="2"/>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/weekly_score_review"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#EFF3F3"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvAdviceTitle"
+                        android:textColor="#00576A"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvAdviceContent"
+                        android:background="@drawable/weekly_score_advice_bg"
+                        android:paddingTop="20dp"
+                        android:paddingLeft="25dp"
+                        android:paddingBottom="20dp"
+                        android:paddingRight="25dp"
+                        android:gravity="left"
+                        android:textSize="14sp"
+                        android:textColor="#6092AF" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnToWeeklyScore"
+                    style="@style/RegistrationButtonQuis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:minWidth="200dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

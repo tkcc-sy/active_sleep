@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_on" android:state_enabled="true" android:state_checked="true" android:state_window_focused="false" />
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="true"  android:state_checked="false" android:state_window_focused="false" />
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_on" android:state_enabled="true"  android:state_checked="true" android:state_pressed="true" />
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_on" android:state_enabled="true"  android:state_checked="false" android:state_pressed="true" />
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_on" android:state_enabled="true"  android:state_checked="true" android:state_focused="true"></item>
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="true"  android:state_checked="false" android:state_focused="true"></item>
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="true"  android:state_checked="false"></item>
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_on" android:state_enabled="true"  android:state_checked="true"></item>
+
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="false" android:state_checked="true" android:state_window_focused="false" />
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="false"  android:state_checked="false" android:state_window_focused="false" />
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="false"  android:state_checked="true" android:state_pressed="true" />
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="false"  android:state_checked="false" android:state_pressed="true" />
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="false"  android:state_checked="true" android:state_focused="true"></item>
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="false"  android:state_checked="false" android:state_focused="true"></item>
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="false"  android:state_checked="false"></item>
+
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_enabled="false"  android:state_checked="true"></item>
+</selector>

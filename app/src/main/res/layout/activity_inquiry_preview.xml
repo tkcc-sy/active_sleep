@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soft_blue"
+    android:descendantFocusability="beforeDescendants"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".ui.main.InquiryPreviewActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/header_progress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+
+    <LinearLayout
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separator">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/wrap1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/HeadingRegistration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center|left"
+                    android:text="UI000781C002"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wrap2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/white"
+                android:paddingBottom="12dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="12dp"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wrap1">
+
+                <TextView
+                    android:id="@+id/tvInquiryType"
+                    style="@style/TextRegistration"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:gravity="left|center"
+                    android:text="UI000781C003" />
+
+
+                <TextView
+                    android:id="@+id/textInquiryType"
+                    style="@style/HeadingRegistration"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="none"
+                    android:gravity="right|center"
+                    android:text="お問い合わせ種別"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wrap3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/white"
+                android:paddingBottom="12dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="12dp"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wrap2">
+
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/tvProduct"
+                    style="@style/TextRegistration"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:text="UI000781C004" />
+
+
+                <TextView
+                    android:id="@+id/textProduct"
+                    style="@style/HeadingRegistration"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="none"
+                    android:gravity="right|center"
+                    android:text="お問い合わせ種別"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wrap4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/white"
+                android:paddingBottom="12dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="12dp"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wrap3">
+
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/tvEmail"
+                    style="@style/TextRegistration"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:text="UI000781C005" />
+
+
+                <TextView
+                    android:id="@+id/textEmail"
+                    style="@style/HeadingRegistration"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="none"
+                    android:gravity="right|center"
+                    android:text="お問い合わせ種別"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/wrap7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/white"
+                android:paddingBottom="12dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="12dp"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wrap4">
+
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/tvName"
+                    style="@style/TextRegistration"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:text="UI000781C007" />
+
+
+                <TextView
+                    android:id="@+id/textName"
+                    style="@style/HeadingRegistration"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="none"
+                    android:gravity="right|center"
+                    android:text="お問い合わせ種別"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/wrap8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/white"
+                android:paddingBottom="12dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="12dp"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wrap7">
+
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/tvPhoneNumber"
+                    style="@style/TextRegistration"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:text="UI000781C008" />
+
+
+                <TextView
+                    android:id="@+id/textPhoneNumber"
+                    android:textColor="@color/colorPrimaryDark"
+                    style="@style/HeadingRegistration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="none"
+                    android:gravity="right|center"
+                    android:text="お問い合わせ種別"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wrap9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:paddingBottom="12dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wrap8">
+
+                <TextView
+                    android:id="@+id/tvInquiry"
+                    style="@style/TextRegistration"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:text="UI000781C009" />
+
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:id="@+id/textInquiry"
+                    style="@style/InputTransparentMultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start"
+                    android:fadeScrollbars="false"
+                    android:scrollbars="vertical"
+                    android:text=""
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnNext"
+        style="@style/RegistrationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:text="UI000781C010"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroll_view"
+        app:layout_constraintVertical_bias="1.0" />
+
+</LinearLayout>

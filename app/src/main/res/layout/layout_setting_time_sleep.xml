@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical">
+
+    <LinearLayout
+        android:id="@+id/linStatusTimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/tvTitleSetting"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="22dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="UI000750C013"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical|right">
+
+            <TextView
+                android:id="@+id/tvStatusTimer"
+                style="@style/HeadingRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:paddingTop="8dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="8dp"
+                android:text="UI000750C014"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imgArrowTimer"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/pull_down" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

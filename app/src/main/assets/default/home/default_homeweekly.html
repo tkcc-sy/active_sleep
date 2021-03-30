@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Active Sleep </title>
+
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+                @font-face {
+                    font-family: AvenirRoman;
+                    src: url("avenir.otf");
+                }
+            </style>
+</head>
+<style type="text/css">
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+
+        body{
+            overflow: hidden;
+        }
+
+        html{
+            overflow: hidden;
+        }
+
+        .tt-content{
+            font-size: 16px;
+            color: #044a63;
+            font-weight: bold;
+            font-family: AvenirRoman;
+        }
+
+        #parent-tooltip{
+            height: 168px;
+            width: 50px;
+            background-color: transparent;
+            border: none;
+            border-radius: 19px;
+            background-color: rgba(0,197,166, 0.4);
+            text-align: center;
+            opacity: 1;
+            position: absolute;
+        }
+
+        #dot-tooltip{
+            height: 14px;
+            width: 14px;
+            border-radius: 14px;
+            background-color: rgb(0,197,166);
+            border: 2px solid white;
+            margin-left: calc(50% - 7px);
+            margin-bottom: 3px;
+        }
+
+        #date-tooltip{
+            color: #00c5a6;
+            font-size: 10px;
+            margin-top: 14px;
+            font-weight: bold;
+            background-color: #99e8db;
+            width: 50px;
+            margin-left: calc(50% - 25px);
+            font-family: AvenirRoman;
+            border-radius: 10px;
+        }
+
+        #day-tooltip{
+            color: #42c2f4;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .detail-box-list-weekly:last-child{
+            margin-right: 0px;
+        }
+        .db-circle-shd{
+            position: absolute;
+            top: -25px;
+            left: 25%;
+            height: 48px;
+            width: 50%;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.4), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+            background-color: white;
+        }
+
+        .db-circle img{
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .calendar-pick{
+            position: absolute;
+            left: 15px;
+            width: 30px;
+            z-index: 20;
+            top: -4px;
+        }
+
+        .calendar-pick img{
+            width: 100%;
+        }
+
+        .modal {
+          text-align: center;
+          padding: 0!important;
+        }
+
+        .modal:before {
+          content: '';
+          display: inline-block;
+          height: 100%;
+          vertical-align: middle;
+          margin-right: -4px;
+        }
+
+        .modal-dialog {
+          display: inline-block;
+          text-align: left;
+          vertical-align: middle;
+        }
+
+        .modal-backdrop{
+            background-color: transparent;
+        }
+
+        .btn-close-notif{
+            width: 20px;
+            background-color: #00576a;
+            color: white;
+            /* padding: 3px; */
+            border-radius: 20px;
+            height: 20px;
+            padding-left: 4px;
+            display: inline-block;
+        }
+
+        .notif{
+            width: 287px;
+            /*height: 40px;*/
+            color: #00576a;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 0px 18px 18px 0px;
+            position: absolute;
+            bottom: 20px;
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+            z-index: 10;
+            left: -300px;
+            overflow: hidden;
+        }
+
+        .notif-content{
+            width: calc(100% - 25px);
+            display: inline-block;
+            font-size: 13px;
+            color: rgb(0,87,106);
+            font-weight: bold;
+        }
+
+        .notif-content span{
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .animation-layer{
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            z-index: 2;
+            background-color: white;
+        }
+
+        .monitoring-icon{
+            width: 40px;
+            position: absolute;
+            left: 15px;
+            top: 30px;
+            display: none;
+        }
+
+        .monitoring-icon img{
+            width: 100%;
+        }
+
+        .swipe-handler{
+            width: calc(100% - 45px);
+            position: absolute;
+            height: 40px;
+            /* border: 1px solid black; */
+            margin-left: 45px;
+            z-index: 5;
+            top: -20px;
+        }
+
+
+
+
+
+
+
+
+
+
+        .score-container{
+            width: 28vh;
+            height: 28vh;
+            padding: 7.4px;
+            border: 1px solid #ddd;
+            border-radius: 52vw;
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+            margin-left: calc(50% - 14vh);
+            margin-top: 1.5vh;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+
+        #score {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .s-body{
+            font-size: 10vh;
+            color: rgb(0,197,166);
+            height: 10vh;
+            line-height: 10vh;
+            font-family: AvenirRoman;
+        }
+
+        .score-text{
+            position: absolute;
+            top: 18%;
+            left: calc(50% - 7vh);
+            text-align: center;
+            width: 14vh;
+        }
+
+        .s-header{
+            color: rgb(96,146,175);
+            margin-bottom: 3vw;
+            font-size: 2.2vh;
+        }
+
+        .s-footer{
+            color: rgb(0,87,106);
+            margin-top: 1vw;
+            /* font-weight: bold; */
+            font-size: 2vh;
+        }
+
+        .small-ext{
+            position: absolute;
+            right: -8px;
+            top: 10.8vh;
+            font-size: 3.8vw;
+            color: #226c88;
+        }
+
+        .home-summary{
+            color: rgb(96,146,175);
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+            padding: 0px 15px;
+            text-align: justify;
+            font-size: 3.9vw;
+            line-height: 7vw;
+            height: 13vw;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .score-summary-cont{
+            width: 100%;
+            text-align: center;
+            margin-top: 6vh;
+            margin-bottom: 3vh;
+            padding: 0px 15px;
+        }
+
+        .db-circle{
+            position: absolute;
+            top: -25px;
+            left: 25%;
+            height: 13vw;
+            width: 50%;
+            border-radius: 13vw;
+            background-color: white;
+            z-index: 2;
+        }
+
+        .detail-box-data{
+            position: absolute;
+            width: 100%;
+            z-index: 3;
+            top: 5vw;
+            /* height: 100%; */
+            /* bottom: 5vw; */
+        }
+
+        .db-body-lightblue{
+            color: #ccf2f6;
+            font-size: 7vw;
+            font-family: AvenirRoman;
+            line-height: 7vw;
+            margin-top: 1vw;
+            margin-bottom: 1vw;
+        }
+
+        .db-body-blue{
+            color: rgb(0,190,210);
+            font-size: 7vw;
+            font-family: AvenirRoman;
+            line-height: 7vw;
+            margin-top: 1vw;
+            margin-bottom: 1vw;
+        }
+
+        .db-body-orange{
+            color: rgb(255,141,121);
+            font-size: 7vw;
+            font-family: AvenirRoman;
+            line-height: 7vw;
+            margin-top: 1vw;
+            margin-bottom: 1vw;
+        }
+
+        .db-body-red{
+            color: #f96868;
+            font-size: 7vw;
+            font-family: AvenirRoman;
+            line-height: 7vw;
+            margin-top: 1vw;
+            margin-bottom: 1vw;
+        }
+
+        .db-body-yellow{
+            color: rgb(255,189,106);
+            font-size: 7vw;
+            font-family: AvenirRoman;
+            line-height: 7vw;
+            margin-top: 1vw;
+            margin-bottom: 1vw;
+        }
+
+        .db-header{
+            color: rgb(96,146,175);
+            font-size: 3vw;
+        }
+
+        .db-footer{
+            color: rgb(96,146,175);
+            font-size: 3vw;
+        }
+
+        .detail-box{
+            position: absolute;
+            width: 100%;
+            height: 25vw;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+            background-color: white;
+        }
+
+        .detail-box-list-weekly{
+            position: relative;
+            display: inline-block;
+            width: calc(32% - 7px);
+            height: 25vw;
+            text-align: center;
+            margin-left: 0px;
+            margin-right: 10px;
+        }
+
+        .score-left{
+            position: absolute;
+            right: calc(50% + 10vh);
+            width: 16vh;
+            height: 16vh;
+            background-color: rgb(46,200,178);
+            border-radius: 15vh;
+            z-index: 1;
+            top: 8vh;
+        }
+
+        .score-right{
+            position: absolute;
+            left: calc(50% + 10vh);
+            width: 16vh;
+            height: 16vh;
+            background-color: rgb(46,200,178);
+            border-radius: 15vh;
+            z-index: 1;
+            top: 8vh;
+        }
+
+        .score-right .score-small{
+            text-align: center;
+            font-size: 4vh;
+            color: white;
+            padding-left: 2vw;
+        }
+
+        .score-right .score-small-title{
+            text-align: center;
+            color: white;
+            margin-top: 4vh;
+            font-size: 2vh;
+            padding-left: 4vw;
+        }
+
+        .score-right .xsmall-ext{
+            right: 3vh;
+            color: white;
+            top: 8.8vh;
+            position: absolute;
+            font-size: 2vh;
+            opacity: 0.75;
+        }
+
+        .score-left .score-small{
+            text-align: center;
+            font-size: 4vh;
+            color: white;
+            padding-right: 5vw;
+        }
+
+        .score-left .score-small-title{
+            text-align: center;
+            color: white;
+            margin-top: 4vh;
+            font-size: 2vh;
+            padding-right: 1vw;
+        }
+
+        .score-left .xsmall-ext{
+            right: 5vh;
+            color: white;
+            top: 8.8vh;
+            position: absolute;
+            font-size: 2vh;
+            opacity: 0.75;
+        }
+
+        .arrow-container{
+            position: absolute;
+            bottom: 1.5vh;
+            z-index: 10;
+            height: 4vh;
+            width: 100%;
+        }
+
+        .arrow-left{
+            position: absolute;
+            width: 4vh;
+            height: 4vh;
+            left: 120px;
+            top: 0px;
+            padding: 0vh 1vh 1vh 1vh;
+            opacity: 0.4;
+        }
+
+        .arrow-left img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .arrow-right{
+            position: absolute;
+            width: 4vh;
+            height: 4vh;
+            right: 120px;
+            top: 0px;
+            padding: 0vh 1vh 1vh 1vh;
+            opacity: 0.4;
+        }
+
+        .arrow-right img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .arrow-right.disabled{
+            opacity: 0.2;
+        }
+
+        .sm-more{
+            display: none;
+            position: absolute;
+            right: 15px;
+            top: 6.5vw;
+            background-color: white;
+        }
+
+        #summary{
+            word-break: break-all;
+        }
+
+        #total_score.score100{
+            margin-left: -3.5vw;
+        }
+
+        #total_score_ext.score100{
+            right: -20px;
+        }
+    </style>
+<body id="body_page" class="nav-sm">
+<div class="score-container" id="weekly_score_detail" data-color="0">
+    <div id="score"></div>
+    <div class="score-text">
+        <div class="s-header fscale">週間スコア</div>
+        <div class="s-body fscale" id="total_score"></div>
+        <span class="small-ext fscale" id="total_score_ext">点</span>
+        <div class="s-footer fscale">スコア詳細 ></div>
+    </div>
+</div>
+<div class="score-left">
+    <div class="score-small-title fscale">睡眠</div>
+    <div class="score-small fscale" id="sleep_score"></div>
+    <span class="xsmall-ext fscale">点</span>
+</div>
+
+<div class="score-right">
+    <div class="score-small-title fscale">生活リズム</div>
+    <div class="score-small fscale" id="daily_life"></div>
+    <span class="xsmall-ext fscale">点</span>
+</div>
+<div class="home-summary fscale">
+    <span id="summary"></span>
+    <span class="sm-more">...more</span>
+</div>
+
+<div class="score-summary-cont">
+    <div class="detail-box-list-weekly" id="cont_detail_1" data-id="1" data-color="3">
+        <div class="db-circle-shd"></div>
+        <div class="db-circle">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIMAAABmCAYAAADoFCJXAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA+5pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ1dWlkOjY1RTYzOTA2ODZDRjExREJBNkUyRDg4N0NFQUNCNDA3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZDMDQ5M0Q3OUZBRDExRThCNDI3RjkzMzdFQUU3MDhCIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZDMDQ5M0Q2OUZBRDExRThCNDI3RjkzMzdFQUU3MDhCIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg1M2VhNjk3LWVjY2QtNDkwMy1iNTU1LWRjOTA5ZmUxOWMyYSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyYzcw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">
+        </div>
+        <div class="detail-box"></div>
+        <div class="detail-box-data">
+            <div class="db-header fscale">心拍</div>
+            <div class="db-body-red fscale" id="d_heart_rate"></div>
+            <div class="db-footer fscale">回/分</div>
+        </div>
+    </div>
+    <div class="detail-box-list-weekly" id="cont_detail_2" data-id="2" data-color="2">
+        <div class="db-circle-shd"></div>
+        <div class="db-circle">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJUAAAB4CAYAAAD7eLATAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA+5pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ1dWlkOjY1RTYzOTA2ODZDRjExREJBNkUyRDg4N0NFQUNCNDA3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjAxRkNENDkxOUZBRTExRThCNDI3RjkzMzdFQUU3MDhCIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjAxRkNENDkwOUZBRTExRThCNDI3RjkzMzdFQUU3MDhCIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg1M2VhNjk3LWVjY2QtNDkwMy1iNTU1LWRjOTA5ZmUxOWMyYSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyYzcw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">
+        </div>
+        <div class="detail-box"></div>
+        <div class="detail-box-data">
+            <div class="db-header fscale">呼吸</div>
+            <div class="db-body-yellow fscale" id="d_respiration"></div>
+            <div class="db-footer fscale">回/分</div>
+        </div>
+    </div>
+    <div class="detail-box-list-weekly" id="cont_detail_3" data-id="3" data-color="1">
+        <div class="db-circle-shd"></div>
+        <div class="db-circle" >
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJMAAABwCAYAAAAaNUI5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA+5pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ1dWlkOjY1RTYzOTA2ODZDRjExREJBNkUyRDg4N0NFQUNCNDA3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjAxRkNENDk5OUZBRTExRThCNDI3RjkzMzdFQUU3MDhCIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjAxRkNENDk4OUZBRTExRThCNDI3RjkzMzdFQUU3MDhCIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg1M2VhNjk3LWVjY2QtNDkwMy1iNTU1LWRjOTA5ZmUxOWMyYSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyYzcw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">
+        </div>
+        <div class="detail-box"></div>
+        <div class="detail-box-data">
+            <div class="db-header fscale">活動量</div>
+            <div class="db-body-blue fscale" id="d_body_movement"></div>
+            <div class="db-footer fscale">秒/分</div>
+        </div>
+    </div>
+</div>
+<div id="divider_chart"></div>
+<div style="position: relative;" id="chart_container">
+    <div class="calendar-pick">
+        <img src="data:image/png;base64,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">
+    </div>
+    <div style="width: 100%;margin-left: -20px;position: relative;bottom: 0;overflow: hidden;">
+        <canvas id="chart1" style="width: 100%"></canvas>
+        <div class="animation-layer" id="animation1"></div>
+    </div>
+</div>
+<div class="arrow-container">
+    <div class="arrow-left" id="arrow_left"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAhCAYAAAA74pBqAAAACXBIWXMAAAsTAAALEwEAmpwYAAA6LGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS41LWMwMjEgNzkuMTU0OTExLCAyMDEzLzEwLzI5LTExOjQ3OjE2ICAgICAgICAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgICAgICAgICAgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiCiAgICAgICAgICAgIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiCiAgICAgICAgICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICAgICAgICAgICB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIgogICAgICAgICAgICB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyI+CiAgICAgICAgIDx4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ+dXVpZDo2NUU2MzkwNjg2Q0YxMURCQTZFMkQ4ODdDRUFDQjQwNzwveG1wTU06T3JpZ2luYWxEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD54bXAuZGlkOjk3MzNBRDIwOUZBRDExRTg5MjlCQzYzMTA2NzdFNEJCPC94bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06SW5zdGFuY2VJRD54bXAuaWlkOmFlYTZiZGM4LWM2NTAtNDgxYi1iOWVmLTdmZDNiZTc2ZjE5MjwveG1wTU06SW5zdGFuY2VJRD4KICAgICAgICAgPHhtcE1NOkRlcml2ZWRGcm9tIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgPHN0UmVmOmluc3RhbmNlSUQ+eG1wLmlpZDo0NzE5MDA2OC05MTU1LTQzZjYtOTAxOS00ZTY4NDMxNTIyNTM8L3N0UmVmOmluc3RhbmNlSUQ+CiAgICAgICAgICAgIDxzdFJlZjpkb2N1bWVudElEPnhtcC5kaWQ6OGIyNWQ5MWEtZWMzNi00ZGQ5LWE3ODMtODhmNGQyYTU2MWIyPC9zdFJlZjpkb2N1bWVudElEPgogICAgICAgICA8L3htcE1NOkRlcml2ZWRGcm9tPgogICAgICAgICA8eG1wTU06SGlzdG9yeT4KICAgICAgICAgICAgPHJkZjpTZXE+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPnNhdmVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDppbnN0YW5jZUlEPnhtcC5paWQ6YWVhNmJkYzgtYzY1MC00ODFiLWI5ZWYtN2ZkM2JlNzZmMTkyPC9zdEV2dDppbnN0YW5jZUlEPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6d2hlbj4yMDE4LTA4LTI0VDIwOjA2OjQ0KzA5OjAwPC9zdEV2dDp3aGVuPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6c29mdHdhcmVBZ2VudD5BZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCk8L3N0RXZ0OnNvZnR3YXJlQWdlbnQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpjaGFuZ2VkPi88L3N0RXZ0OmNoYW5nZWQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICA8L3JkZjpTZXE+CiAgICAgICAgIDwveG1wTU06SGlzdG9yeT4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCk8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgICAgPHhtcDpDcmVhdGVEYXRlPjIwMTgtMDgtMjRUMTk6MzQ6MTUrMDk6MDA8L3htcDpDcmVhdGVEYXRlPgogICAgICAgICA8eG1wOk1vZGlmeURhdGU+MjAxOC0wOC0yNFQyMDowNjo0NCswOTowMDwveG1wOk1vZGlmeURhdGU+CiAgICAgICAgIDx4bXA6TWV0YWRhdGFEYXRlPjIwMTgtMDgtMjRUMjA6MDY6NDQrMDk6MDA8L3htcDpNZXRhZGF0YURhdGU+CiAgICAgICAgIDxkYzp0aXRsZT4KICAgICAgICAgICAgPHJkZjpBbHQ+CiAgICAgICAgICAgICAgIDxyZGY6bGkgeG1sOmxhbmc9IngtZGVmYXVsdCI+V2ViPC9yZGY6bGk+CiAgICAgICAgICAgIDwvcmRmOkFsdD4KICAgICAgICAgPC9kYzp0aXRsZT4KICAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9wbmc8L2RjOmZvcm1hdD4KICAgICAgICAgPHBob3Rvc2hvcDpDb2xvck1vZGU+MzwvcGhvdG9zaG9wOkNvbG9yTW9kZT4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WFJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOlhSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj43MjAwMDAvMTAwMDA8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+NjU1MzU8L2V4aWY6Q29sb3JTcGFjZT4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjE5PC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjMzPC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgCjw/eHBhY2tldCBlbmQ9InciPz4SPJVhAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAHUSURBVHjapNbNi45RHMbxj2ckL0WEJFJKkllIzcLMwgwTxjOJGC8bKTtl4++YssFKyiymZrLwOmZQYmUaC1bYYKymFBYMIWx+d53G43Hf5zmbc646fbvO75zfdd/zHDujhbEcw7iNi/NbAC3FNezCPnzLhS3DDewM/R2vaxmglRhPQO/QiYdVna2O+nSEnsFevIQqztbhXgJ6hd0FCMo62xCO2kO/CUfT6aYyzjaGowL0PBxNz934P2ebcQubQr+IZzDTaHMzZ1vCUQGaRO+/QM2cbcNNrA/9NBx9anaMRs62YyIBPSoDauSsE9exKvRj7MdsmStPnXVhLAFNoF4WlMJ6cSd6TkD78blKe9RwJIpdgIZwCD+rNm0Nx7Eo6f7LMcuBnYxCwwKMYmsubBZ98dJhTTzWHTkwATyMu6HXRmZ15MDgBw5gJInl8WjqyjBxgyci22FFRE93Dgx+YwBXQi8MYH8OrBincTXWS6LN6rkwOIULsW4L4NFcGJzFpSQYRqIMf4027aVufyyO2hV6IGL7WQ4M7mNxAjw4F1gFBg9i7k6A7zGVAyuS9xd6QtfxEZM5sCKBv2BP6D58yPnXKMYgzsX6K5608ksF5+PT9xZTfwYA6v9hG+/t0d0AAAAASUVORK5CYII="></div>
+    <div class="arrow-right" id="arrow_right"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAhCAYAAAA74pBqAAAACXBIWXMAAAsTAAALEwEAmpwYAAA6LGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS41LWMwMjEgNzkuMTU0OTExLCAyMDEzLzEwLzI5LTExOjQ3OjE2ICAgICAgICAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgICAgICAgICAgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiCiAgICAgICAgICAgIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiCiAgICAgICAgICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICAgICAgICAgICB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIgogICAgICAgICAgICB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyI+CiAgICAgICAgIDx4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ+dXVpZDo2NUU2MzkwNjg2Q0YxMURCQTZFMkQ4ODdDRUFDQjQwNzwveG1wTU06T3JpZ2luYWxEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD54bXAuZGlkOkRCRkQ1OEEzOThDNDExRThBNjU5ODFDMkZGNEUxRDRDPC94bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06SW5zdGFuY2VJRD54bXAuaWlkOjNiNjg0NjEzLTdmYTktNDA3ZC05ODNhLTUxYjYyY2NmZDNmZjwveG1wTU06SW5zdGFuY2VJRD4KICAgICAgICAgPHhtcE1NOkRlcml2ZWRGcm9tIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgPHN0UmVmOmluc3RhbmNlSUQ+eG1wLmlpZDo2MjdjZmQxZS1mOWMwLTRmNTAtYmE3MC01NDRhMTU5MDY0Mjk8L3N0UmVmOmluc3RhbmNlSUQ+CiAgICAgICAgICAgIDxzdFJlZjpkb2N1bWVudElEPnhtcC5kaWQ6ZTVhZTg1NTYtNTE2NS00ZjZhLTliODQtN2EyYTcxNTQ4YWZmPC9zdFJlZjpkb2N1bWVudElEPgogICAgICAgICA8L3htcE1NOkRlcml2ZWRGcm9tPgogICAgICAgICA8eG1wTU06SGlzdG9yeT4KICAgICAgICAgICAgPHJkZjpTZXE+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPnNhdmVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDppbnN0YW5jZUlEPnhtcC5paWQ6M2I2ODQ2MTMtN2ZhOS00MDdkLTk4M2EtNTFiNjJjY2ZkM2ZmPC9zdEV2dDppbnN0YW5jZUlEPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6d2hlbj4yMDE4LTA4LTI0VDIwOjA2OjQ0KzA5OjAwPC9zdEV2dDp3aGVuPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6c29mdHdhcmVBZ2VudD5BZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCk8L3N0RXZ0OnNvZnR3YXJlQWdlbnQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpjaGFuZ2VkPi88L3N0RXZ0OmNoYW5nZWQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICA8L3JkZjpTZXE+CiAgICAgICAgIDwveG1wTU06SGlzdG9yeT4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCk8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgICAgPHhtcDpDcmVhdGVEYXRlPjIwMTgtMDgtMjRUMTk6MTU6NDUrMDk6MDA8L3htcDpDcmVhdGVEYXRlPgogICAgICAgICA8eG1wOk1vZGlmeURhdGU+MjAxOC0wOC0yNFQyMDowNjo0NCswOTowMDwveG1wOk1vZGlmeURhdGU+CiAgICAgICAgIDx4bXA6TWV0YWRhdGFEYXRlPjIwMTgtMDgtMjRUMjA6MDY6NDQrMDk6MDA8L3htcDpNZXRhZGF0YURhdGU+CiAgICAgICAgIDxkYzp0aXRsZT4KICAgICAgICAgICAgPHJkZjpBbHQ+CiAgICAgICAgICAgICAgIDxyZGY6bGkgeG1sOmxhbmc9IngtZGVmYXVsdCI+V2ViPC9yZGY6bGk+CiAgICAgICAgICAgIDwvcmRmOkFsdD4KICAgICAgICAgPC9kYzp0aXRsZT4KICAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9wbmc8L2RjOmZvcm1hdD4KICAgICAgICAgPHBob3Rvc2hvcDpDb2xvck1vZGU+MzwvcGhvdG9zaG9wOkNvbG9yTW9kZT4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WFJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOlhSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj43MjAwMDAvMTAwMDA8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+NjU1MzU8L2V4aWY6Q29sb3JTcGFjZT4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjE5PC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjMzPC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgCjw/eHBhY2tldCBlbmQ9InciPz5spiVMAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAG1SURBVHjapNa7a1VBEMfxj8eAFoLp/AustBXSaBOQIGqiICZGEMFYCMFUglfFKgliYbxgE1HBB/EBKniFWCgiWlgJWgoiamFhIWliYR7NBJbDzUnO3qnmN5z9cnZ2d2Y2OHoG7uMnzuvAunAXw6H/41IurMDXRF/EeC5so5273uEXDkZsN7rxKgcGn/AD/RHvyQEWiX8HQ4kew3QuDB5iEAuhR+oAizaxRxgoAWdyYdDCIcyHHsS9iu8rYfAC+/Ev9HE8r1pTrPHnbwL4N/QBPMHmHBi8Rh/mQh+ONGzKgcFH7MPv0L2x5a05MPiAvfgTug+z2JIDgy8B/J68lJfYlgNbeXq9+Bx6T+R1e5FZIL7hWaJ3YCAXNoLLiW7iag7sbOm9Tkasds7GMJXoCTRyTrOBa6WqfCHnnpXLeaNdee9aB2g83Ups9fpq3anKruBcKfnNqla3mk2tnFLYadxcq2+2syZGE30Kt9bThMs2HZcSFnEiOr66sNs4mehj0RPUhT2IxaJUD+Np3VkDHuNI+Avht3JmjZkENBc1v5Xz+gu8D38pxoPZTkaqG1Hb5/G2k/lseQDnhFYg+cVr/AAAAABJRU5ErkJggg=="></div>
+</div>
+<div class="notif">
+    <div class="notif-content fscale"><span>メッセージ:</span><span id="notif_nickname" style="font-weight: bold;"></span>さんが見守りました</div>
+    <div class="btn-close-notif">✕</div>
+</div>
+</body>
+
+<input id="base_url" type="hidden" value="http://27.86.2.229/asapi/">
+<input id="selected_start_date" type="hidden" value="0">
+<input id="selected_end_date" type="hidden" value="0">
+<input type="hidden" id="webview_debug_mode" value="0">
+<input type="hidden" id="UI000503C014" value="スコアが取れていません。">
+
+<script src="jquery.min.js"></script>
+<script src="Chart.custom.min.js"></script>
+<script src="progressbar.min.js"></script>
+<script src="moment.min.js"></script>
+<script src="ja.js"></script>
+<script src="image-list.js"></script>
+</html>
+
+<script type="text/javascript">
+    var lineChart = false;
+    var firstinit = false;
+    var chart1Height = 0;
+    var baseURL = $("#base_url").val();
+    var webMode = $("#webview_debug_mode").val();
+    var bar = false;
+    var currGeneratedData = false;
+    var currSelectedIdx = 5;
+    var startCounter = false;
+    var UI000503C014 = $("#UI000503C014").val();
+    var onChangePage = false;
+
+    function initMonitoring(){
+
+    }
+
+    function showNotif(nickname){
+        $("#notif_nickname").text(nickname);
+        var left = $('.notif').offset().left;
+        if (left != 0) {
+            $(".notif").css({left:left}).animate({"left":"0px"}, "slow");
+        }
+    }
+
+    function hideNotif(){
+        var left = $('.notif').offset().left;
+        $(".notif").css({left:left}).animate({"left":"-300px"}, "slow");
+    }
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function getRandomFloat(min, max) {
+        return (Math.round(Math.random() * (max - min + 1)) / 10) + min;
+    }
+
+    function generateScoreDetail(detailScore){
+        $("#sleep_score").text(detailScore.sleep_score);
+        $("#daily_life").text(detailScore.daily_life);
+
+
+
+
+        var elm = $("#cont_detail_1 .db-circle img")[0];
+        if (detailScore.heart_rate == "-") {
+            $("#d_heart_rate").text(detailScore.heart_rate);
+            $(elm).attr("src", heartImage[0]);
+            $("#d_heart_rate").removeClass().addClass("db-body-lightblue");
+            document.getElementById('cont_detail_1').setAttribute("data-color", "0");
+        }else{
+            $("#d_heart_rate").text(detailScore.heart_rate.toFixed(1));
+            $(elm).attr("src", heartImage[3]);
+            $("#d_heart_rate").removeClass().addClass("db-body-red");
+            document.getElementById('cont_detail_1').setAttribute("data-color", "3");
+        }
+
+        var elm = $("#cont_detail_2 .db-circle img")[0];
+        if (detailScore.respiration == "-") {
+            $("#d_respiration").text(detailScore.respiration);
+            $(elm).attr("src", respirationImage[0]);
+            $("#d_respiration").removeClass().addClass("db-body-lightblue");
+            document.getElementById('cont_detail_2').setAttribute("data-color", "0");
+        }else{
+            $("#d_respiration").text(detailScore.respiration.toFixed(1));
+            $(elm).attr("src", respirationImage[2]);
+            $("#d_respiration").removeClass().addClass("db-body-yellow");
+            document.getElementById('cont_detail_2').setAttribute("data-color", "2");
+        }
+
+        var elm = $("#cont_detail_3 .db-circle img")[0];
+        if (detailScore.body_movement == "-") {
+            $("#d_body_movement").text(detailScore.body_movement);
+            $(elm).attr("src", bodyMoveImage[0]);
+            $("#d_body_movement").removeClass().addClass("db-body-lightblue");
+            document.getElementById('cont_detail_3').setAttribute("data-color", "0");
+        }else{
+            $("#d_body_movement").text(detailScore.body_movement.toFixed(1));
+            $(elm).attr("src", bodyMoveImage[1]);
+            $("#d_body_movement").removeClass().addClass("db-body-blue");
+            document.getElementById('cont_detail_3').setAttribute("data-color", "1");
+        }
+    }
+
+    function generateSummary(generatedData, idx){
+        $("#summary").html(generatedData.summary[idx]);
+        if( parseInt($("#summary").height()) > parseInt($(".home-summary").height()) ){
+            $(".sm-more").show();
+        }else{
+            $(".sm-more").hide();
+        }
+        if (generatedData.dataExist[idx] != 0) {
+            var dateNow = moment().format("YYYY/MM/DD");
+            if (dateNow == generatedData.dataDate[idx]) {
+                $("#summary").parent().css("text-align", "justify");
+            }else{
+                $("#summary").parent().css("text-align", "justify");
+            }
+        }else{
+            $("#summary").parent().css("text-align", "center");
+        }
+    }
+
+    function initChart(animation){
+        $(".btn-close-notif").on("click", function(){
+            hideNotif();
+        });
+
+        var tscore = currGeneratedData.dataPoint[currSelectedIdx];
+        if (tscore != 0) {
+            if (parseInt(tscore) == 100) {
+                $("#total_score").addClass("score100");
+                $("#total_score_ext").addClass("score100");
+            }else{
+                $("#total_score").removeClass("score100");
+                $("#total_score_ext").removeClass("score100");
+            }
+
+            $("#total_score").text(tscore);
+            bar.animate(tscore/100);
+        }else{
+            $("#total_score").removeClass("score100");
+            $("#total_score_ext").removeClass("score100");
+            $("#total_score").text("-");
+            bar.animate(0, {duration: 300});
+            $("#selected_start_date").val("0");
+            $("#selected_end_date").val("0");
+        }
+        generateSummary(currGeneratedData, currSelectedIdx);
+        generateScoreDetail(currGeneratedData.dataDetailScore[currSelectedIdx]);
+
+        if (lineChart != false) {
+            lineChart.destroy();
+            lineChart = false;
+            $("#parent-tooltip").remove();
+            $("#chart1").removeAttr("height");
+            $("#chart1").removeAttr("width");
+            firstinit = false;
+        }
+
+        setTimeout(function() {
+            var divPosition = $("#divider_chart").position().top;
+            var currHeight = $(window).height();
+            var currWidth = $(window).width();
+            chart1Height = currHeight - divPosition;
+            $("#chart1").attr("height", chart1Height);
+            $("#chart1").attr("width", currWidth);
+            $("#animation1").css("height", (chart1Height - 30) + "px")
+
+            var dataPoint = currGeneratedData.dataPoint;
+            var dataTitle = currGeneratedData.dataTitle;
+            var dataDay = ["", "", "", "", "", "", ""];
+            var dataDetailScore = currGeneratedData.dataDetailScore;
+
+            var ctx = document.getElementById('chart1').getContext("2d");
+
+            var gradientStroke = ctx.createLinearGradient(0, 0, 0, chart1Height*0.9);
+            gradientStroke.addColorStop(0, 'rgba(0,234,168,1)');
+            gradientStroke.addColorStop(1, 'rgba(0,234,168,0.05)');
+
+            $("#animation1").css("left", "0px");
+            if (animation == 1) {
+                var aniOption = {
+                    duration: 0,
+                    onComplete : function(){
+                        if (!firstinit) {
+                            $("#animation1").animate({"left":"120%"}, 2000, function(){
+                                onChangePage = false;
+                                firstinit = true;
+                                currSelectedIdx = 6;
+                                openTip(lineChart,0,currSelectedIdx);
+                            });
+                        }
+                    }
+                };
+            }else{
+                $("#animation1").css("left", "120%");
+                var aniOption = {
+                    duration: 2000,
+                    onComplete : function(){
+                        if (!firstinit) {
+                            onChangePage = false;
+                            firstinit = true;
+                            currSelectedIdx = 6;
+                            openTip(lineChart,0,currSelectedIdx);
+                        }
+                    }
+                };
+            }
+
+            lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: dataTitle,
+                  datasets: [{
+                    label: "",
+                    borderColor: gradientStroke,
+                    pointRadius: 0,
+                    fill: true,
+                    backgroundColor: gradientStroke,
+                    borderWidth: 1,
+                    data: dataPoint
+                  }]
+                },
+                plugins: [{
+                    afterRender: function(chart, options) {
+
+                    }
+                }],
+                options: {
+                    responsive:false,
+                    animation: aniOption,
+                    tooltips: {
+                        enabled: false,
+                        mode: 'index',
+                        intersect: false,
+                        custom: function(tooltipModel) {
+                            if (!firstinit) {
+                                return false;
+                            }
+                            // Tooltip Element
+                            if (tooltipModel.dataPoints == undefined) {
+                                return false;
+                            }
+
+                            var idx = tooltipModel.dataPoints[0].index;
+                            if (idx < 2) {
+                                return false;
+                            }
+                            currSelectedIdx = idx;
+                            var parentTooltip = document.getElementById('parent-tooltip');
+
+                            // Create element on first render
+                            if (!parentTooltip) {
+                                parentTooltip = document.createElement('div');
+                                parentTooltip.id = "parent-tooltip";
+                                parentTooltip.style.height = (chart1Height - 20 ) + "px";
+
+                                var dateTooltip = document.createElement('div');
+                                dateTooltip.id = 'date-tooltip';
+
+                                var dayTooltip = document.createElement('div');
+                                dayTooltip.id = 'day-tooltip';
+
+                                var tooltipDot = document.createElement('div');
+                                tooltipDot.id = 'dot-tooltip';
+
+                                var tooltipEl = document.createElement('div');
+                                tooltipEl.id = 'chartjs-tooltip';
+
+                                document.body.appendChild(parentTooltip);
+                                $("#parent-tooltip").append(dateTooltip);
+                                $("#parent-tooltip").append(dayTooltip);
+                                $("#parent-tooltip").append(tooltipDot);
+                                $("#parent-tooltip").append(tooltipEl);
+
+                                initTooltipEvent();
+                            }
+
+                            function getBody(bodyItem) {
+                                return bodyItem.lines;
+                            }
+
+                            // Set Text
+                            if (tooltipModel.body) {
+                                var titleLines = tooltipModel.title || [];
+                                var bodyLines = tooltipModel.body.map(getBody);
+                                var innerHtml = "";
+                                var tscore = 0;
+
+                                generateSummary(currGeneratedData, idx);
+
+                                if (currGeneratedData.dataExist[idx] == 0) {
+                                    $("#dot-tooltip").hide();
+                                    $("#total_score").removeClass("score100");
+                                    $("#total_score_ext").removeClass("score100");
+                                    $("#total_score").text("-");
+                                    bar.animate(0, {duration: 300});
+                                    $("#selected_start_date").val("0");
+                                    $("#selected_end_date").val("0");
+                                }else{
+                                    bodyLines.forEach(function(body, i) {
+                                        innerHtml = '<div class="tt-content">' + body + '</div>';
+                                        tscore = body;
+                                    });
+
+                                    if (parseInt(tscore) == 100) {
+                                        $("#total_score").addClass("score100");
+                                        $("#total_score_ext").addClass("score100");
+                                    }else{
+                                        $("#total_score").removeClass("score100");
+                                        $("#total_score_ext").removeClass("score100");
+                                    }
+
+                                    $("#total_score").text(tscore);
+                                    bar.animate(tscore/100, {duration: 300});
+                                    $("#dot-tooltip").show();
+                                    var res = currGeneratedData.dataDate[idx].split(":");
+                                    $("#selected_start_date").val(res[0]);
+                                    $("#selected_end_date").val(res[1]);
+                                }
+
+                                $("#chartjs-tooltip").html(innerHtml);
+                                $("#day-tooltip").text(dataDay[idx]);
+                                generateScoreDetail(currGeneratedData.dataDetailScore[idx]);
+
+                                if (titleLines.length > 0) {
+                                    $("#date-tooltip").text(titleLines[0]);
+                                }
+                            }
+
+                            // `this` will be the overall tooltip
+                            var position = this._chart.canvas.getBoundingClientRect();
+
+                            $("#parent-tooltip").css("left", position.left + tooltipModel.caretX - 25 + 'px');
+                            $("#parent-tooltip").css("top", position.top - 12 + 'px');
+                            $("#dot-tooltip").css("margin-top", tooltipModel.caretY - 23 + 'px');
+
+                            $(".tt-content").css("transform", "scale("+window.fontScale+")");
+                        }
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes : [{
+                            display : false,
+                            ticks : {
+                                min : 0,
+                                max : 100
+                            },
+                            gridLines : {
+                                display : false
+                            }
+                        }],
+                        xAxes : [{
+                            gridLines : {
+                                display : false,
+                                drawBorder: false
+                            },
+                            position: 'top',
+                            ticks : {
+                                fontColor : "#044a63",
+                                fontSize : 11,
+                                padding: 26,
+                                fontFamily : "AvenirRoman"
+                            }
+                        }]
+                    }
+                }
+            });
+        }, 500);
+    }
+
+    function openTip(oChart,datasetIndex,pointIndex){
+       if(oChart.tooltip._active == undefined)
+          oChart.tooltip._active = []
+       var activeElements = oChart.tooltip._active;
+       var requestedElem = oChart.getDatasetMeta(datasetIndex).data[pointIndex];
+       var activeElementsNew = [];
+       for(var i = 0; i < activeElements.length; i++) {
+           if(requestedElem._index == activeElements[i]._index){
+                activeElementsNew.push(activeElements[i])
+           }
+       }
+       activeElementsNew.push(requestedElem);
+       oChart.tooltip._active = activeElementsNew;
+       oChart.tooltip.update(true);
+       oChart.draw();
+    }
+
+    function startMoveCounter(){
+        $( "#parent-tooltip" ).animate({opacity: 0.1}, 700 , function(){
+            if (!onChangePage) {
+                onChangePage = true;
+                if (currSelectedIdx == 2) {
+                    goToLastMonth();
+                }else if(currSelectedIdx == 6){
+                    goToNextMonth();
+                }
+            }
+        });
+    }
+
+    function stopMoveCounter(){
+        $( "#parent-tooltip" ).stop();
+        $( "#parent-tooltip" ).css("opacity", 1);
+        startCounter = false;
+    }
+
+    function initTooltipEvent(){
+        $("#chart_container").off();
+        $("#parent-tooltip").off();
+
+        $("#chart_container").on("touchstart", function(){
+            if (currSelectedIdx == 2 || currSelectedIdx == 6) {
+                startCounter = currSelectedIdx;
+                startMoveCounter();
+            }
+        });
+
+        $("#chart_container").on("touchmove", function(){
+            if (startCounter != false){
+                if(startCounter != currSelectedIdx) {
+                    stopMoveCounter();
+                }
+            }else{
+                if (currSelectedIdx == 2 || currSelectedIdx == 6) {
+                    startCounter = currSelectedIdx;
+                    startMoveCounter();
+                }
+            }
+        });
+
+        $("#chart_container").on("touchend", function(){
+            if (startCounter != false){
+                stopMoveCounter();
+            }
+        });
+    }
+
+    window.fontScale = 1;
+    function setFontScale(scale) {
+        window.fontScale = scale;
+        $(".fscale").css("transform","scale("+window.fontScale+")");
+    }
+
+    $(document).ready(function() {
+        if (window.hasOwnProperty('webkit')) {
+            if (window.controller !== undefined) {
+                controller.finish_loading('');
+            }else{
+                window.webkit.messageHandlers.finish_loading.postMessage('');
+            }
+        }
+
+        // $(".score-left").on("click", function(){
+        //     initChart(1);
+        // });
+
+        // $(".score-right").on("click", function(){
+        //     initChart(2);
+        // });
+
+        bar = new ProgressBar.Circle(score, {
+            color: 'url(#gradient)',
+            strokeWidth: 2,
+            trailWidth: 0,
+            easing: 'easeInOut',
+            duration: 2000,
+            // Set default step function for all animate calls
+            step: function(state, circle) {
+                var value = Math.round(circle.value() * 100);
+                if (value === 0) {
+                    circle.setText('');
+                }
+            }
+        });
+
+        let linearGradient = `
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
+                <stop offset="30%" stop-color="rgb(0,218,202)"/>
+                <stop offset="90%" stop-color="rgb(0,234,168)"/>
+            </linearGradient>
+          </defs>
+        `
+
+        bar.svg.insertAdjacentHTML('afterBegin', linearGradient);
+        // bar.animate(0.93);  // Number from 0.0 to 1.0
+
+        $("#arrow_left").on("click", function(){
+            if (!onChangePage) {
+                onChangePage = true;
+                goToLastMonth();
+            }
+        });
+
+        $("#arrow_right").on("click", function(){
+            if (!onChangePage) {
+                onChangePage = true;
+                goToNextMonth();
+            }
+        });
+
+        var dt = moment();
+        var currDay = dt.format("e");
+        if (currDay == 0) {
+            curretDate = dt.format('YYYY/MM/DD');
+            currSelectedIdx = 6;
+        }else{
+            curretDate = dt.add(-currDay, 'days').format('YYYY/MM/DD');
+            currSelectedIdx = 6;
+        }
+        curretDate = moment(curretDate).add(-7, 'days').format('YYYY/MM/DD');
+        getDataWeeklyHome();
+    });
+
+    function showSelectedData(date){
+        var dt = moment(date);
+        var currDay = dt.format("e");
+        curretDate = dt.add(-currDay, 'days').format('YYYY/MM/DD');
+        currSelectedIdx = 6;
+
+        getDataWeeklyHome();
+    }
+
+    function getDataWeeklyHome(){
+        var startdate = moment(curretDate).add(-63, "days").format('YYYY/MM/DD');
+        var enddate = moment(curretDate).add(+7, "days").format('YYYY/MM/DD');
+
+        if (webMode != 0) {
+            var ajax = $.ajax({
+                url  : baseURL + "index.php/api/v1/User/weekly_score?user_id=1298&start_date="+startdate+"&end_date="+enddate,
+                type : "GET"
+            });
+            ajax.done(function (result) {
+                var resultData = result.data;
+                if (result.success) {
+                    initializeWeeklyHome(resultData);
+                }
+            });
+        }else{
+            if (window.controller !== undefined) {
+                controller.get_weekly_data(startdate+';'+enddate);
+            }else{
+                window.webkit.messageHandlers.get_weekly_data.postMessage(startdate+';'+enddate);
+            }
+
+            var TMPdt = moment();
+            var TMPcurrDay = TMPdt.format("e");
+            if (TMPcurrDay == 0) {
+                TMPcurretDate = TMPdt.add(-7, 'days').format('YYYY/MM/DD');
+            }else{
+                TMPcurretDate = TMPdt.add(-TMPcurrDay, 'days').format('YYYY/MM/DD');
+            }
+            var TMPstartdate = moment(TMPcurretDate).add(-7, "days").format('YYYY/MM/DD');
+            var TMPenddate = moment(TMPcurretDate).add(+7, "days").format('YYYY/MM/DD');
+
+            if (window.controller !== undefined) {
+                controller.get_daily_data(TMPstartdate+';'+TMPenddate);
+            }else{
+                window.webkit.messageHandlers.get_daily_data.postMessage(TMPstartdate+';'+TMPenddate);
+            }
+        }
+    }
+
+    function initializeWeeklyHome(data){
+        $("#parent-tooltip").remove();
+        $("#animation1").stop();
+        $("#animation1").css("left", "-100%");
+        $("#animation1").show();
+
+        var masterData = [];
+        if (webMode != 0) {
+            for (var i = 0; i < data.length; i++) {
+                var parsedData = JSON.parse(data[i].data);
+                if (parsedData.score != undefined && parsedData.score != null && parsedData.score != "") {
+                    masterData[parsedData.date] = parsedData;
+                }else{
+                    masterData[parsedData.date] = undefined;
+                }
+            }
+        }else{
+            for (var i = 0; i < data.length; i++) {
+                var parsedData = JSON.parse(data[i]);
+                if (parsedData.score != undefined && parsedData.score != null && parsedData.score != "") {
+                    masterData[parsedData.date] = parsedData;
+                }else{
+                    masterData[parsedData.date] = undefined;
+                }
+            }
+        }
+        // var masterData = [];
+        console.log("AS");
+        console.log(data);
+        console.log("MS");
+        console.log(masterData);
+
+        currGeneratedData = generateData(curretDate, masterData);
+        initChart(1);
+    }
+
+    function generateData(currentDate, data){
+        var returnData = {
+            dataDate:[],
+            dataTitle:[],
+            dataPoint:[],
+            dataDetailScore:[],
+            fontColor:[],
+            dataExist:[],
+            summary:[]
+        };
+
+        var dateNow = moment().format("YYYY/MM/DD");
+        var dateNextWeek = moment(curretDate).add(+7, "days").format('YYYY/MM/DD');
+
+        disableNext = false;
+        for (var i = 0; i < 7; i++) {
+            var summary = UI000503C014;
+            var mmST = moment(currentDate);
+            var st = mmST.add((i - 6)*7, 'days').format("YYYY/MM/DD");
+            var mmEN = moment(st);
+            var en = mmEN.add(6, 'days').format("YYYY/MM/DD");
+            var indexdate = st+":"+en;
+            returnData.dataDate.push(indexdate);
+
+            var date1 = mmST.format('D');
+            var date2 = mmEN.format('D');
+
+            if (date1.length == 2 && date2.length == 1) {
+                date2 = mmEN.format('M/D');
+            }
+
+            if (data[indexdate] != undefined) {
+                if (data[indexdate] != false) {
+                    summary = data[indexdate].summary;
+                    if (i < 2) {
+                        returnData.dataTitle.push("");
+                        returnData.dataPoint.push(data[indexdate].score);
+                        returnData.dataDetailScore.push(false);
+                        returnData.fontColor.push("rgba(96,146,175,1)");
+                        returnData.dataExist.push(1);
+                    }else{
+                        returnData.dataTitle.push(date1+"-"+date2);
+                        returnData.dataPoint.push(data[indexdate].score);
+                        returnData.dataDetailScore.push({"sleep_score" : data[indexdate].night_score, "daily_life" : data[indexdate].life_score, "heart_rate" : data[indexdate].weekly_heart_rate_avg, "respiration" : data[indexdate].weekly_respiration_avg, "body_movement" : data[indexdate].weekly_body_movement_avg});
+                        returnData.fontColor.push("rgba(96,146,175,1)");
+                        returnData.dataExist.push(1);
+                    }
+                }else{
+                    returnData.dataTitle.push(date1+"-"+date2);
+                    returnData.dataPoint.push(null);
+                    returnData.dataDetailScore.push({"sleep_score" : "-", "daily_life" : "-", "heart_rate" : "-", "respiration" : "-", "body_movement" : "-"});
+                    returnData.fontColor.push("rgba(96,146,175,0.3)");
+                    returnData.dataExist.push(0);
+                }
+            }else{
+                if (i < 2) {
+                    returnData.dataTitle.push("");
+                    returnData.dataPoint.push(0);
+                    returnData.dataDetailScore.push(false);
+                    returnData.fontColor.push("rgba(96,146,175,1)");
+                    returnData.dataExist.push(0);
+                }else{
+                    returnData.dataTitle.push(date1+"-"+date2);
+                    returnData.dataPoint.push(0);
+                    returnData.dataDetailScore.push({"sleep_score" : "-", "daily_life" : "-", "heart_rate" : "-", "respiration" : "-", "body_movement" : "-"});
+                    returnData.fontColor.push("rgba(96,146,175,0.3)");
+                    returnData.dataExist.push(0);
+                }
+            }
+            returnData.summary.push(summary);
+        }
+
+        if (moment(dateNextWeek).isSameOrAfter(dateNow)) {
+            disableNext = true;
+        }
+
+        if (disableNext) {
+            $(".arrow-right").addClass("disabled");
+        }else{
+            $(".arrow-right").removeClass("disabled");
+        }
+
+        return returnData;
+    }
+
+    function goToLastMonth(){
+        var lastDate = moment(curretDate).add(-35, 'days').format('YYYY/MM/DD');
+        curretDate = lastDate;
+        getDataWeeklyHome();
+    }
+
+    function goToNextMonth(){
+        if (!disableNext) {
+            var lastDate = moment(curretDate).add(35, 'days').format('YYYY/MM/DD');
+            curretDate = lastDate;
+            getDataWeeklyHome();
+        }else{
+            onChangePage = false;
+            $( "#parent-tooltip" ).css("opacity", 1);
+        }
+    }
+</script>

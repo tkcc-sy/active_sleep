@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvGuide"
+        style="@style/RegistrationHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_gravity="center"
+        android:text="UI000430C002" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textview10"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="22dp"
+            android:text="UI000430C003" />
+
+        <EditText
+            android:id="@+id/etPIN"
+            style="@style/InputNomargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_marginTop="6dp"
+            android:paddingBottom="10dp"
+            android:hint="UI000430C004"
+            android:text=""
+            android:textColorHint="@color/hint_color" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNext"
+        style="@style/RegistrationButton"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:textSize="15sp"
+        android:layout_gravity="center"
+        android:text="UI000430C005"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</LinearLayout>

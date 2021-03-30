@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_top_news_single"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.front.SliderActivity"
+    android:elevation="10dp">
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_dark_transparent"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/contentNews"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="70dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view4">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.paramount.bed.util.ViewPagerCustomDuration
+                android:id="@+id/view_pager"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.paramount.bed.util.ViewPagerCustomDuration>
+
+            <ImageView
+                android:id="@+id/imageView17"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/popup_modal_close1" />
+
+            <ImageView
+                android:id="@+id/ivClose2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/popup_modal_close1"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+                app:layout_constraintEnd_toEndOf="@+id/imageView17"
+                app:layout_constraintStart_toStartOf="@+id/imageView17"
+                app:layout_constraintTop_toTopOf="@+id/imageView17" />
+
+            <com.paramount.bed.ui.front.slider.LoopingCirclePageIndicator
+                android:id="@+id/indicator"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:ci_animator="@animator/alpha"
+                app:ci_drawable="@drawable/slider_dot_active"
+                app:ci_drawable_unselected="@drawable/slider_dot_inactive"
+                app:ci_height="5dp"
+                app:ci_width="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="65dp">
+
+            </com.paramount.bed.ui.front.slider.LoopingCirclePageIndicator>
+
+            <ImageView
+                android:id="@+id/btnFront"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/front" />
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/back" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="5dp">
+
+    <ToggleButton
+        style="@style/RadioButtonAccount"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
+        android:textOff=""
+        android:textOn=""/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:text="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            style="@style/RecommendSecondaryView"
+            android:layout_weight="1"
+            android:text="8"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            style="@style/RecommendSecondaryView"
+            android:layout_weight="1"
+            android:text="7"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            style="@style/RecommendSecondaryView"
+            android:layout_weight="1"
+            android:text="8"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            style="@style/RecommendSecondaryView"
+            android:layout_weight="1"
+            android:text="6"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            style="@style/RecommendSecondaryView"
+            android:layout_weight="1"
+            android:text="5"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            style="@style/RecommendSecondaryView"
+            android:layout_weight="1"
+            android:text="4"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

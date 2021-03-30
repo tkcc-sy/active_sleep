@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.paramount.bed">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:required="false" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.BIND_DEVICE_ADMIN"
+        tools:ignore="ProtectedPermissions" /> <!-- permission required to automatically restart a repeating alarm if the user reboots the device -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <supports-screens
+        android:largeScreens="false"
+        android:normalScreens="true"
+        android:smallScreens="false"
+        android:xlargeScreens="false" />
+
+    <application
+        android:name=".BedApplication"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.FullScreen"
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
+        tools:replace="allowBackup,supportsRtl">
+
+        <service android:name=".recorder.RecordingService"
+            android:stopWithTask="false"
+            android:exported="false"
+            android:enabled="true"/>
+
+        <activity
+            android:name=".ui.main.SleepResetActivity"
+            android:theme="@style/AppTheme.Dialog"/>
+        <activity android:name=".ui.main.SnoreSettingActivity"
+            android:screenOrientation="portrait" />
+
+        <provider
+            android:name=".data.provider.GenericFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity android:name=".ui.main.TopNewsListActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.main.UpdateFirmwareScanActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.main.SnoreActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.main.UpdateFirmwareActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.main.UpdateFirmwareIntroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.front.SliderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.front.WelcomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.front.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.main.HomeActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="MONITORING_REQUEST" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="APPROVAL_REMINDER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="BIRDIE_BUTTON" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="SLEEP_ALARM" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.registration.CompanyRegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.registration.TncActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.TncAppUpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.registration.RegistrationStepActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.LoginEmailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.login.ChangePhoneInputActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.ChangePhonePinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.ForgotPasswordInputActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.ForgotPasswordPinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.ForgotPaswordResetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.ForgotIDInputActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.ForgotIDPinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.ForgotIDResetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.TutorialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.RemoteActivity"
+            android:configChanges="fontScale|screenSize|density|smallestScreenSize|screenLayout"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.MyAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.DeviceListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.AutomaticOperationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.AutomaticSleepOperationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.AutomaticWakeOperationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.RealtimeMonitorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.FaqActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.InquiryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.main.InquiryPreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.MyAccountSaveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.MyAccountEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.HomeTNCActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.RealtimeMonitorDialog"
+            android:theme="@style/ThemeRealtimeDialogue"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity> <!-- Register the Alarm Receiver -->
+        <receiver
+            android:name=".util.alarms.AlarmsReceiver"
+            android:enabled="false"
+            android:process=":AlarmReceiverPro">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".util.alarms.AlarmsAutoDriveReceiver"
+            android:enabled="false"
+            android:process=":AlarmsAutoDriveReceiverPro">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".util.firebase.FirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo_active_sleep" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorNotification" />
+
+        <activity
+            android:name=".util.alarms.AlarmsPopup"
+            android:excludeFromRecents="true"
+            android:label="@string/title_activity_alarms_popup"
+            android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".util.alarms.AlarmsSleepQuestionnaire"
+            android:excludeFromRecents="true"
+            android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".util.alarms.WeeklyScoreReviewDialog"
+            android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".ui.main.ForestDialog"
+            android:theme="@style/AppTheme.Dialog"/>
+        <activity
+            android:name=".ui.main.TimerActivity"
+            android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".util.deeplink.DeeplinkActivity"
+            android:excludeFromRecents="false"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Dialog">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="asmobile.paramount.co.jp"
+                    android:pathPattern="/bedapp"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="asmobile.paramount.co.jp"
+                    android:pathPattern="/bedapp"
+                    android:scheme="bedapp" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".util.ServerUtil"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.Dialog" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f18f12f2cd634d7f0cb658f6e0a6a6bf92ac90d6" />
+
+        <activity android:name=".util.CloseUtil"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".util.FakeNemuriUtil"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".util.DialogOTP"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.Dialog"/>
+
+        <receiver
+            android:name=".util.firebase.NotificationReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".util.TokenExpiredReceiver">
+            <intent-filter>
+                <action android:name="com.paramount.bed.FORCE_LOGOUT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".util.NSCommandReceiver" />
+
+        <service
+            android:name=".util.alarms.OnClearFromRecentService"
+            android:stopWithTask="false" />
+        <service
+            android:name=".util.alarms.AlarmsStopService"
+            android:exported="false" />
+    </application>
+
+</manifest>

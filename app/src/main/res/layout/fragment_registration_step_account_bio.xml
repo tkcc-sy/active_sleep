@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textview9"
+        style="@style/RegistrationHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="UI000440C002"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView12"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:text="UI000440C003" />
+
+        <EditText
+            android:id="@+id/etName"
+            style="@style/InputNomargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="UI000440C016"
+            android:layout_marginStart="22dp"
+            android:ems="10"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView13"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="50dp"
+            android:text="UI000440C004" />
+
+        <EditText
+            android:id="@+id/etBirthday"
+            style="@style/InputSpinnerNoMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="UI000440C017"
+            android:layout_marginStart="22dp"
+            android:ems="10"
+            android:clickable="true"
+            android:editable="false"
+            android:focusableInTouchMode="false"
+            android:focusable="false"
+            android:focusedByDefault="false"
+            android:inputType="none"
+            android:text=""
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="50dp"
+            android:text="UI000440C005" />
+
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                style="@style/PrimaryRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:checked="true"
+                android:text="UI000440C006" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                style="@style/PrimaryRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="UI000440C007" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                style="@style/PrimaryRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="UI000440C008" />
+        </RadioGroup>
+
+        <TextView
+            style="@style/TextRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="44dp"
+            android:text="UI000440C009" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNext"
+        style="@style/RegistrationButton"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:textSize="15sp"
+        android:layout_gravity="center"
+        android:text="UI000440C010"
+        app:srcCompat="@color/dot_active"/>
+
+</LinearLayout>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Active Sleep </title>
+    <style type="text/css">
+            @font-face {
+                font-family: AvenirRoman;
+                src: url("../../assets/css/font/Avenir Roman.otf");
+            }
+
+            @font-face {
+                font-family: 'Glyphicons Halflings';
+
+                src: url('../../plugins/vendors/bootstrap/fonts/glyphicons-halflings-regular.eot');
+                src: url('../../plugins/vendors/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../plugins/vendors/bootstrap/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../../plugins/vendors/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../plugins/vendors/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../plugins/vendors/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+            }
+        </style>
+    <link href="https://dev1.infinitec.co.jp/webapi/plugins/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://dev1.infinitec.co.jp/webapi/assets/css/daily-detail-webview.css?ver=1597932400" rel="stylesheet">
+</head>
+
+<style type="text/css">
+        *:not([type=text]) {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+        .toggle-accordion{
+            font-size: 18px;
+            position: absolute;
+            right: 10px;
+            top: 15px;
+        }
+
+        .panel-title{
+            margin-top: 7px;
+        }
+
+        .panel-default>.panel-heading{
+            color: #333;
+            background-color: #ffffff;
+            border-color: #ddd;
+            height: 50px;
+            border-radius: 0px;
+        }
+
+        .panel-title a{
+            color: #00576a;
+        }
+
+        a:focus, a:hover{
+            text-decoration: none;
+        }
+
+        .panel-body{
+            color: #6a9fbd;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .panel-heading{
+            position: relative;
+        }
+
+        .search-container{
+            padding: 10px;
+            height: 60px;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            z-index: 2;
+            background-color: #e8eeee;
+        }
+
+        .search-container .input-group{
+            padding: 5px 20px 5px 0px;
+            background-color: #d4e0e0;
+            border-radius: 25px;
+            /*width: calc(100% - 27px);*/
+            float: left;
+            width: 100%;
+            -webkit-transition: width .3s ease-in-out;
+            -moz-transition: width .3s ease-in-out;
+            -o-transition: width .3s ease-in-out;
+            transition: width .3s ease-in-out;
+        }
+
+        .search-container .input-group-addon{
+            border: none;
+            background-color: transparent;
+            color: #629fad;
+            font-size: 18px;
+            padding: 0px 5px 0px 10px;
+        }
+
+        .search-container input{
+            background-color: #d4e0e0;
+            border-color: #d4e0e0;
+            box-shadow: none;
+            color: black;
+            padding-left: 5px;
+            border: none;
+            height: 30px;
+        }
+        .search-container input:focus{
+            box-shadow: none;
+            border: none;
+        }
+        .clear-search{
+            font-size: 20px;
+            color: #00576a;
+            width: 15px;
+            float: right;
+            padding: 7px 0px;
+            margin-right: 2px;
+            display: none;
+        }
+
+        .panel-group{
+            margin-top: 60px;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        .images{
+            max-height: 500px;
+        }
+
+        .faq-image{
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .content-faq img{
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        .faq_highlight {
+            font-weight: bold;
+            font-style: italic;
+            background: yellow;
+            color: #000
+        }
+
+        h3 .faq_highlight {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .pre-img{
+            display: none;
+        }
+
+        .link_no{
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+<body id="body_page" class="nav-sm" style="background-color: transparent;">
+<div class="popup-cont" style="padding: 0px;">
+    <div class="popup-list popup-qs" id="popup-qs" style="height:100vh;">
+        <div class="scrollable adv">
+            <div class="header">Covid 19</div>
+            <div class="publish-date text-center">
+                <i class="glyphicon glyphicon-calendar"></i> August 13, 2020, 12:00 am                    </div>
+            <div class="content" style="padding:10px">
+                <!DOCTYPE html>
+                <html>
+                <head>
+                </head>
+                <body>
+                <p style="margin: 0px 0px 15px; padding: 0px; text-align: justify; font-family: 'Open Sans', Arial, sans-serif;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc elementum in tellus sed blandit. Quisque odio odio, tempor a lacus quis, iaculis lobortis lectus. Morbi sed eros dictum, vehicula tortor vitae, vehicula justo. Ut ut nunc vitae felis faucibus lobortis at nec metus. Sed orci leo, laoreet eget lacus nec, placerat mattis eros. In imperdiet turpis vel tortor hendrerit pretium. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris convallis orci massa. Sed id aliquet risus. Curabitur odio mauris, laoreet sit amet congue dapibus, volutpat eu mi. Aenean orci felis, fringilla quis libero scelerisque, ornare semper augue. Aliquam lacus purus, sollicitudin vitae laoreet vitae, bibendum sed nisl. Donec at fermentum nulla. Ut eget posuere arcu.</p>
+                <p style="margin: 0px 0px 15px; padding: 0px; text-align: justify; font-family: 'Open Sans', Arial, sans-serif;"><img src="https://dev1.infinitec.co.jp/webapi//assets/img/news-img.png" alt="" width="100%" /></p>
+                <p style="margin: 0px 0px 15px; padding: 0px; text-align: justify; font-family: 'Open Sans', Arial, sans-serif;">Etiam diam velit, tincidunt id porttitor in, interdum eu elit. Curabitur aliquet purus in ultrices tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam non justo ipsum. Proin elementum, lectus ut iaculis tempus, velit massa semper ex, sed fermentum lacus odio non magna. In vel urna in arcu rutrum interdum. Morbi facilisis a tellus id dictum. Quisque erat sem, laoreet venenatis feugiat vel, pellentesque sed neque. Morbi nisi lectus, ultrices nec dapibus sed, accumsan a erat. Aliquam in erat ornare felis interdum tempus sed vel magna. Integer est augue, porttitor ut elit id, tincidunt lobortis ex. Praesent eu sapien at leo pellentesque pellentesque. Aenean id mauris in purus commodo condimentum id in ligula. Aliquam nec suscipit ex.</p>
+                <p style="margin: 0px 0px 15px; padding: 0px; text-align: justify; font-family: 'Open Sans', Arial, sans-serif;">Curabitur ullamcorper quam nec ornare cursus. Vestibulum hendrerit eros maximus, convallis magna volutpat, iaculis dui. Mauris posuere molestie ipsum, ac semper nibh consequat sed. Pellentesque lorem felis, congue nec nibh ut, ultricies tempor eros. Duis eu suscipit ante. Nam ultrices lectus magna, non porta quam tincidunt nec. Donec blandit maximus commodo. Sed eget eros vitae metus gravida tempor volutpat nec quam. Proin fringilla tellus at dui pharetra, at fringilla nibh vehicula. Phasellus finibus finibus quam, vitae eleifend sem blandit eget. Suspendisse in metus ut dui condimentum rutrum nec sed justo. Duis vulputate dapibus ante, eget eleifend dui tempus a.</p>
+                <p style="margin: 0px 0px 15px; padding: 0px; text-align: justify; font-family: 'Open Sans', Arial, sans-serif;">Aliquam erat volutpat. Nullam vitae commodo velit. Fusce maximus commodo imperdiet. Praesent lectus felis, lacinia ac nisl a, mollis ullamcorper nunc. Donec vel tincidunt elit. Donec vulputate libero a felis convallis, sit amet vestibulum purus varius. Cras quis magna nec turpis rhoncus blandit. Vivamus rutrum volutpat velit eu rhoncus. Vestibulum pretium arcu neque.</p>
+                <p style="margin: 0px 0px 15px; padding: 0px; text-align: justify; font-family: 'Open Sans', Arial, sans-serif;">Cras dictum non mauris sed aliquet. Sed ac consequat odio, vitae elementum turpis. Sed in mattis lorem. Etiam rutrum diam sed ipsum rutrum, a sollicitudin justo maximus. Proin pretium vel nisl non rutrum. Mauris placerat, ipsum eu viverra sollicitudin, tellus sapien accumsan lorem, vitae venenatis quam sem et nunc. Suspendisse ut tempor purus. Etiam pretium nulla eget purus volutpat ultrices. Curabitur mattis erat vitae eros luctus efficitur. Phasellus lobortis quam id erat bibendum, eget tincidunt sem scelerisque. Curabitur viverra diam eget odio blandit hendrerit. Aenean dignissim mollis mollis. Morbi egestas libero eget sapien tempus cursus. Suspendisse luctus massa quam, ut auctor arcu vehicula ac. Fusce lacinia lacinia arcu, quis volutpat elit elementum non.</p>
+                </body>
+                </html>                    </div>
+            <div class="content-text"></div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="https://dev1.infinitec.co.jp/webapi/plugins/vendors/jquery/dist/jquery.min.js"></script>
+<script src="https://dev1.infinitec.co.jp/webapi/plugins/vendors/Chart.js/dist/Chart.min.js"></script>
+<script src="https://dev1.infinitec.co.jp/webapi/assets/js/image-list.js"></script>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+</script>

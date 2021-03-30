@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/card_background"
+    android:elevation="5dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/btnFukato"
+        style="@style/MainButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:drawableTop="@drawable/button_fukato"
+        android:text="UI000630C009"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/vwPositionNow"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/controller_fukatto"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/CardTitleMatress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="UI000630C010"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvTag"
+            style="@style/CardText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="UI000630C011"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnStopMatress"
+        android:layout_width="200dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/slider_button"
+        android:gravity="center"
+        android:text="UI000630C012"
+        android:textColor="@android:color/white"
+        android:textScaleX=".9"
+        android:textSize="30sp" />
+
+
+</LinearLayout>

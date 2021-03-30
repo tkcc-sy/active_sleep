@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/ic_mattress_tog_on" android:state_activated="true" android:state_checked="true"></item>
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/ic_mattress_tog_on" android:state_activated="false" android:state_checked="true"></item>
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_grey" android:state_activated="true" android:state_checked="false"></item>
+    <item android:width="50dp" android:height="50dp" android:drawable="@drawable/circle_checkbox_off" android:state_activated="false" android:state_checked="false"></item>
+</selector>

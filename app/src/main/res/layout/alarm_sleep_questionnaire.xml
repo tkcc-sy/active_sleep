@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/content_alarm_sleep">
+
+        <com.github.rahatarmanahmed.cpv.CircularProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="4"
+            android:visibility="gone"
+            android:background="@drawable/alarm_dialogue"
+            app:cpv_animAutostart="true"
+            app:cpv_color="#456A82"
+            app:cpv_indeterminate="true"
+            app:cpv_thickness="2dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/alarm_dialogue"
+            app:cardCornerRadius="7dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp">
+
+                <LinearLayout
+                    android:id="@+id/quisLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:onClick="close"
+                            android:src="@drawable/popup_modal_close1" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        style="@style/TextRegistration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Q1"
+                        android:textColor="#02586B"
+                        android:textSize="22sp"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                    <LinearLayout
+                        android:layout_width="280dp"
+                        android:layout_height="1dp"
+                        android:background="#D2DEE2">
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvQuestion"
+                        style="@style/RegistrationSubHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="1日の運動量はどれくらいですか？"
+                        android:textColor="#5998B2"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvQuestionNumber" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/answerView"
+                        android:layout_width="280dp"
+                        android:layout_height="275dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:foregroundGravity="center_horizontal"
+                        android:minWidth="250dp"
+                        android:textAlignment="center"
+                        tools:listitem="@layout/layout_sleep_answer_list"></androidx.recyclerview.widget.RecyclerView>
+
+                    <Button
+                        android:id="@+id/close"
+                        style="@style/RegistrationButtonQuis"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="20dp"
+                        android:enabled="false"
+                        android:text="UI000781C010"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"></Button>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

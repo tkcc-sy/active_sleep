@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bed_background"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.main.RemoteActivity">
+
+    <!--Matrass Area-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/matressContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="42dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_container">
+
+        <ImageView
+            android:id="@+id/matressMan"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="32dp"
+            android:padding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/controller_36"/>
+
+        <LinearLayout
+            android:id="@+id/matressWrapLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matressMan">
+
+            <LinearLayout
+                android:id="@+id/matressWrap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <View
+                    android:id="@+id/mWrapOn1"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mattress_segment_right_flat"
+                    android:checked="true"/>
+
+                <View
+                    android:id="@+id/mWrapOn2"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mattress_segment_both_flat"/>
+
+                <View
+                    android:id="@+id/mWrapOn3"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mattress_segment_left_flat"/>
+
+                <View
+                    android:id="@+id/mWrapOn4"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bed_segment"/>
+
+                <View
+                    android:id="@+id/mWrapOn5"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bed_segment"/>
+
+                <View
+                    android:id="@+id/mWrapOn6"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:background="@drawable/bed_segment"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/matressIndicatorWrap"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matressWrapLayout">
+
+            <ImageView
+                android:id="@+id/matressIndicator1"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:checked="true"
+                android:src="@drawable/matress_indicator"/>
+
+            <ImageView
+                android:id="@+id/matressIndicator2"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/matress_indicator"/>
+
+            <ImageView
+                android:id="@+id/matressIndicator3"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+
+                android:src="@drawable/matress_indicator"/>
+
+            <ImageView
+                android:id="@+id/matressIndicator4"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/matress_indicator"/>
+
+            <ImageView
+                android:id="@+id/matressIndicator5"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/matress_indicator"/>
+
+            <ImageView
+                android:id="@+id/matressIndicator6"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:src="@drawable/matress_indicator"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/matressTextWrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matressIndicatorWrap">
+
+            <TextView
+                android:id="@+id/txtSegment1"
+                style="@style/MatressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"/>
+
+            <TextView
+                android:id="@+id/txtSegment2"
+                style="@style/MatressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"/>
+
+            <TextView
+                android:id="@+id/txtSegment3"
+                style="@style/MatressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"/>
+
+            <TextView
+                android:id="@+id/txtSegment4"
+                style="@style/MatressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"/>
+
+            <TextView
+                android:id="@+id/txtSegment5"
+                style="@style/MatressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"/>
+
+            <TextView
+                android:id="@+id/txtSegment6"
+                style="@style/MatressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"/>
+
+        </LinearLayout>
+
+        <com.paramount.bed.util.CustomViewPager
+            android:id="@+id/matressCardPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="10dp"
+            android:overScrollMode="never"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/btnStartMatress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/matressTextWrap"/>
+
+
+        <LinearLayout
+            android:id="@+id/btnStartMatress"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/slider_button"
+            android:clickable="true"
+            android:visibility="invisible"
+            android:elevation="5dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/txtStartMatress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI000610C004"
+                android:textColor="@android:color/white"
+                android:textScaleX=".9"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCloseMatress"
+            android:background="@drawable/selector_img_remote"
+            android:textColor="@android:color/white"
+            android:padding="0dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="12.5dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/header_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp">
+
+        <Button
+            android:id="@+id/btnHelp"
+            style="@style/ButtonOutlineText"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:text="\?"
+            android:textSize="19dp"/>
+
+        <Button
+            android:id="@+id/btnSetting"
+            style="@style/OutlineButtonRemote"
+            android:layout_width="70dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="14dp"
+            android:text="UI000610C003"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/btnBed"
+                style="@style/BedMenuToggle"
+                android:layout_width="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textOff="UI000610C001"
+                android:textOn="UI000610C001"/>
+
+            <ToggleButton
+                android:id="@+id/btnMatress"
+                style="@style/BedMenuToggle"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:textSize="14sp"
+                android:textOff="UI000610C002"
+                android:textOn="UI000610C002"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--Bed Area-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bedContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="42dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_container">
+
+        <RelativeLayout
+            android:id="@+id/bedWrap"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="32dp">
+
+            <LinearLayout
+                android:id="@+id/bedSegmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:weightSum="272">
+
+                <View
+                    android:id="@+id/bed_head_segment"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="120"
+                    android:background="@drawable/bed_segment"/>
+
+                <View
+                    android:id="@+id/core_segment"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="44"
+                    android:background="@drawable/bed_segment"/>
+
+                <View
+                    android:id="@+id/bed_thigh_segment"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="44"
+                    android:background="@drawable/bed_segment"/>
+
+                <View
+                    android:id="@+id/bed_leg_segment"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="64"
+                    android:background="@drawable/bed_segment"/>
+            </LinearLayout>
+
+            <!--shadow area-->
+            <LinearLayout
+                android:id="@+id/bedSegmentShadContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:weightSum="272">
+
+                <View
+                    android:id="@+id/bed_shad_head_segment"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="120"
+                    android:background="@drawable/bed_segment_shad"/>
+
+                <View
+                    android:id="@+id/core_shad_segment"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="44"
+                    android:background="@drawable/bed_segment_shad"/>
+
+                <View
+                    android:id="@+id/bed_shad_thigh_segment"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="44"
+                    android:background="@drawable/bed_segment_shad"/>
+
+                <View
+                    android:id="@+id/bed_shad_leg_segment"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="64"
+                    android:background="@drawable/bed_segment_shad"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/bedIndicatorWrap"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="276"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bedWrap">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="120"
+                android:background="@drawable/bed_indicator_segment"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="44"
+                android:background="@drawable/bed_indicator_segment"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="112"
+                android:background="@drawable/bed_indicator_segment"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bedNumberIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bedIndicatorWrap">
+
+            <TextView
+                android:id="@+id/headIndicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="120"
+                android:text="0°"
+                android:textAlignment="center"
+                android:textColor="#80DFE9"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/heightIndicator"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="0dp"
+                android:layout_weight="44"
+                android:text="27cm"
+                android:textAlignment="center"
+                android:textColor="#80DFE9"
+                android:textSize="16dp"/>
+
+
+            <TextView
+                android:id="@+id/footIndicator"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="112"
+                android:text="0°"
+                android:textAlignment="center"
+                android:textColor="#80DFE9"
+                android:textSize="16dp"/>
+        </LinearLayout>
+
+        <com.paramount.bed.util.CustomViewPager
+            android:id="@+id/bedCardPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:overScrollMode="never"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/btnStartBed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bedNumberIndicator">
+
+        </com.paramount.bed.util.CustomViewPager>
+
+        <LinearLayout
+            android:id="@+id/btnStartBed"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/slider_button"
+            android:clickable="true"
+            android:elevation="5dp"
+            android:visibility="invisible"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/txtStartBed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI000610C004"
+                android:textColor="@android:color/white"
+                android:textScaleX=".9"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCloseBed"
+            style="@style/NewCirclePrimaryButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="12.5dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/dialogSettingBed"
+        layout="@layout/dialog_bed_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <include
+        android:id="@+id/dialogSettingMatress"
+        layout="@layout/dialog_matress_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/matressOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_dark_transparent"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/core_segment_dummy"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/bed_segment"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/core_segment_dummy">
+
+        <View
+            android:id="@+id/heightArrowUp1"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom"
+            android:alpha="0"
+            android:background="@drawable/height_up"/>
+
+        <View
+            android:id="@+id/heightArrowUp2"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom"
+            android:alpha="0"
+            android:background="@drawable/height_up"/>
+
+        <View
+            android:id="@+id/heightArrowUp3"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom"
+            android:alpha="0"
+            android:background="@drawable/height_up"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/core_segment_dummy">
+
+        <View
+            android:id="@+id/heightArrowDown1"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom"
+            android:alpha="0"
+            android:background="@drawable/height_down"/>
+
+        <View
+            android:id="@+id/heightArrowDown2"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom"
+            android:alpha="0"
+            android:background="@drawable/height_down"/>
+
+        <View
+            android:id="@+id/heightArrowDown3"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom"
+            android:alpha="0"
+            android:background="@drawable/height_down"/>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/dialogHistorySetting"
+        layout="@layout/dialog_history_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/dialogSettingRecommend"
+        layout="@layout/dialog_setting_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

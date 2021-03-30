@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:max="1000"
+        android:progress="1000"
+        android:progressTint="@color/dot_active"
+        android:secondaryProgressTint="@color/dot_inactive"
+        app:layout_constraintEnd_toStartOf="@+id/textview10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:id="@+id/textview10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="30dp"
+        android:text="UI000311C002"
+        android:textAlignment="center"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bluetoothList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="34dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+
+        app:layout_constraintBottom_toTopOf="@id/notes_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview10" />
+
+    <TextView
+        android:id="@+id/notes_text"
+        style="@style/TextRegistration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="UI000311C003"
+        android:textAlignment="textStart"
+        android:textColor="#6092AF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/btnRescan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bluetoothList" />
+
+    <Button
+        android:id="@+id/btnRescan"
+        style="@style/RegistrationButton"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/slider_button"
+        android:text="UI000311C004"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notes_text" />
+</androidx.constraintlayout.widget.ConstraintLayout>

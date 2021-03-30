@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></LinearLayout>
+
+    <View
+        android:id="@+id/bedSettingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_dark_transparent"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bedSettingContainer"
+        android:layout_width="match_parent"
+        android:background="@drawable/dialog_bg"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:paddingBottom="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView27"
+            style="@style/HeadingDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:text="UI000650C001"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnCloseSettingBed"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/popup_modal_close1" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/primary_disabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView27" />
+
+        <TextView
+            android:id="@+id/textView28"
+            style="@style/HeadingDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="UI000650C002"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout99"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView28">
+
+            <ToggleButton
+                android:id="@+id/btn_fast"
+                style="@style/MainButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:width="130dp"
+                android:textOff="UI000650C003"
+                android:textOn="UI000650C003" />
+
+            <ToggleButton
+                android:id="@+id/btn_usually"
+                style="@style/MainButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:width="130dp"
+                android:textOff="UI000650C004"
+                android:textOn="UI000650C004" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/primary_disabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout99" />
+
+        <TextView
+            android:id="@+id/textView29"
+            style="@style/HeadingDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="UI000650C005"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+
+        <TextView
+            android:id="@+id/textView30"
+            style="@style/CardText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="UI000650C006"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView29" />
+
+        <RelativeLayout
+            android:id="@+id/linearLayout98"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView30">
+
+            <ToggleButton
+                android:id="@+id/toogle1"
+                style="@style/CircleButton"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:textOff="UI000650C007"
+                android:textOn="UI000650C007"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+
+            <ImageView
+                android:id="@+id/lockToogle1"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignEnd="@+id/toogle1"
+                android:src="@drawable/padlock"
+                android:visibility="gone" />
+
+            <ToggleButton
+                android:id="@+id/toogle2"
+                style="@style/CircleButton"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@+id/toogle1"
+                android:gravity="center"
+                android:textOff="UI000650C008"
+                android:textOn="UI000650C008"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+
+            <ImageView
+                android:id="@+id/lockToogle2"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignEnd="@+id/toogle2"
+                android:src="@drawable/padlock"
+                android:visibility="gone" />
+
+            <ToggleButton
+                android:id="@+id/toogle3"
+                style="@style/CircleButton"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@+id/toogle2"
+                android:gravity="center"
+                android:textOff="UI000650C009"
+                android:textOn="UI000650C009"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+
+            <ImageView
+                android:id="@+id/lockToogle3"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignEnd="@+id/toogle3"
+                android:src="@drawable/padlock"
+                android:visibility="gone" />
+
+            <ToggleButton
+                android:id="@+id/toogle4"
+                style="@style/CircleButton"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_toEndOf="@+id/toogle3"
+                android:gravity="center"
+                android:textOff="UI000650C010"
+                android:textOn="UI000650C010"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+
+            <ImageView
+                android:id="@+id/lockToogle4"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignEnd="@+id/toogle4"
+                android:src="@drawable/padlock"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/primary_disabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout98" />
+
+
+        <TextView
+            android:id="@+id/textView32"
+            style="@style/HeadingDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="UI000650C011"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+        <Button
+            android:id="@+id/btnBedPositionAdjustment"
+            style="@style/MainButtonSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:text="UI000650C012"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView32" />
+
+        <Button
+            android:id="@+id/btnBedConfirm"
+            style="@style/RegistrationButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:text="UI000650C013"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnBedPositionAdjustment" />
+
+        <TextView
+            android:id="@+id/textViewBedReset"
+            style="@style/TextAddDevice"
+            android:textColor="@drawable/selector_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="UI000650C014"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnBedConfirm" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

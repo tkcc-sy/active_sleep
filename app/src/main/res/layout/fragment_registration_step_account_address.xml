@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/heading"
+        style="@style/RegistrationHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="UI000450C002"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/subheading"
+        style="@style/RegistrationSubHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="UI000450C003"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heading" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    app:layout_constraintTop_toBottomOf="@id/subheading"
+    app:layout_constraintBottom_toTopOf="@id/btnNext">
+
+    <LinearLayout
+        android:id="@+id/wrap1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:paddingRight="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI000450C004" />
+
+            <EditText
+                android:id="@+id/etPostalCode"
+                style="@style/Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:hint="UI000450C013"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLength="8"
+                android:textColorHint="@color/separator_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/etAddress"
+                style="@style/RegistrationHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:lines="1"
+                android:textAlignment="viewStart" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_zip_req"
+            style="@style/ZipcodeSearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="0dp"
+            android:layout_weight="0.7"
+            android:text="UI000450C005"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@id/wrap2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap1">
+
+        <LinearLayout
+            android:id="@+id/etHeightClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI000450C006" />
+
+            <EditText
+                android:id="@+id/etHeight"
+                style="@style/InputSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="UI000450C007"
+                android:textColorHint="@color/separator_gray" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/etWeightClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI000450C008" />
+
+            <EditText
+                android:id="@+id/etWeight"
+                style="@style/InputSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="UI000450C009"
+                android:textColorHint="@color/separator_gray" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@id/mattressSettingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrap2">
+
+        <LinearLayout
+            android:id="@+id/etHardnessClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI000450C019" />
+
+            <EditText
+                android:id="@+id/etHardness"
+                style="@style/InputSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/separator_gray" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+    <Button
+        android:id="@+id/btnNext"
+        style="@style/RegistrationButton"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:textSize="15sp"
+        android:enabled="true"
+        android:text="UI000450C010"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

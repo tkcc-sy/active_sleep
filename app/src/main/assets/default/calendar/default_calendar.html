@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Active Sleep </title>
+
+    <style type="text/css">
+                @font-face {
+                    font-family: AvenirRoman;
+                    src: url("avenir.otf");
+                }
+
+                @font-face {
+                  font-family: 'Glyphicons Halflings';
+
+                  src: url('glyphicons-halflings-regular.woff2') format('woff2');
+                }
+            </style>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-datetimepicker.css" rel="stylesheet">
+</head>
+<style type="text/css">
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+        #date{
+            color: #84a9bf;
+            font-weight: bold;
+            margin: 20px 10px 10px 10px;
+        }
+
+        #date .sat{
+            color: #3eb6d8;
+        }
+
+        #date .sun{
+            color: rgb(225,113,121);
+        }
+
+        .bootstrap-datetimepicker-widget table tr td.new { display: none; }
+        .bootstrap-datetimepicker-widget table tr td.old { visibility: hidden; }
+
+        #date .dow:nth-of-type(1) {
+          color: rgb(225,113,121);
+        }
+
+        #date .dow:nth-of-type(7) {
+          color: #3eb6d8;
+        }
+
+        .bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover{
+            background-color: white;
+            color: #84a9bf;
+            text-shadow: none;
+        }
+
+        .bootstrap-datetimepicker-widget table td.day{
+            height: 30px;
+            line-height: 30px;
+        }
+
+        #date .next .glyphicon{
+            background-color: #005962;
+            padding: 5px;
+            border-radius: 25px;
+            color: white;
+        }
+
+        #date .prev .glyphicon{
+            background-color: #005962;
+            padding: 5px;
+            border-radius: 25px;
+            color: white;
+        }
+
+        tbody{
+            font-family: AvenirRoman;
+            font-size: 15px;
+        }
+
+        .picker-switch{
+            font-family: AvenirRoman;
+            font-size: 16px;
+        }
+
+        .bootstrap-datetimepicker-widget table td.today{
+            background-color: transparent;
+            color: white !important;
+        }
+
+        .bootstrap-datetimepicker-widget table td.today:before{
+            content: '';
+            display: inline-block;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #44bfe2;
+            z-index: -1;
+            top: calc(50% - 15px);
+            left: calc(50% - 15px);
+            border-radius: 30px;
+            border: none;
+            border-width: 0px;
+        }
+
+        .bootstrap-datetimepicker-widget table td.day{
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+        .bootstrap-datetimepicker-widget table th{
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+        .bootstrap-datetimepicker-widget table thead tr:first-child th:hover{
+            background-color: white;
+        }
+    </style>
+<body id="body_page" class="nav-sm">
+<div id="date"></div>
+</body>
+
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="moment.min.js"></script>
+<script src="ja.js"></script>
+<script src="bootstrap-datetimepicker.js"></script>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#date').datetimepicker({
+            inline: true,
+            format: 'YYYY/MM/DD',
+            maxDate: moment().format('YYYY/MM/DD'),
+            locale: 'ja',
+            dayViewHeaderFormat : "Y 年 MMMM",
+            minDate: '1900-01-01'
+        }).on("dp.update", function(e) {
+            applyAppEvent();
+        });
+    });
+</script>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="#00ffffff">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_margin="10dp"
+        android:background="@drawable/server_dialogue"
+        app:cardCornerRadius="7dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/versionAPP"
+                    style="@style/TextRegistration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="0.0.0"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimaryDark"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_server" />
+
+                <TextView
+                    style="@style/TextRegistration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Server Host URL" />
+            </LinearLayout>
+
+
+            <RadioGroup
+                android:id="@+id/rgServer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <RadioButton
+                    android:id="@+id/rbServerWEBAPI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="WEBAPI"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rbServerASSDEBUG"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ASSDEBUG"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rbServerASSQC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ASSQC"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rbServerASAPI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ASAPI / KCPS"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rbServerOTHER"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OTHER"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etHost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="https://example.com"
+                    android:inputType="textMultiLine|text"
+                    android:singleLine="false"
+                    android:textColorHint="@color/hint_color"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/actionCopy"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_server_copy" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.5"
+                android:minHeight="40dp"
+                android:text=""
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/close"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_server_cancel"
+                    android:gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="Cancel"
+                    android:textColor="@color/red_google"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_server_save"
+                    android:gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="Save"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

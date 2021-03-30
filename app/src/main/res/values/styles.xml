@@ -1,0 +1,669 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+
+    </style>
+    <style name="AppTheme.DialogX" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+
+    </style>
+
+    <style name="AppTheme.FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="toolbarNavigationButtonStyle">@style/myActionButtonStyle</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <style name="ThemeFullSCreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="O">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="O">true</item>
+    </style>
+
+    <style name="myActionButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:height">10dp</item>
+        <item name="android:width">10dp</item>
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">10dp</item>
+    </style>
+
+    <style name="RegistrationHeader" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">30dp</item>
+    </style>
+
+    <style name="RegistrationSubHeader" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">30dp</item>
+    </style>
+
+    <style name="HeadingRegistration" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="HeadingRegistrationNoMargin" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+
+    </style>
+
+    <style name="SubHeadingRegistration" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="HeadingDialog" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextRegistration" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextTitleDialogScore" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextTitleDialogForest" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="RadioButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/custom_radio_button</item>
+    </style>
+
+    <style name="RadioButtonAccount" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/btn_account_radio_button</item>
+    </style>
+    <style name="NewRadioButtonAccount" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/new_btn_account_radio_button</item>
+    </style>
+
+    <style name="ButtonPlayPause" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/playpause_button</item>
+    </style>
+
+    <style name="TextDialog" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/dialog_accent</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="CardTitleBed" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@drawable/secondary_cardtitle_text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="TitleDevice" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#6092af</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextDevice" parent="TitleDevice">
+        <item name="android:textColor">#6092af</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+
+    <style name="CardTitleMatress" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@drawable/secondary_cardtitle_text</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="matress" parent="TextAppearance.AppCompat">
+        <item name="android:background">@drawable/matress</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="MatressText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#80dfe9</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="bed" parent="TextAppearance.AppCompat">
+        <item name="android:background">@drawable/bed</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="CardText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@drawable/secondary_card_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="TextButton" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Heading1" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_light</item>
+        <item name="android:textSize">60sp</item>
+    </style>
+
+    <style name="Heading2" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_blue</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="HeadingWireframe" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextWireframe" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextLogin" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAddDevice" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextSlider" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#b4000000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Input" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>
+        <item name="android:background">@drawable/edit_text</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginTop">@dimen/medium_space</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+    <style name="InputEmailAccount" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>
+        <item name="android:background">@drawable/edit_text</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <style name="PlainInput" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>>
+        <item name="android:background">@drawable/plain_edit_text</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="InputWireframe" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:background">@drawable/wireframe_border</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="InputSpinner" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>
+        <item name="android:background">@drawable/edit_text_spinner</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginTop">@dimen/medium_space</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <style name="ButtonOutlineText" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/outline_rounded_text_button</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonAutoOutlineText" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/outline_rounded_button_primary</item>
+        <item name="android:textColor">@drawable/outline_main_button_text</item>
+    </style>
+
+    <style name="NewButtonAutoOutlineText" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/new_outline_rounded_button_primary</item>
+        <item name="android:textColor">@drawable/outline_main_button_text</item>
+    </style>
+
+    <style name="PrimaryButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/primary_button</item>
+        <item name="android:textColor">@drawable/primary_button_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="RegistrationButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/registration_button</item>
+        <item name="android:textColor">@drawable/registration_button_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="RegistrationButtonQuis" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/registration_button_quis</item>
+        <item name="android:textColor">@drawable/registration_button_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ButtonForrestCancel" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/button_forrest_cancel</item>
+        <item name="android:textColor">@drawable/registration_button_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="StopEvaluation" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/sleep_reset_button</item>
+        <item name="android:textColor">@drawable/registration_button_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="StopEvaluationFinish" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/sleep_reset_finish_button</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ZipcodeSearchButton" parent="PrimaryButton">
+        <item name="android:background">@drawable/zipcode_search_button</item>
+        <item name="android:textColor">@drawable/zipcode_search_button_text</item>
+    </style>
+
+    <style name="RedButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/red_button</item>
+        <item name="android:textColor">@drawable/primary_button_text</item>
+    </style>
+
+    <style name="SecondaryButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/secondary_button</item>
+        <item name="android:textColor">@drawable/secondary_button_text</item>
+    </style>
+    <style name="QuestionnaireButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/questionnaire_button</item>
+        <item name="android:textColor">@drawable/secondary_button_text</item>
+    </style>
+    <style name="OutlineMainButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/outline_main_button</item>
+        <item name="android:textColor">@drawable/outline_main_button_text</item>
+    </style>
+
+
+    <style name="CircleButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/circle_secondary_button</item>
+        <item name="android:textColor">@drawable/secondary_button_text</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="MainButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/main_button</item>
+        <item name="android:textColor">@drawable/secondary_button_text</item>
+    </style>
+
+    <style name="RecommendPrimaryView" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@drawable/recommend_primary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="NewRecommendPrimaryView" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@drawable/new_recommend_primary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="RecommendSecondaryView" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/recommend_secondary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="NewRecommendSecondaryView" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/new_recommend_history</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="RecommendHistoryView" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/recommend_history</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="NewRecommendHistoryView" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/new_recommend_history</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MainButtonSpinner" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/main_button_spinner</item>
+        <item name="android:textColor">@drawable/secondary_button_text</item>
+    </style>
+
+    <style name="BedMenuToggle" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/bed_menu_toggle</item>
+        <item name="android:textColor">@drawable/bed_menu_toggle_text</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+
+    <style name="MatressMenuToggle" parent="BedMenuToggle">
+        <item name="android:textColor">@drawable/matress_menu_toggle_text</item>
+    </style>
+
+    <style name="OutlineButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/outline_rounded_button</item>
+        <item name="android:textColor">@drawable/registration_button_text</item>
+    </style>
+
+    <style name="OutlineButtonRemote" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/btn_remote_setting_selector</item>
+        <item name="android:textColor">@drawable/outline_button_remote_text_disabled</item>
+    </style>
+
+    <style name="CirclePrimaryButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selector_img_remote</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="NewCirclePrimaryButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selector_new_img_remote</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="CircleMatressButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/controller_48_edit</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+
+    <style name="DayMenuToggle" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/day_menu_toggle</item>
+        <item name="android:textColor">@drawable/day_menu_toggle_text</item>
+
+    </style>
+
+
+    <style name="WeekMenuToggle" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/week_menu_toggle</item>
+        <item name="android:textColor">@drawable/week_menu_toggle_text</item>
+
+    </style>
+
+
+    <style name="LoginInput" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@color/wireframe_dark_grey</item>
+        <item name="android:background">@drawable/login_edit_text</item>
+    </style>
+
+    <style name="Seekbar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:progressTint">#bde0ea</item>
+        <item name="android:colorControlActivated">#009bd2</item>
+    </style>
+
+    <style name="PrimaryCheckbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:buttonTint">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:button">@drawable/ic_checkbox</item>
+    </style>
+
+    <style name="PrimaryRadio" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:buttonTint">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="InputNomargin" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>
+        <item name="android:background">@drawable/edit_text</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginTop">@dimen/medium_space</item>
+        <item name="android:layout_marginEnd">@dimen/medium_space</item>
+        <item name="android:layout_marginStart">@dimen/medium_space</item>
+
+
+    </style>
+
+    <style name="InputSpinnerNoMargin" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>
+        <!--<item name="android:background">@drawable/edit_text_spinner</item>-->
+        <item name="android:background">@drawable/edit_text</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginTop">@dimen/medium_space</item>
+        <item name="android:layout_marginEnd">@dimen/medium_space</item>
+        <item name="android:layout_marginStart">@dimen/medium_space</item>
+    </style>
+
+    <style name="InputSpinnerTrasparent" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>
+        <item name="android:background">@drawable/edit_text_spinner_transparent</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="InputTransparent" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="InputTransparentMultiLine" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/slight_blue</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_vertical_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_vertical_track</item>
+        <item name="android:scrollbarSize">12dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="ios_dialog_style" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/iosdialog_bg_custom</item>
+    </style>
+    
+    <style name="popupDialogueAnimation">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+    </style>
+
+    <style name="AppTheme.FullScreen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.FullScreen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="CalendarDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowEnterTransition">@transition/explode</item>
+        <item name="android:windowExitTransition">@transition/explode</item>
+        <item name="android:duration">1000</item>
+        <item name="android:fadeDuration">1000</item>
+    </style>
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/CustomDialogAnimation</item>
+    </style>
+
+    <style name="CustomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/explode</item>
+        <item name="android:windowExitAnimation">@anim/explode</item>
+    </style>
+    <style name="Theme.AppCompat.Transparent.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="ThemeRealtimeDialogue" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+    <style name="HeaderSnoreDialog" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/header_snore</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="SubHeaderSnoreDialog" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/sub_header_snore</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="TitleSnoreDialog" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/title_snore</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Body1SnoreDialog" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/sub_header_snore</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Body2SnoreDialog" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/body1_snore</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AudioFileInfoOverlayText">
+        <item name="android:paddingLeft">4px</item>
+        <item name="android:paddingBottom">4px</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+</resources>

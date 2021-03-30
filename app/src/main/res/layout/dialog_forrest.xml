@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ffffff">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/autoDialogShareContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/alarm_dialogue"
+            android:visibility="visible"
+            app:cardCornerRadius="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:id="@+id/btnCloseShare"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/popup_modal_close1" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/headerDialogShare"
+                        style="@style/HeaderSnoreDialog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="30dp"
+                        android:padding="5dp"
+                        android:text="UI000507C001。"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:id="@+id/rlProgressBarContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvScore"
+                            style="@style/HeaderSnoreDialog"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="-"
+                            android:textSize="58sp"
+                            android:textStyle="normal"
+                            android:textColor="#7ec8ef"/>
+
+                        <TextView
+                            style="@style/HeaderSnoreDialog"
+                            android:id="@+id/tvLabelScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/tvScore"
+                            android:layout_marginBottom="16dp"
+                            android:layout_toRightOf="@+id/tvScore"
+                            android:text="UI000507C003"
+                            android:textSize="18sp"
+                            android:textColor="#7ec8ef"
+                            android:layout_marginLeft="7.5dp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvNickName"
+                        style="@style/SubHeaderSnoreDialog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="#3592bd"
+                        android:textStyle="bold"
+                        android:textSize="24sp"/>
+
+                    <ImageView
+                        android:id="@+id/tvIvScore"
+                        android:layout_width="100dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/no_image_score"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"/>
+
+
+                    <TextView
+                        android:id="@+id/descriptionDialogTimer"
+                        style="@style/SubHeaderSnoreDialog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:textColor="#a0b0af"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="15sp"/>
+
+                    <Button
+                        android:id="@+id/btnShare"
+                        style="@style/RegistrationButtonQuis"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="UI000507C006"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/btnToCancel"
+                        style="@style/ButtonForrestCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:enabled="true"
+                        android:text="UI000507C007"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"></Button>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</RelativeLayout>

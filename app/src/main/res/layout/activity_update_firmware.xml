@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBF1F1"
+    tools:context=".ui.registration.TncActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/header_progress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/footer_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:weightSum="10">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_weight="7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:keepScreenOn="true"
+                android:id="@+id/fwUpdateProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                app:cpb_round_border="false" />
+
+            <TextView
+                android:id="@+id/percentage_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textSize="28sp"
+            android:textColor="#226d88"/>
+
+            <TextView
+                android:id="@+id/status_text"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI000732C002"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/fwUpdateProgressBar"
+                app:layout_constraintEnd_toEndOf="@id/fwUpdateProgressBar"
+                app:layout_constraintTop_toBottomOf="@id/fwUpdateProgressBar"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="35dp"
+                android:textColor="@color/colorPrimaryDark"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_layout"
+        android:gravity="center"
+        android:paddingBottom="30dp">
+
+
+        <Button
+            android:id="@+id/btnRetry"
+            style="@style/RegistrationButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:text="UI000732C004"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.main.MyAccountEditActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separator_gray">
+
+    </LinearLayout>
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLabelName"
+                    style="@style/TextRegistration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UI000710C002" />
+
+                <EditText
+                    android:id="@+id/etName"
+                    style="@style/Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ems="10"
+                    android:hint="UI000710C034"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLabelBirthdate"
+                    style="@style/TextRegistration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UI000710C003" />
+
+                <EditText
+                    android:id="@+id/etBirthday"
+                    style="@style/Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:focusedByDefault="false"
+                    android:hint="UI000710C035"
+                    android:inputType="none"
+                    android:text=""
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvLabelEmail"
+                    style="@style/TextRegistration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UI000710C004" />
+
+                <EditText
+                    android:id="@+id/etEmails"
+                    style="@style/Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
+                    android:text="t2@mail.com"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLabelPassword"
+                    style="@style/TextRegistration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UI000710C005"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLabelEmail" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    style="@style/Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:ems="10"
+                    android:hint="UI000710C037"
+                    android:inputType="textPassword"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etEmail" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLabelConfirmPassword"
+                    style="@style/TextRegistration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UI000710C032"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLabelEmail" />
+
+
+                <EditText
+                    android:id="@+id/etConfirmPassword"
+                    style="@style/Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ems="10"
+                    android:hint="UI000710C038"
+                    android:inputType="textPassword"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etEmail" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/emailContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/tvLabelEmailConfirm"
+                    style="@style/TextRegistration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UI000710C069" />
+
+                <LinearLayout
+                    android:id="@+id/emailWrap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subtitle2">
+
+                    <ToggleButton
+                        android:id="@+id/tbEmail"
+                        style="@style/RadioButtonAccount"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="20dp"
+                        android:textOff=""
+                        android:textOn="" />
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        style="@style/InputEmailAccount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="UI000710C070"
+                        android:text=""
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/facebookWrap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subtitle2">
+
+                    <ToggleButton
+                        android:id="@+id/tbFacebook"
+                        style="@style/RadioButtonAccount"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="20dp"
+                        android:textOff=""
+                        android:textOn="" />
+
+                    <LinearLayout
+                        android:id="@+id/btnFacebook"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_account_facebook"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:paddingHorizontal="20dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/registration_06" />
+
+                            <TextView
+                                android:id="@+id/captionFacebook"
+                                style="@style/TextButton"
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="10sp"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:gravity="center_vertical"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:text="UI000710C071"
+                                android:textColor="@drawable/registration_button_text" />
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/twitterWrap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subtitle2">
+
+                    <ToggleButton
+                        android:id="@+id/tbTwitter"
+                        style="@style/RadioButtonAccount"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="20dp"
+                        android:textOff=""
+                        android:textOn="" />
+
+                    <LinearLayout
+                        android:id="@+id/btnTwitter"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_account_twitter"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="20dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/registration_07" />
+
+                            <TextView
+                                android:id="@+id/captionTwitter"
+                                style="@style/TextButton"
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="10sp"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:text="UI000710C072"
+                                android:textColor="@drawable/registration_button_text" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phoneContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvLabelPhoneConfirm"
+                        style="@style/TextRegistration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UI000710C061" />
+
+                    <EditText
+                        android:id="@+id/etPhoneConfirm"
+                        style="@style/Input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:hint="UI000710C062"
+                        android:inputType="number"
+                        android:maxLength="13"
+                        android:text=""
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnPhoneConfirm"
+                        style="@style/ZipcodeSearchButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp"
+                        android:gravity="center"
+                        android:text="UI000710C063"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/genderContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    style="@style/TextRegistration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UI000710C057" />
+
+                <RadioGroup
+                    android:id="@+id/rgGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/medium_space"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        style="@style/PrimaryRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="UI000710C058" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        style="@style/PrimaryRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="UI000710C059" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        style="@style/PrimaryRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="UI000710C060" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvLabelAddress"
+                        style="@style/TextRegistration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UI000710C006" />
+
+                    <EditText
+                        android:id="@+id/etZip"
+                        style="@style/Input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:hint="UI000710C039"
+                        android:inputType="number"
+                        android:maxLength="8"
+                        android:text=""
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/etAddress"
+                        style="@style/HeadingRegistration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:lines="1"
+                        android:textAlignment="viewStart"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnZipReq"
+                        style="@style/ZipcodeSearchButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp"
+                        android:gravity="center"
+                        android:text="UI000710C007"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:id="@+id/etHeightClick"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical"
+                        android:paddingRight="15dp">
+
+                        <TextView
+                            android:id="@+id/tvLabelHeight"
+                            style="@style/TextRegistration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="UI000710C008" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="6dp"
+                            android:paddingLeft="10dp">
+
+                            <EditText
+                                android:id="@+id/etHeight"
+                                style="@style/PlainInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="UI000710C009"
+                                android:inputType="textPersonName"
+
+                                android:textSize="15sp" />
+
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/pull_down" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/light_blue" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/etWeightClick"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical"
+                        android:paddingLeft="15dp">
+
+                        <TextView
+                            android:id="@+id/tvLabelWeight"
+                            style="@style/TextRegistration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="UI000710C010" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="6dp"
+                            android:paddingLeft="10dp">
+
+                            <EditText
+                                android:id="@+id/etWeight"
+                                style="@style/PlainInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="UI000710C011"
+                                android:inputType="textPersonName"
+
+                                android:textSize="15sp" />
+
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/pull_down" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/light_blue" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/mattressSettingContainer"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginBottom="44dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                        android:id="@+id/etHardnessClick"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvLabelHardness"
+                            style="@style/TextRegistration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="UI000710C063" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="6dp"
+                            android:paddingLeft="10dp">
+
+                            <EditText
+                                android:id="@+id/etHardness"
+                                style="@style/PlainInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName"
+
+                                android:textSize="15sp" />
+
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/pull_down" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/light_blue" />
+                    </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnNext"
+                style="@style/RegistrationButton"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="40dp"
+                android:text="UI000710C012" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebookLoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@android:color/transparent"
+        android:visibility="gone" />
+
+    <com.twitter.sdk.android.core.identity.TwitterLoginButton
+        android:id="@+id/twitterLoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+</LinearLayout>

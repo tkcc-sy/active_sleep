@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBF1F1"
+    tools:context=".ui.registration.TncActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/header_progress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <WebView
+        android:id="@+id/wvIntro"
+        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/lin_chk_aggree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/lin_chk_aggree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wvIntro"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/medium_space"
+        android:layout_marginBottom="@dimen/medium_space"
+        android:padding="5dp">
+
+        <CheckBox
+            android:checked="false"
+            android:id="@+id/chkAgree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PrimaryCheckbox"/>
+
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UI000731C002"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNext"
+        style="@style/RegistrationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:layout_gravity="center"
+        android:enabled="false"
+        android:text="UI000731C003"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btnCancel"
+        style="@style/RegistrationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:layout_gravity="center"
+        android:text="UI000731C004"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/card_background"
+    android:elevation="5dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <View
+        android:id="@+id/vwPositionNow"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:orientation="vertical"
+        android:background="@drawable/controller_17"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/CardTitleBed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:text="UI000610C019"/>
+
+        <TextView
+            android:id="@+id/tvTag"
+            style="@style/CardText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="UI000610C020"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnStopBed"
+        android:layout_width="200dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/slider_button"
+        android:clickable="true"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txtStartBed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UI000610C021"
+            android:textColor="@android:color/white"
+            android:textScaleX=".9"
+            android:textSize="32sp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

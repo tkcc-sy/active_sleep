@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text\/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Active Sleep </title>
+</head>
+
+<style type="text/css">
+    *:not([type=text]) {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+    }
+    .toggle-accordion{
+        font-size: 18px;
+        position: absolute;
+        right: 10px;
+        top: 15px;
+    }
+
+    .panel-title{
+        margin-top: 7px;
+        padding: 8px;
+    }
+
+    .panel-default>.panel-heading{
+        color: #333;
+        background-color: #ffffff;
+        border-color: #ddd;
+        height: 50px;
+        border-radius: 0px;
+    }
+
+    .panel-title a{
+        color: #00576a;
+    }
+
+    a:focus, a:hover{
+        text-decoration: none;
+    }
+
+    .panel-body{
+        color: #6a9fbd;
+        text-align: justify;
+        line-height: 1.8;
+    }
+
+    .panel-heading{
+        position: relative;
+    }
+
+    .search-container{
+        padding: 10px;
+        height: 60px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 2;
+        background-color: #e8eeee;
+    }
+
+    .panel-group{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .images{
+        max-height: 500px;
+    }
+
+    .faq-image{
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .content-faq img{
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .faq_highlight {
+        font-weight: bold;
+        font-style: italic;
+        background: yellow;
+        color: #000
+    }
+
+    h3 .faq_highlight {
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .pre-img{
+        display: none;
+    }
+
+    .link_no{
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+
+</style>
+<body style="background-color: #ebf1f1;">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default search_content group-01" data-mylink="0102">
+        <div class="panel-heading" role="tab" id="heading1">
+            <h4 class="panel-title">
+                <a role="button" id="tab_2" data-groupid="01" class="tabLink" data-mylink="0102">
+                    <span class="faq-scale">FAQ?2</span>
+                </a>
+            </h4>
+        </div>
+    </div>
+    <div class="panel panel-default search_content group-01" data-mylink="0103">
+        <div class="panel-heading" role="tab" id="heading2">
+            <h4 class="panel-title">
+                <a role="button" id="tab_3" data-groupid="01" class="tabLink" data-mylink="0103">
+                    <span class="faq-scale">FAQ?3</span>
+                </a>
+            </h4>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <p>News Content goes here...</p>
+        <p>This is javascript modal box</p>
+    </div>
+
+</div>
+
+</body>
+
+<script>
+  var modal = document.getElementById("myModal");
+  var panels = document.getElementsByClassName("panel-heading");
+  var close = document.getElementsByClassName("close")[0];
+  var i;
+
+  for (i = 0; i < panels.length; i++) {
+    panels[i].addEventListener("click", function() {
+      modal.style.display = "block";
+    });
+  }
+
+  close.onclick = function() {
+    modal.style.display = "none";
+    window.location = "closeNews"
+  }
+</script>
+
+
+</html>

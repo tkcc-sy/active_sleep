@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_02"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.login.LoginEmailActivity">
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/as_white" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        style="@style/LoginInput"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="12dp"
+        android:ems="10"
+        android:hint="UI000480C001"
+        android:inputType="textEmailAddress"
+        android:paddingStart="20dp"
+
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/etPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:id="@+id/etPassword"
+        style="@style/LoginInput"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="26dp"
+        android:ems="10"
+        android:hint="UI000480C002"
+        android:inputType="textPassword"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnForgotID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/btnForgotID"
+        style="@style/TextLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="UI000480C003"
+        android:textColor="@drawable/registration_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/btnForgotPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/btnForgotPassword"
+        style="@style/TextLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="22dp"
+        android:text="UI000480C004"
+        android:textColor="@drawable/registration_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/slider_button"
+        android:enabled="true"
+        android:text="UI000480C005"
+        android:textColor="@drawable/selector_btn"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:gravity="center_vertical"
+        android:paddingRight="20dp"
+        android:paddingBottom="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/btnBackSlider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/login_03"/>
+
+        <TextView
+            style="@style/TextLogin"
+            android:textColor="@drawable/registration_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UI000480C006"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnBackSlider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:gravity="center_vertical"
+        android:paddingRight="20dp"
+        android:paddingBottom="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/login_03"/>
+
+        <TextView
+            style="@style/TextLogin"
+            android:textColor="@drawable/registration_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UI000480C021"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

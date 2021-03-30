@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/card_background"
+    android:elevation="5dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/CardTitleBed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="23sp"
+            android:text="UI000620C001" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center|top">
+
+            <TextView
+                android:id="@+id/tvTag"
+                style="@style/CardText"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:text="UI000620C002"
+                android:textAlignment="center"
+                android:gravity="bottom"
+                android:textSize="12sp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/combination_up"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/manual_up_button" />
+
+            <TextView
+                android:id="@+id/txt0"
+                style="@style/CardText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="UI000620C003"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/combination_down"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/manual_down_button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/head_up"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/manual_up_button" />
+
+            <TextView
+                android:id="@+id/txt1"
+                style="@style/CardText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="UI000620C004"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/head_down"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/manual_down_button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/leg_up"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/manual_up_button" />
+
+            <TextView
+                android:id="@+id/txt2"
+                style="@style/CardText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="UI000620C005"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/leg_down"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/manual_down_button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/height_up"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/manual_up_button" />
+
+            <TextView
+                android:id="@+id/txt3"
+                style="@style/CardText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="UI000620C006"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/height_down"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/manual_down_button" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

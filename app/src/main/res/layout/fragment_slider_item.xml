@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:fitsSystemWindows="true"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="#fff"
+        android:id="@+id/slideContainer">
+        <ImageView
+            android:id="@+id/slideimg"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_centerInParent="true"
+            android:layout_height="match_parent"
+            />
+        <TextView
+            android:id="@+id/txtdescription"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:text=""
+            android:textColor="#6C6D71"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="195dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

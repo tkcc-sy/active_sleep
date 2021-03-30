@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_enabled="false"
+        android:drawable="@drawable/secondary_button_disabled_zip" />
+    <item
+    	android:state_pressed="true"
+    	android:state_enabled="true"
+        android:drawable="@drawable/secondary_button_pressed_zip" />
+    <item
+    	android:state_focused="true"
+    	android:state_enabled="true"
+        android:drawable="@drawable/secondary_button_focused_zip" />
+
+	<item
+		android:state_selected="true"
+		android:drawable="@drawable/secondary_button_selected_zip" />
+
+
+	<item
+		android:state_checked="true"
+		android:drawable="@drawable/secondary_button_selected_zip" />
+    <item
+    	android:state_enabled="true"
+        android:drawable="@drawable/secondary_button_enabled_zip" />
+</selector>

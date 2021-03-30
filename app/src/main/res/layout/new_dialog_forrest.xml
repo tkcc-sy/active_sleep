@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/dialog_weekly">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/alarm_dialogue"
+        android:visibility="visible"
+        app:cardCornerRadius="7dp"
+        android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/layHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <RelativeLayout
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/tvHeader"
+                            android:layout_centerHorizontal="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UI000507C001"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="22sp" />
+
+
+                        <TextView
+                            android:id="@+id/tvDateHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvHeader"
+                            android:layout_centerHorizontal="true"
+                            android:padding="5dp"
+                            android:text="UI000507C012"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp" />
+
+
+                        <ImageView
+                            android:id="@+id/btnCloseShare"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/popup_modal_close1" />
+
+                        <Button
+                            android:id="@+id/btnHelp"
+                            style="@style/NewButtonAutoOutlineText"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_alignParentLeft="true"
+                            android:text="\?"
+                            android:textSize="19dp"/>
+
+
+                    </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/soft_grey"
+                        android:layout_alignBottom="@id/tvHeader"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_gravity="center"
+                    android:id="@+id/autoDialogShareContainer">
+
+                    <TextView
+                        android:id="@+id/tvSubHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="30dp"
+                        android:text="UI000507C002"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="normal"
+                        android:textSize="12sp"
+                        android:layout_marginTop="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/rlProgressBarContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="-"
+                            android:textSize="26sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="normal"/>
+
+                        <TextView
+                            android:id="@+id/tvLabelScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/tvScore"
+                            android:layout_toRightOf="@+id/tvScore"
+                            android:text="UI000507C003"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="5dp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/headerDialogShare"
+                        android:background="#EBF0F0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:text="UI000507C004"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/tvIvScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="195dp"
+                        android:src="@drawable/no_image_score"
+                        android:adjustViewBounds="true"/>
+
+                    <TextView
+                        android:id="@+id/descriptionDialogTimer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:text="UI000507C005"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="#5E8DA8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layFooter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:visibility="visible"
+                    android:layout_marginBottom="5dp"
+                    android:paddingRight="15dp"
+                    android:paddingLeft="15dp">
+
+                    <Button
+                        android:id="@+id/btnShare"
+                        style="@style/RegistrationButtonQuis"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="2.5dp"
+                        android:layout_marginRight="20dp"
+                        android:text="UI000507C006"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"/>
+
+                    <LinearLayout
+                        android:id="@+id/lin_chk_dismiss"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <CheckBox
+                            android:checked="false"
+                            android:textSize="10dp"
+                            android:scaleX="0.70"
+                            android:scaleY="0.70"
+                            android:id="@+id/chkDismiss"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/PrimaryCheckbox"
+                            android:layout_marginRight="5dp" />
+
+                        <TextView
+                            android:id="@+id/labelCheckbox"
+                            style="@style/TextDialog"
+                            android:layout_margin="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UI000507C007"
+                            android:textSize="14sp"
+                            android:textColor="#5E8DA8" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

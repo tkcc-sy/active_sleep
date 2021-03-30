@@ -1,0 +1,59 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Focused and not pressed -->
+    <item android:state_focused="true"
+        android:state_pressed="false"
+        android:color="#ffffff"
+        android:state_enabled="true"
+        />
+
+    <!-- Focused and pressed -->
+    <item android:state_focused="true"
+        android:state_pressed="true"
+        android:state_enabled="true"
+        android:color="#000000" />
+
+    <!-- Unfocused and pressed -->
+    <item android:state_focused="false"
+        android:state_pressed="true"
+        android:state_checked="true"
+        android:state_enabled="true"
+        android:color="#FFFFFF" />
+
+    <item android:state_checked="true"
+        android:state_enabled="true"
+        android:color="@android:color/white" />
+
+    <!-- Default color -->
+    <item android:color="@color/colorPrimaryDark"
+        android:state_enabled="true"
+        />
+
+    <!-- Focused and not pressed -->
+    <item android:state_focused="true"
+        android:state_pressed="false"
+        android:color="#CFD8DA"
+        android:state_enabled="false"
+        />
+
+    <!-- Focused and pressed -->
+    <item android:state_focused="true"
+        android:state_pressed="true"
+        android:state_enabled="false"
+        android:color="#CFD8DA" />
+
+    <!-- Unfocused and pressed -->
+    <item android:state_focused="false"
+        android:state_pressed="true"
+        android:state_enabled="false"
+        android:color="#CFD8DA" />
+
+    <item android:state_checked="true"
+        android:state_enabled="false"
+        android:color="#CFD8DA" />
+
+    <!-- Default color -->
+    <item android:color="#CFD8DA"
+        android:state_enabled="false"
+        />
+</selector>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/linearLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:paddingHorizontal="15dp"
+    android:layout_marginBottom="6dp"
+    android:background="@drawable/secondary_button"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/registration_04" />
+
+<TextView
+    android:id="@+id/wifiName"
+    android:textColor="@color/text_primary"
+    android:text="WIFI"
+    android:textSize="15sp"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="center_vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>
+
