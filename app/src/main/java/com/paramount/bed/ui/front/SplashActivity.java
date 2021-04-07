@@ -68,8 +68,8 @@ public class SplashActivity extends BaseActivity {
             String appVersion = "1" + String.valueOf(BuildConfig.VERSION_MAJOR) + String.valueOf(BuildConfig.VERSION_MINOR) + String.valueOf(BuildConfig.VERSION_REVISION);
             String dbVersion = "1" + String.valueOf(updateApp.getMajor()) + String.valueOf(updateApp.getMinor()) + String.valueOf(updateApp.getRevision());
             if (Integer.parseInt(appVersion) > Integer.parseInt(dbVersion)) {
-                LanguageProvider.init(this);
-                DashboardProvider.init(this);
+//                LanguageProvider.init(this);
+//                DashboardProvider.init(this);
                 ServerModel.clear();
                 MigrateLanguageModel.clear();
                 MigrateLanguageModel updateData = new MigrateLanguageModel();
