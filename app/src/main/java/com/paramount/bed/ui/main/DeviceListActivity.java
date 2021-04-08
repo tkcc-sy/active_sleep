@@ -232,15 +232,15 @@ public class DeviceListActivity extends BaseActivity implements NemuriScanUtil.N
 
     private void updateUIState() {
         NemuriScanModel nemuriScanModel = NemuriScanModel.get();
-        if (nemuriScanModel != null && nemuriScanModel.getInfoType() != null && nemuriScanModel.getInfoType() == 2) {
+        if (nemuriScanModel != null && nemuriScanModel.getInfoType() != null) {
             switch (nemuriScanModel.getInfoType()) {
                 case 2:
                     imageView13.setImageResource(R.drawable.intime_sample);
                     bedTitle.setText(LanguageProvider.getLanguage("UI000730C013"));
                     break;
                 case 3:
-                    imageView13.setImageResource(R.drawable.intime_sample); // あとで変更：正式画像を受領したら修正
-                    bedTitle.setText(LanguageProvider.getLanguage("UI000730C014")); // あとで変更：正式機器名を受領したら修正
+                    imageView13.setImageResource(R.drawable.intime_comfort_sample);
+                    bedTitle.setText(LanguageProvider.getLanguage("UI000730C025"));
                     break;
                 default:
                     imageView13.setImageResource(R.drawable.bed_sample);
