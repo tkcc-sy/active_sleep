@@ -604,11 +604,13 @@ public class UpdateFirmwareScanActivity extends BaseActivity implements NSScanDe
 
     private void getDeviceTemplate() {
         showProgress();
-        if (UserLogin.isUserExist()) {
-            DeviceTemplateProvider.getDeviceTemplate(this, this, UserLogin.getUserLogin().getId());
-        } else {
 
-            DeviceTemplateProvider.getDeviceTemplate(this, this, 0);
+        NemuriScanModel currentNemuriscanModel = isNSRegistered ? registeredNemuriScan : selectedNemuriScan;
+        Integer bedType = currentNemuriscanModel == null ? null : currentNemuriscanModel.getInfoType();
+        if (UserLogin.isUserExist()) {
+            DeviceTemplateProvider.getDeviceTemplate(this, this, UserLogin.getUserLogin().getId(), bedType);
+        } else {
+            DeviceTemplateProvider.getDeviceTemplate(this, this, 0, bedType);
         }
     }
 

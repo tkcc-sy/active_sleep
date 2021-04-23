@@ -133,6 +133,8 @@ public class NemuriScanModel extends RealmObject {
             infoType = 2;
         } else if (bedModel == NSSpec.BED_MODEL.ACTIVE_SLEEP) {
             infoType = 1;
+        } else if (bedModel == NSSpec.BED_MODEL.INTIME_COMFORT) {
+            infoType = 3;
         } else {
             infoType = 0;
         }

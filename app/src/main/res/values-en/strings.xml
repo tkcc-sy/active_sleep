@@ -216,7 +216,6 @@
     <string name="UI000740C001">自動運転詳細設定</string>
     <string name="UI000741C001">入眠時の自動運転</string>
     <string name="UI000741C002">自動運転ON / OFF</string>
-    <string name="UI000741C004">Sleeping angle</string>
     <string name="UI000742C001">起床時の自動運転</string>
     <string name="UI000742C002">曜日と時間</string>
     <string name="UI000742C003">日曜日</string>

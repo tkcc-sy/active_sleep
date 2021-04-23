@@ -3,6 +3,7 @@ package com.paramount.bed.data.remote;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.orhanobut.logger.Logger;
 import com.paramount.bed.BedApplication;
 import com.paramount.bed.BuildConfig;
 import com.paramount.bed.data.model.ServerModel;
@@ -45,7 +46,11 @@ public class ApiClient {
             //SERVER SETTINGS
             //SERVER_ASSQC to build app run on Development Server
             //SERVER_ASAPI to build app run on Production Server
-            serverModel.setUrl(ServerUtil.SERVER_MAN1);
+            if (BuildConfig.BUILD_TYPE.equals("debug")) {
+                serverModel.setUrl(ServerUtil.SERVER_MAN1);
+            } else {
+                serverModel.setUrl(ServerUtil.SERVER_ASAPI);
+            }
             serverModel.insert();
         }
         initOkHttp(context);

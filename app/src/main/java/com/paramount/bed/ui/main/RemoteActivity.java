@@ -89,6 +89,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -167,6 +168,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         if (btnBed.isChecked()) {
             btnMattress.setChecked(false);
             mainLayout.setBackground(getDrawable(R.drawable.bed_background));
+
             //hide matress
             matressContainer.setVisibility(View.INVISIBLE);
             //show bed
@@ -244,6 +246,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     //MARK END : Main Layout Binding
 
     //MARK : Bed Layout Binding
+    @BindView(R.id.tiltIconImage)
+    ImageView tiltIconImage;
+
     @BindView(R.id.bed_head_segment)
     View bedHeadSegment;
     @BindView(R.id.bed_shad_head_segment)
@@ -291,7 +296,8 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     private Boolean isBack = true;
 
     private int counterDim = 0;
-    private ArrayList<float[]> dimmingPattern = new ArrayList<>();
+    private ArrayList<float[]> dimmingPatternUp = new ArrayList<>();
+    private ArrayList<float[]> dimmingPatternDown = new ArrayList<>();
 
     private ArrayList<DeviceTemplateBedModel> bedPresetValues;
     private ArrayList<DeviceTemplateMattressModel> mattressPresetValues;
@@ -431,8 +437,8 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     private boolean isIntentionalDC = false;
 
     private NSManager nsManager;
-    private NSBedSpec currentBedSpec = new NSBedSpec(0, 70, 0, 30, 0, 37);
-    private NSBedPosition currentBedPosition = new NSBedPosition(0, 0, 27);
+    private NSBedSpec currentBedSpec = new NSBedSpec(0, 70, 0, 30, 0, 37, 0, 0);
+    private NSBedPosition currentBedPosition = new NSBedPosition(0, 0, 27, 0);
     private NSBedPosition currentShadowPosition = new NSBedPosition();
     private NSMattressPosition dehumidifierTemp = new NSMattressPosition();
     private int dehumidifierTempCounter = 0;
@@ -443,9 +449,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     private NSBedSetting currentSetting = new NSBedSetting();
     private NSBedSetting previousSetting = new NSBedSetting();
     private NemuriConstantsModel nemuriConstantsModel = new NemuriConstantsModel();
-
-    private Handler arrowHeightTimeoutHandler = new Handler();
-    private Runnable arrowHeightTimeoutTimer = () -> runOnUiThread(this::stopHeightArrowAnimation);
 
     private Handler connectionTimeoutHandler = new Handler();
     private Runnable connectionTimeoutTimer = new Runnable() {
@@ -576,6 +579,48 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     private int selectedHardnessIndex = 0;
     //MARK END :  Bed setting vars
 
+    private final int showTiltIconThreshold = 2;    // 傾斜マーク表示閾値
+    private final int tiltIconFadeStopTime = 2000;  // この時間（ms）の間、傾斜が変化しなかったら、傾斜マークの点滅を終了する
+    private Handler tiltIconFadeHandler = new Handler();
+    private Runnable tiltIconFadeRunnable = new Runnable() {
+        @Override
+        public void run() {
+            tiltIconImage.clearAnimation();
+            tiltIconImage.setAlpha(1.0f);
+        }
+    };
+
+    private final float legHeightCalcValue = 70.8f;
+    private final int tiltThreshold = 2;    // 傾斜角度がこの数値以上の場合は、傾斜有りと判断
+    private boolean aboveHeightThresholdFlag = false;
+
+    private final int legHeightAddValue = 4;    // 足先高さと比較する場合に、高さ閾値に加算する数値
+    private final int heightAnimationStopTime = 1;  // この時間（秒）の間、高さが変化しなかったら、高さアニメーションを停止する
+    private final int checkHeightWarningTime = 2;   // この時間（秒）の間、ベッド位置情報が変化しなかったら、高さ警告ポップアップ表示の判定を行う
+
+    private Date headLastUpdateTime = new Date();
+    private Date legLastUpdateTime = new Date();
+    private Date heightLastUpdateTime = new Date();
+    private Date tiltLastUpdateTime = new Date();
+
+    @BindView(R.id.debugTiltIndicator)
+    TextView debugTiltIndicator;
+
+    @BindView(R.id.debugLegHeightIndicator)
+    TextView debugLegHeightIndicator;
+
+    @BindView(R.id.debugTargetHead)
+    TextView debugTargetHead;
+
+    @BindView(R.id.debugTargetLeg)
+    TextView debugTargetLeg;
+
+    @BindView(R.id.debugTargetHeight)
+    TextView debugTargetHeight;
+
+    @BindView(R.id.debugTargetTilt)
+    TextView debugTargetTilt;
+
     //MARK : Activity lifecycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -601,7 +646,8 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             toggleMatress();
         }
 
-        DeviceTemplateProvider.getDeviceTemplate(this, this, UserLogin.getUserLogin().getId());
+        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+        DeviceTemplateProvider.getDeviceTemplate(this, this, UserLogin.getUserLogin().getId(), bedType);
 
         if (UserLogin.getUserLogin() != null) {
             try {
@@ -779,8 +825,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                 }
             });
         }
-
-//        initDialogSettingHardness();
     }
 
     @Override
@@ -894,13 +938,13 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
 
     //MARK : Initialization
     private void initUI() {
-        dimmingPattern.add(new float[]{1, 0.5f, 0});
-        dimmingPattern.add(new float[]{0.5f, 1, 0.5f});
-        dimmingPattern.add(new float[]{0, 0.5f, 1});
-        dimmingPattern.add(new float[]{0.5f, 0, 0.5f});
-        dimmingPattern.add(new float[]{1, 0.5f, 0});
-        dimmingPattern.add(new float[]{0.5f, 1, 0.5f});
-        dimmingPattern.add(new float[]{0, 0.5f, 1});
+        dimmingPatternUp.add(new float[]{0.5f, 0.5f, 1});
+        dimmingPatternUp.add(new float[]{0.5f, 1, 0.75f});
+        dimmingPatternUp.add(new float[]{1, 0.75f, 0.5f});
+
+        dimmingPatternDown.add(new float[]{1, 0.5f, 0.5f});
+        dimmingPatternDown.add(new float[]{0.75f, 1, 0.5f});
+        dimmingPatternDown.add(new float[]{0.5f, 0.75f, 1});
 
         overridePendingTransition(R.anim.goup, R.anim.explode);
     }
@@ -934,17 +978,14 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                 currentPagerType = RemotePagerType.values()[position];
                 txtStartBed.clearAnimation();
 
-                if (currentPagerType == RemotePagerType.FREE || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME) {
+                if (currentPagerType == RemotePagerType.FREE || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME_COMFORT) {
                     btnStartBed.animate().alpha(0.0f).translationY(btnStartBed.getHeight());
 //                    btnStartBed.setVisibility(View.INVISIBLE);
                 } else if (currentPagerType == RemotePagerType.PRESET) {
-                    if (currentNSSpec.getBedType() != NSSpec.BED_MODEL.INTIME) {
-                        btnStartBed.setVisibility(View.VISIBLE);
-                        btnStartBed.animate().alpha(1.0f).translationY(0);
-                    }
+                    btnStartBed.setVisibility(View.VISIBLE);
+                    btnStartBed.animate().alpha(1.0f).translationY(0);
                 }
                 clearBedPresetUI();
-                userWarnedHeight = false;
                 applyLockWhenBedExist();
                 if (!PermissionUtil.locationFeatureEnabled(RemoteActivity.this)) {
                     disableBedUI();
@@ -1111,7 +1152,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             btnStartBed.setVisibility(View.VISIBLE);
             btnStartMatress.setVisibility(View.VISIBLE);
 
-            if (currentPagerType == RemotePagerType.FREE || (currentTabType == RemoteTabType.BED && currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME)) {
+            if (currentPagerType == RemotePagerType.FREE || (currentTabType == RemoteTabType.BED && currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME_COMFORT)) {
                 btnStartBed.setVisibility(View.INVISIBLE);
             }
             //TO Set Default By Last Persistence Data
@@ -1123,7 +1164,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                 }
             }
         });
-        bedPresetFragment.setIsTouchHoldMode(currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME);
+        bedPresetFragment.setIsTouchHoldMode(currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME_COMFORT);
         bedManualFragment.setHeightAvailable(currentBedSpec.isHeightLockSupported());
         applyLockWhenBedExist();
         hideProgress();
@@ -1185,7 +1226,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                     currentBedSpec.setHeightLockSupported(NemuriScanModel.get().isHeightSupported());
                 }
             }
-            btnStartBed.setVisibility(currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME ? View.INVISIBLE : View.VISIBLE);
+            btnStartBed.setVisibility(currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME_COMFORT ? View.INVISIBLE : View.VISIBLE);
             bedCardPager.setSwipeLocked(false);
             if (bedPresetFragment != null) bedPresetFragment.disableUI();
             if (bedManualFragment != null) bedManualFragment.disableUI();
@@ -1589,6 +1630,8 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             }
             if (nemuriScanModel.getInfoType() == 1) {
                 currentNSSpec.setBedModel(NSSpec.BED_MODEL.ACTIVE_SLEEP.ordinal());
+            } else if (nemuriScanModel.getInfoType() == 3) {
+                currentNSSpec.setBedModel(NSSpec.BED_MODEL.INTIME_COMFORT.ordinal());
             } else {
                 currentNSSpec.setBedModel(NSSpec.BED_MODEL.INTIME.ordinal());
             }
@@ -1609,9 +1652,16 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     }
 
     private void animateBed(NSBedPosition targetPosition) {
+        // 現在のベッド情報とレスポンスのベッド情報を比較して、差分があったら各データごとに最終更新時間を更新する
+        if (targetPosition.getHead() != currentBedPosition.getHead()) headLastUpdateTime = new Date();
+        if (targetPosition.getLeg() != currentBedPosition.getLeg()) legLastUpdateTime = new Date();
+        if (targetPosition.getHeight() != currentBedPosition.getHeight()) heightLastUpdateTime = new Date();
+        if (targetPosition.getTilt() != currentBedPosition.getTilt()) tiltLastUpdateTime = new Date();
+
         setHeadBed(targetPosition);
         setHeightBed(targetPosition);
         setFootBed(targetPosition);
+        setTiltBed(targetPosition);
     }
 
     private void animateBedShadow(NSBedPosition targetPosition) {
@@ -1637,10 +1687,20 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
 
     @SuppressLint("SetTextI18n")
     private void setHeightBed(NSBedPosition target) {
+        int diff = target.getHeight() - currentBedPosition.getHeight();
+        if ((isArrowPressedDown || isPresetPressedDown) && diff != 0) {
+            animateNSHeightArrow(diff > 0);
+        }
+
         //no animation,only info display
         runOnUiThread(() -> tvHeightIndicator.setText(target.getHeight() + "cm"));
         currentBedPosition.setHeight(target.getHeight());
-        if (currentBedPosition.getHeight() > nemuriConstantsModel.heightWarningThreshold) {
+//        calcLegHeight();    // デバッグ用
+
+        // 高さが閾値より大きくなったら高さ警告ポップアップの表示フラグをリセット
+        final int legHeightWarningThreshold = nemuriConstantsModel.heightWarningThreshold + legHeightAddValue;  // 足先高さ用の一旦停止閾値
+        if ((currentBedPosition.getTilt() < tiltThreshold && currentBedPosition.getHeight() > nemuriConstantsModel.heightWarningThreshold) ||
+            (currentBedPosition.getTilt() >= tiltThreshold && calcLegHeight() > legHeightWarningThreshold)) {
             userWarnedHeight = false;
         }
     }
@@ -1673,6 +1733,23 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             currentBedPosition.setLeg(target.getLeg());
             tvFootIndicator.setText(Math.abs(Math.round(target.getLeg())) + "°");
         });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setTiltBed(NSBedPosition target) {
+        if (target.getTilt() >= showTiltIconThreshold) {
+            tiltIconImage.setVisibility(View.VISIBLE);
+            if ((isArrowPressedDown || isPresetPressedDown) && target.getTilt() != currentBedPosition.getTilt()) {
+                if (tiltIconImage.getAnimation() == null) fadeOutTiltIcon();    // アニメーション設定がnullなら、アニメーション中ではないと判断してフェードを開始
+                tiltIconFadeHandler.removeCallbacks(tiltIconFadeRunnable);
+                tiltIconFadeHandler.postDelayed(tiltIconFadeRunnable, tiltIconFadeStopTime);
+            }
+        } else {
+            tiltIconImage.setVisibility(View.INVISIBLE);
+        }
+
+        currentBedPosition.setTilt(target.getTilt());
+//        runOnUiThread(() -> debugTiltIndicator.setText(target.getTilt() + "°"));  // デバッグ用
     }
 
     private void setHeadShadBed(NSBedPosition target) {
@@ -1722,43 +1799,33 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             nsArrowAnimator = new Timer();
             nsArrowAnimator.scheduleAtFixedRate(new TimerTask() {
                 public void run() {
-                    runOnUiThread(() -> {
-                        Logger.w("ARROW ANIMATE START + HEIGHT " + fingerPressCount);
-                        if (fingerPressCount > 1 || IOSDialogRight.getDialogVisibility()) {
-                            stopHeightArrowAnimation();
-                            return;
-                        }
-                        arrowHeightTimeoutHandler.removeCallbacks(arrowHeightTimeoutTimer);
-                        arrowHeightTimeoutHandler.postDelayed(arrowHeightTimeoutTimer, 1000);
-                        startHeightArrowAnimation(isUp);
-                    });
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(new Date());
+                    calendar.add(Calendar.SECOND, -heightAnimationStopTime);
+                    // 高さが1秒以内に変化している場合はアニメーション継続、変化していない場合アニメーション停止
+                    if ((isArrowPressedDown || isPresetPressedDown) && heightLastUpdateTime.after(calendar.getTime())) {
+                        runOnUiThread(() -> startHeightArrowAnimation(isUp));
+                    } else {
+                        stopHeightArrowAnimation();
+                    }
                 }
-            }, 0, 1000);
+            }, 0, 300);
         }
     }
 
     private void startHeightArrowAnimation(boolean isUp) {
-        float[] value = dimmingPattern.get(counterDim);
-        if (isUp) {
-            for (int i = 0; i < heightArrowsUp.size(); i++) {
-                heightArrowsUp.get(i).setAlpha(value[2 - i]);
-            }
-        } else {
-            for (int i = 0; i < heightArrowsUp.size(); i++) {
-                heightArrowsDown.get(i).setAlpha(value[i]);
-            }
-        }
+        ArrayList<float[]> patterns = isUp ? dimmingPatternUp : dimmingPatternDown;
+        List<View> arrows = isUp ? heightArrowsUp : heightArrowsDown;
 
-        counterDim = counterDim + 1;
-        if (counterDim == dimmingPattern.size()) counterDim = 0;
-        if (fingerPressCount > 1 || IOSDialogRight.getDialogVisibility()) {
-            stopHeightArrowAnimation();
+        float[] value = patterns.get(counterDim);
+        for (int i = 0; i < arrows.size(); i++) {
+            arrows.get(i).setAlpha(value[i]);
         }
+        counterDim = counterDim + 1;
+        if (counterDim == patterns.size()) counterDim = 0;
     }
 
     private void stopHeightArrowAnimation() {
-        arrowHeightTimeoutHandler.removeCallbacks(arrowHeightTimeoutTimer);
-        Logger.w("ARROW ANIMATE STOP + HEIGHT " + fingerPressCount);
         if (nsArrowAnimator != null) {
             nsArrowAnimator.cancel();
             nsArrowAnimator.purge();
@@ -1766,7 +1833,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         }
         ViewCollections.run(heightArrowsUp, (view, index) -> view.setAlpha(0));
         ViewCollections.run(heightArrowsDown, (view, index) -> view.setAlpha(0));
-
     }
 
     private void setMattressSegmentBlinking(int index, boolean shouldStart) {
@@ -1793,6 +1859,42 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         } else {
             txtStartMatress.clearAnimation();
         }
+    }
+
+    private void fadeOutTiltIcon() {
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.tilt_icon_fade_out);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (tiltIconImage.getAnimation() == null) return;
+                fadeInTiltIcon();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+        tiltIconImage.startAnimation(fadeOut);
+    }
+
+    private void fadeInTiltIcon() {
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.tilt_icon_fade_in);
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (tiltIconImage.getAnimation() == null) return;
+                fadeOutTiltIcon();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+        tiltIconImage.startAnimation(fadeIn);
     }
     //MARK END : animation methods
 
@@ -1921,14 +2023,15 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             currentFreeOperation = NSOperation.FREE_MULTI_BUTTON;
         }
 
-        //height warning logic
+        // 一旦停止判定
         if (currentFreeOperation == NSOperation.FREE_DECREASE_HEIGHT) {
-            if (!userWarnedHeight && currentBedPosition.getHeight() <= nemuriConstantsModel.heightWarningThreshold) {
+            if (checkHeightWarning(null, null)) {
                 showHeightThresholdAlert();
                 stopBedFreeMode();
                 return;
             }
         }
+
         if (nsManager != null) {
             nsManager.sendArrowCommand(currentFreeOperation);
         }
@@ -1953,6 +2056,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                 mismatchButtonCodeCounter = 0;
                 isArrowPressedDown = false;
 
+                tiltIconImage.clearAnimation();
+                tiltIconImage.setAlpha(1.0f);
+
                 freeCommandHandler.removeCallbacks(freeCommandTimer);
                 if (!shouldTerminate) {
                     new Handler().postDelayed(() -> nsManager.sendArrowCommand(NSOperation.FREE_TERMINATE),
@@ -1965,21 +2071,32 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     //MARK END: BLE free mode functions
 
     //MARK : BLE preset mode functions
+    @SuppressLint("SetTextI18n")
     private void schedulePresetCommand(boolean isFirst) {
+        if (isFirst) {
+            updateAboveHeightThreshold();
+//            debugTargetHead.setText(currentPresetTarget.getHead() + "°");   // デバッグ用
+//            debugTargetLeg.setText(currentPresetTarget.getLeg() + "°");
+//            debugTargetHeight.setText(currentPresetTarget.getHeight() + "cm");
+//            debugTargetTilt.setText(currentPresetTarget.getTilt() + "°");
+        }
+
         if (isSendingMultiButton) {
             nsManager.sendArrowCommand(NSOperation.FREE_MULTI_BUTTON);
             isArrowPressedDown = true;
         } else {
-            nsManager.sendPresetCommand(currentPresetTarget);
+            nsManager.sendPresetCommand(currentPresetTarget, currentBedPosition.getHeight());
         }
+
         commandRequestCount += 1;
         if (!isFirst && commandRequestCount != commandResponseCount) {
             commandTimeoutHandler.postDelayed(commandTimeoutTimer, (long) (nemuriConstantsModel.bedResponseTimeout * 1000));
         }
-        if ((currentPresetTarget.getHead() >= (currentBedPosition.getHead() - nemuriConstantsModel.lowerBedThreshold) &&
-                currentPresetTarget.getHead() <= (currentBedPosition.getHead() + nemuriConstantsModel.upperBedThreshold)) &&
-                (currentPresetTarget.getLeg() >= (currentBedPosition.getLeg() - nemuriConstantsModel.lowerBedThreshold) &&
-                        currentPresetTarget.getLeg() <= (currentBedPosition.getLeg() + nemuriConstantsModel.upperBedThreshold))) {
+
+        // 一旦停止判定
+        if (checkHeightWarning(currentPresetTarget.getHeight(), currentPresetTarget.getTilt())) {
+            showHeightThresholdAlert();
+
             //stop
             if (sameBedPosTimer == null) {
                 sameBedPosTimer = () -> {
@@ -1987,7 +2104,23 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                     sameBedPosTimer = null;
                 };
                 sameBedPosHandler.postDelayed(sameBedPosTimer, nemuriConstantsModel.nsBedSameResultTimeout * 1000);
-
+            }
+        } else if ((currentPresetTarget.getHead() >= (currentBedPosition.getHead() - nemuriConstantsModel.lowerBedThreshold) &&
+                    currentPresetTarget.getHead() <= (currentBedPosition.getHead() + nemuriConstantsModel.upperBedThreshold)) &&
+                   (currentPresetTarget.getLeg() >= (currentBedPosition.getLeg() - nemuriConstantsModel.lowerBedThreshold) &&
+                    currentPresetTarget.getLeg() <= (currentBedPosition.getLeg() + nemuriConstantsModel.upperBedThreshold))) {
+            // ベッドタイプが「INTIME_COMFORT」の時は、高さと傾斜が目標値に達している時のみ停止
+            if (nemuriScanModel.getInfoType() != NSSpec.BED_MODEL.INTIME_COMFORT.ordinal() ||
+               (currentPresetTarget.getHeight() == currentBedPosition.getHeight() &&
+                currentPresetTarget.getTilt() == currentBedPosition.getTilt())) {
+                //stop
+                if (sameBedPosTimer == null) {
+                    sameBedPosTimer = () -> {
+                        stopPresetOperation();
+                        sameBedPosTimer = null;
+                    };
+                    sameBedPosHandler.postDelayed(sameBedPosTimer, nemuriConstantsModel.nsBedSameResultTimeout * 1000);
+                }
             }
         } else {
             if (sameBedPosTimer != null) {
@@ -1995,6 +2128,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                 sameBedPosTimer = null;
             }
         }
+
         presetCommandHandler.removeCallbacks(presetCommandTimer);
         presetCommandHandler.postDelayed(presetCommandTimer, (long) ((nemuriConstantsModel.commandInterval) * 1000));
     }
@@ -2061,6 +2195,79 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         }
     }
     //MARK END: ble preset mode functions
+
+    /**
+     * 現在高さと傾斜角度から、足先高さを計算して返す
+     * @return 足先高さ
+     */
+    @SuppressLint("SetTextI18n")
+    private int calcLegHeight() {
+        int legHeight = (int)(currentBedPosition.getHeight() - (legHeightCalcValue * Math.sin(Math.toRadians(currentBedPosition.getTilt()))));
+//        runOnUiThread(() -> debugLegHeightIndicator.setText(legHeight + "cm"));  // デバッグ用
+        return legHeight;
+    }
+
+    /**
+     * 高さ閾値フラグの更新
+     */
+    private void updateAboveHeightThreshold() {
+        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+        if (bedType == null) {
+            aboveHeightThresholdFlag = false;
+            return;
+        }
+
+        // 以下のいずれかの条件を満たす時はフラグをtrue、満たさない時はfalseにする
+        // 　ー「傾斜角度が2°未満」かつ「現在高さが閾値（32cm想定）より大きい」
+        // 　ー「傾斜角度が2°以上」かつ「足先高さが閾値（35cm想定）より大きい」
+        final int legHeightWarningThreshold = nemuriConstantsModel.heightWarningThreshold + legHeightAddValue;  // 足先高さ用の一旦停止閾値
+        aboveHeightThresholdFlag = (currentBedPosition.getTilt() < tiltThreshold && currentBedPosition.getHeight() > nemuriConstantsModel.heightWarningThreshold) ||
+                                   (currentBedPosition.getTilt() >= tiltThreshold && calcLegHeight() > legHeightWarningThreshold);
+    }
+
+    /**
+     * 高さ一旦停止ポップアップの表示チェック
+     * @return true=表示する、false=表示しない
+     */
+    private boolean checkHeightWarning(Integer targetHeight, Integer targetTilt) {
+        if (userWarnedHeight) {
+            // 「すでにポップアップ表示済み」の場合はfalse
+            return false;
+        }
+
+        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+        if (bedType != null && bedType != NSSpec.BED_MODEL.INTIME.ordinal() && bedType != NSSpec.BED_MODEL.INTIME_COMFORT.ordinal() && !currentBedSpec.isHeightLockSupported()) {
+            // 「高さをサポートしていないベッド」の場合はfalse
+            return false;
+        }
+
+        if (bedType != null && bedType == NSSpec.BED_MODEL.INTIME.ordinal() && targetHeight != null && targetTilt != null) {
+            // 「ベッドタイプがINTIME」かつ「目標値が存在する（POSITION動作）」場合はfalse
+            return false;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.SECOND, -checkHeightWarningTime);
+        if (aboveHeightThresholdFlag) {
+            if (headLastUpdateTime.after(calendar.getTime()) || legLastUpdateTime.after(calendar.getTime()) || heightLastUpdateTime.after(calendar.getTime()) || tiltLastUpdateTime.after(calendar.getTime())) {
+                // 「操作開始時の高さが閾値より上（高さ閾値フラグ=true）」かつ「ベッド情報（頭、膝、高さ、傾斜）が1秒以内に変化している」場合はfalse
+                return false;
+            }
+        }
+
+        final int height = currentBedPosition.getTilt() < tiltThreshold ? currentBedPosition.getHeight() : calcLegHeight();
+        final int threshold = currentBedPosition.getTilt() < tiltThreshold ? nemuriConstantsModel.heightWarningThreshold : nemuriConstantsModel.heightWarningThreshold + legHeightAddValue;
+        if (targetHeight != null && targetTilt != null) {
+            // 「目標値が存在する（POSITION動作）」場合
+            // 「現在高さ（傾斜角度2°以上の時は足先高さ）が閾値以下」かつ「現在高さが目標値に達していない」かつ「傾斜角度2°未満の時に傾斜角度が目標値に達していない」の場合はtrue
+            return height <= threshold && (currentBedPosition.getHeight() != targetHeight || (currentBedPosition.getTilt() != targetTilt && currentBedPosition.getTilt() < tiltThreshold));
+        } else {
+            // 「目標値が存在しない（FREE動作）」場合
+            // 「現在高さ（傾斜角度2°以上の時は足先高さ）が閾値以下」の場合はtrue
+            return height <= threshold;
+        }
+    }
 
     //MARK : dummy ns exclusive functions
     private void startDummyBedPresetAnimation(NSBedPosition target) {
@@ -2198,7 +2405,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                             showHeightThresholdAlert();
                         } else {
                             setHeightBed(targetPosition);
-                            startHeightArrowAnimation(false);
                         }
                         break;
 
@@ -2210,7 +2416,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                         runOnUiThread(() -> {
                             increaseHeightThreshold(targetPosition.getHeight());
                             setHeightBed(targetPosition);
-                            startHeightArrowAnimation(true);
                         });
                         break;
                 }
@@ -2235,7 +2440,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             dummyBedFreeAnimator.purge();
             dummyBedFreeAnimator = null;
         }
-        stopHeightArrowAnimation();
     }
 
     private void startDummyMattressPresetAnimation(NSMattressPosition target) {
@@ -2714,7 +2918,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             isArrowPressedDown = true;
 
             scheduleArrowCommand(true);
-            animateNSHeightArrow(true);
 
             return;
         }
@@ -2741,6 +2944,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         //LOG HERE NS_REMOTE_FREE_START
         bedCardPager.setSwipeLocked(true);
         LogUserAction.sendNewLog(userService, "NS_REMOTE_FREE_START", "1", "", "UI000610");
+
+        updateAboveHeightThreshold();
+
         if (isNemuriScanInitiated) {
             commandTimeoutHandler.removeCallbacks(commandTimeoutTimer);
 
@@ -2751,7 +2957,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             isArrowPressedDown = true;
 
             scheduleArrowCommand(true);
-            animateNSHeightArrow(false);
 
             return;
         }
@@ -3030,6 +3235,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     //MARK : NSBedDelegate Implementation
     @Override
     public void onBedSpecReceived(NSBedSpec bedSpec) {
+        Logger.d("傾斜上限値 %d", bedSpec.getTiltUpperRange());
+        Logger.d("傾斜下限値 %d", bedSpec.getTiltLowerRange());
+
         //LOG HERE NS_REMOTE_CONNECTION_SUCCESS
         LogUserAction.sendNewLog(userService, "NS_REMOTE_CONNECTION_SUCCESS", "1", "", "UI000610");
         currentBedSpec = bedSpec;
@@ -3465,7 +3673,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     private Timer dummyBedPresetAnimator;
     private Timer dummyMattressFreeAnimator;
     private Timer dummyMattressPresetAnimator;
-    private NSBedPosition dummyBedAnimIncrement = new NSBedPosition(5, 5, 3);
+    private NSBedPosition dummyBedAnimIncrement = new NSBedPosition(5, 5, 3, 5);
     private NSMattressPosition dummyMattressAnimIncrement = new NSMattressPosition();
     //MARK END: Dummy vars
 
@@ -3503,7 +3711,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     public void onPresetTouchStart(int index) {
         //this operation only available for intime beds
         Logger.d("touch onPresetTouchStart");
-        if (currentNSSpec.getBedType() != NSSpec.BED_MODEL.INTIME) return;
+        if (currentNSSpec.getBedType() != NSSpec.BED_MODEL.INTIME && currentNSSpec.getBedType() != NSSpec.BED_MODEL.INTIME_COMFORT) return;
         if (isNemuriScanInitiated) {
             fingerPressCount += 1;
             isSendingMultiButton = fingerPressCount > 1;
@@ -3511,6 +3719,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             if (fingerPressCount == 1) {
                 DeviceTemplateBedModel preset = bedPresetValues.get(index);
                 currentPresetTarget = new NSBedPosition(preset);
+                Logger.d("presetTarget head:" + currentPresetTarget.getHead() + " leg:" + currentPresetTarget.getLeg() + " height:" + currentPresetTarget.getHeight() + " tilt:" + currentPresetTarget.getTilt());
                 currentBedOperationStatus = NSOperation.BedOperationType.PRESET;
                 animateBedShadow(currentPresetTarget);
 
@@ -3529,7 +3738,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     public void onPresetTouchEnd(int index) {
         Logger.d("touch onPresetTouchEnd");
         //this operation only available for in time beds
-        if (currentNSSpec.getBedType() != NSSpec.BED_MODEL.INTIME) return;
+        if (currentNSSpec.getBedType() != NSSpec.BED_MODEL.INTIME && currentNSSpec.getBedType() != NSSpec.BED_MODEL.INTIME_COMFORT) return;
 
         fingerPressCount -= 1;
         if (fingerPressCount <= 0) {
@@ -3545,6 +3754,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                 commandRequestCount = 0;
                 isPresetPressedDown = false;
                 isArrowPressedDown = false;
+
+                tiltIconImage.clearAnimation();
+                tiltIconImage.setAlpha(1.0f);
 
                 stopPresetOperation();
             }
@@ -3900,12 +4112,22 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             target.setHead(currentBedPosition.getHead());
             target.setLeg(currentBedPosition.getLeg());
 
+            // 動作禁止値ではない場合、高さと傾斜も更新する
+            DeviceTemplateBedModel preset = bedPresetValues.get(selectedTemplate - 1);
+            if (preset.getHeight() != DeviceTemplateBedModel.heightAndTiltDefaultValue_Other) {
+                target.setHeight(currentBedPosition.getHeight());
+            }
+            if (preset.getTilt() != DeviceTemplateBedModel.heightAndTiltDefaultValue_Other) {
+                target.setTilt(currentBedPosition.getTilt());
+            }
+
             //update data used by remote
             bedPresetValues.set(selectedTemplate - 1, target);
 
             //send log
             showProgress();
-            LogProvider.logBedTemplateChange(RemoteActivity.this, target, () -> runOnUiThread(() -> hideProgress()));
+            Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+            LogProvider.logBedTemplateChange(RemoteActivity.this, target, bedType, () -> runOnUiThread(() -> hideProgress()));
         }
 
         void resetBedTemplate() {
@@ -3915,13 +4137,22 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             target.setHead(defaultTemplate.getHead());
             target.setLeg(defaultTemplate.getLeg());
 
+            // 動作禁止値ではない場合、高さと傾斜もリセットする
+            DeviceTemplateBedModel preset = bedPresetValues.get(selectedTemplate - 1);
+            if (preset.getHeight() != DeviceTemplateBedModel.heightAndTiltDefaultValue_Other) {
+                target.setHeight(defaultTemplate.getHeight());
+            }
+            if (preset.getTilt() != DeviceTemplateBedModel.heightAndTiltDefaultValue_Other) {
+                target.setTilt(defaultTemplate.getTilt());
+            }
+
             //update data used by remote
             bedPresetValues.set(selectedTemplate - 1, target);
 
             //send log
             showProgress();
-            LogProvider.logBedTemplateChange(RemoteActivity.this, target, () -> runOnUiThread(() -> hideProgress()));
-
+            Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+            LogProvider.logBedTemplateChange(RemoteActivity.this, target, bedType, () -> runOnUiThread(() -> hideProgress()));
         }
 
         int shiftUIIndex() {

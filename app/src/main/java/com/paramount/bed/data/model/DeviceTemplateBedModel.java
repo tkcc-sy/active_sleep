@@ -8,6 +8,9 @@ import io.realm.RealmObject;
 import io.realm.RealmQuery;
 
 public class DeviceTemplateBedModel extends RealmObject {
+    public static int heightAndTiltDefaultValue_Comfort = 254;
+    public static int heightAndTiltDefaultValue_Other = 255;
+
     private int id;
     private int head;
     private int leg;
@@ -65,7 +68,10 @@ public class DeviceTemplateBedModel extends RealmObject {
     }
 
     public void setTilt(int tilt) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
         this.tilt = tilt;
+        realm.commitTransaction();
     }
 
     public int getHeight() {
@@ -73,7 +79,10 @@ public class DeviceTemplateBedModel extends RealmObject {
     }
 
     public void setHeight(int height) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
         this.height = height;
+        realm.commitTransaction();
     }
 
     public int getTilt_default() {

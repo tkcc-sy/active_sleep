@@ -319,11 +319,11 @@ public class UpdateFirmwareActivity extends BaseActivity implements NSScanDelega
     }
 
     private void getDeviceTemplate() {
+        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
         if (UserLogin.isUserExist()) {
-            DeviceTemplateProvider.getDeviceTemplate(this, this, UserLogin.getUserLogin().getId());
+            DeviceTemplateProvider.getDeviceTemplate(this, this, UserLogin.getUserLogin().getId(), bedType);
         } else {
-
-            DeviceTemplateProvider.getDeviceTemplate(this, this, 0);
+            DeviceTemplateProvider.getDeviceTemplate(this, this, 0, bedType);
         }
     }
 

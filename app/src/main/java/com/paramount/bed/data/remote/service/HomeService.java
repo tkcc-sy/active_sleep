@@ -64,6 +64,9 @@ public interface HomeService {
     @GET("Content/device_template")
     Call<BaseResponse<DeviceTemplateResponse>> getDeviceTemplate(@Query("user_id") int user_id, @Query("app_type") int app_type);
 
+    @GET("Content/device_template")
+    Call<BaseResponse<DeviceTemplateResponse>> getDeviceTemplate(@Query("user_id") int user_id, @Query("app_type") int app_type, @Query("bed_type") int bed_type);
+
     @GET("Content/appli_version")
     Single<BaseResponse<VersionResponse>> getVersionApp(@Query("type") Integer type, @Query("app_type") int app_type);
 

@@ -221,6 +221,8 @@ public class RealtimeMonitorDialog extends BaseActivity implements NSScanDelegat
     public void initBLE() {
         //BLE setup
         showProgress();
+
+        Integer bedType = currentNemuriscan == null ? null : currentNemuriscan.getInfoType();
         nsManager = NSManager.getInstance(this, this);
         DeviceTemplateProvider.getDeviceTemplate(this, (mattressModels, bedModels, mattressModelDefaults, bedModelDefaults, newNemuriConstantsModel) -> {
             nemuriConstantsModel.copyValue(newNemuriConstantsModel);
@@ -231,7 +233,7 @@ public class RealtimeMonitorDialog extends BaseActivity implements NSScanDelegat
                 htmlContent = extras.getString("html_content");
             }
             initWebView(htmlContent);
-        }, UserLogin.getUserLogin().getId());
+        }, UserLogin.getUserLogin().getId(), bedType);
     }
 
     @Override

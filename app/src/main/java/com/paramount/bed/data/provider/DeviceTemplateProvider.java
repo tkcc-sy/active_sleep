@@ -3,6 +3,7 @@ package com.paramount.bed.data.provider;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
+import com.orhanobut.logger.Logger;
 import com.paramount.bed.data.model.DeviceTemplateBedModel;
 import com.paramount.bed.data.model.DeviceTemplateMattressModel;
 import com.paramount.bed.data.model.NemuriConstantsModel;
@@ -18,10 +19,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DeviceTemplateProvider {
-
-    public static void getDeviceTemplate(Context ctx, DeviceTemplateFetchListener listener, int userId) {
+    public static void getDeviceTemplate(Context ctx, DeviceTemplateFetchListener listener, int userId, Integer bed_type) {
         HomeService homeService = ApiClient.getClient(ctx).create(HomeService.class);
-        homeService.getDeviceTemplate(userId,1).enqueue(new Callback<BaseResponse<DeviceTemplateResponse>>() {
+        Call<BaseResponse<DeviceTemplateResponse>> method;
+        if (bed_type == null) {
+            method = homeService.getDeviceTemplate(userId,1);
+        } else {
+            method = homeService.getDeviceTemplate(userId,1, bed_type);
+        }
+
+//        method = homeService.getDeviceTemplate(userId,1, 3);  // 「INTIME COMFORT」用設定値を取得するデバッグ処理
+
+        method.enqueue(new Callback<BaseResponse<DeviceTemplateResponse>>() {
             @Override
             public void onResponse(@NonNull Call<BaseResponse<DeviceTemplateResponse>> call, @NonNull Response<BaseResponse<DeviceTemplateResponse>> response) {
                 if(response.body() != null && response.body().getData() != null){
@@ -50,6 +59,11 @@ public class DeviceTemplateProvider {
                     }
                     NemuriConstantsModel.clear();
                     data.constants.insert();
+
+//                    Logger.d("設定値 ベッドタイプ:%d", bed_type);
+//                    Logger.d("設定値 一時停止高さ:%d", data.constants.heightWarningThreshold);
+//                    Logger.d("設定値 高さデフォルト値:%d", data.bed.get(0).getHeight_default());
+//                    Logger.d("設定値 傾斜デフォルト値:%d", data.bed.get(0).getTilt_default());
 
                     if(listener != null){
                         listener.onDeviceTemplateFetched(data.getMattress(),data.getBed(),data.getMattressDefault(),data.getBedDefault(),NemuriConstantsModel.get());

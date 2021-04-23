@@ -117,6 +117,7 @@ public class AutomaticSleepOperationActivity extends BaseActivity implements NSS
         settingProvider = new SettingProvider(this);
         nemuriScanModel = NemuriScanModel.get();
         showProgress();
+        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
         DeviceTemplateProvider.getDeviceTemplate(this,
                 (mattressModels, bedModels, mattressModelDefaults, bedModelDefaults, nemuriConstantsModel) -> {
                     nsConstants = nemuriConstantsModel;
@@ -136,7 +137,7 @@ public class AutomaticSleepOperationActivity extends BaseActivity implements NSS
                         nsManager = NSManager.getInstance(this, this);
                         checkNSDetail();
                     }
-                }, UserLogin.getUserLogin().getId());
+                }, UserLogin.getUserLogin().getId(), bedType);
 
         Integer[] listDegreePolicy =  FormPolicyModel.getPolicy().getAutodriveDegreeSettingPrimitives();
         final ArrayList<Integer> listDegree = new ArrayList<>(Arrays.asList(listDegreePolicy));

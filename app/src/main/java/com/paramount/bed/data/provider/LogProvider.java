@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -31,7 +32,7 @@ import static com.paramount.bed.util.LogUtil.Logx;
 
 public class LogProvider {
     @SuppressLint("CheckResult")
-    public static void logBedTemplateChange(Activity activity, @Nullable DeviceTemplateBedModel target, BedTemplateChangeListener bedTemplateChangeListener) {
+    public static void logBedTemplateChange(Activity activity, @Nullable DeviceTemplateBedModel target, Integer bedType, BedTemplateChangeListener bedTemplateChangeListener) {
         if (target != null) {
             DeviceTemplateBedModelLog.insertLogBedTemplateChangeOffline(target);
         }
@@ -43,29 +44,28 @@ public class LogProvider {
             DeviceTemplateBedModelLog logData = DeviceTemplateBedModelLog.getFirst();
             if (logData != null) {
                 UserService sService = ApiClient.getClient(activity.getApplicationContext()).create(UserService.class);
-                sService.sendBedTemplate(UserLogin.getUserLogin().getId(),
-                        logData.getId(),
-                        logData.getHead(),
-                        logData.getLeg(),
-                        logData.getTilt(),
-                        logData.getHeight(),
-                        1)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribeWith(new DisposableSingleObserver<BaseResponse>() {
-                            public void onSuccess(BaseResponse response) {
-                                logData.delete();
-                                if (!activity.isFinishing()) {
-                                    logBedTemplateChange(activity, null, bedTemplateChangeListener);
-                                }
+                Single<BaseResponse> method;
+                if (bedType == null) {
+                    method = sService.sendBedTemplate(UserLogin.getUserLogin().getId(), logData.getId(), logData.getHead(), logData.getLeg(), logData.getTilt(), logData.getHeight(), 1);
+                } else {
+                    method = sService.sendBedTemplate(UserLogin.getUserLogin().getId(), logData.getId(), logData.getHead(), logData.getLeg(), logData.getTilt(), logData.getHeight(), bedType, 1);
+                }
+                method.observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribeWith(new DisposableSingleObserver<BaseResponse>() {
+                        public void onSuccess(BaseResponse response) {
+                            logData.delete();
+                            if (!activity.isFinishing()) {
+                                logBedTemplateChange(activity, null, bedType, bedTemplateChangeListener);
                             }
+                        }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                if (bedTemplateChangeListener != null)
-                                    bedTemplateChangeListener.onDone();
-                            }
-                        });
+                        @Override
+                        public void onError(Throwable e) {
+                            if (bedTemplateChangeListener != null)
+                                bedTemplateChangeListener.onDone();
+                        }
+                    });
             } else {
                 if (bedTemplateChangeListener != null) bedTemplateChangeListener.onDone();
             }

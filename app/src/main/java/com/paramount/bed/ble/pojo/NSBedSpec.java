@@ -1,25 +1,29 @@
 package com.paramount.bed.ble.pojo;
 
 public class NSBedSpec {
-    private int headLowerRange,headUpperRange,legLowerRange, legUpperRange, heightLowerRange, heightUpperRange;
+    private int headLowerRange,headUpperRange,legLowerRange, legUpperRange, heightLowerRange, heightUpperRange, tiltLowerRange, tiltUpperRange;
     private boolean isHeightLockSupported,isHeadLockSupported,isLegLockSupported,isCombiLockSupported;
 
-    public NSBedSpec(int headLowerRange, int headUpperRange, int legLowerRange, int legUpperRange, int heightLowerRange, int heightUpperRange) {
+    public NSBedSpec(int headLowerRange, int headUpperRange, int legLowerRange, int legUpperRange, int heightLowerRange, int heightUpperRange, int tiltLowerRange, int tiltUpperRange) {
         this.headLowerRange = headLowerRange;
         this.headUpperRange = headUpperRange;
         this.legLowerRange = legLowerRange;
         this.legUpperRange = legUpperRange;
         this.heightLowerRange = heightLowerRange;
         this.heightUpperRange = heightUpperRange;
+        this.tiltLowerRange = tiltLowerRange;
+        this.tiltUpperRange = tiltUpperRange;
     }
 
-    public NSBedSpec(int headLowerRange, int headUpperRange, int legLowerRange, int legUpperRange, int heightLowerRange, int heightUpperRange, boolean isHeightLockSupported, boolean isHeadLockSupported, boolean isLegLockSupported, boolean isCombiLockSupported) {
+    public NSBedSpec(int headLowerRange, int headUpperRange, int legLowerRange, int legUpperRange, int heightLowerRange, int heightUpperRange, int tiltLowerRange, int tiltUpperRange, boolean isHeightLockSupported, boolean isHeadLockSupported, boolean isLegLockSupported, boolean isCombiLockSupported) {
         this.headLowerRange = headLowerRange;
         this.headUpperRange = headUpperRange;
         this.legLowerRange = legLowerRange;
         this.legUpperRange = legUpperRange;
         this.heightLowerRange = heightLowerRange;
         this.heightUpperRange = heightUpperRange;
+        this.tiltLowerRange = tiltLowerRange;
+        this.tiltUpperRange = tiltUpperRange;
         this.isHeightLockSupported = isHeightLockSupported;
         this.isHeadLockSupported = isHeadLockSupported;
         this.isLegLockSupported = isLegLockSupported;
@@ -104,5 +108,21 @@ public class NSBedSpec {
 
     public void setHeightUpperRange(int heightUpperRange) {
         this.heightUpperRange = heightUpperRange;
+    }
+
+    public int getTiltLowerRange() {
+        return tiltLowerRange;
+    }
+
+    public void setTiltLowerRange(int tiltLowerRange) {
+        this.tiltLowerRange = tiltLowerRange;
+    }
+
+    public int getTiltUpperRange() {
+        return tiltUpperRange;
+    }
+
+    public void setTiltUpperRange(int tiltUpperRange) {
+        this.tiltUpperRange = tiltUpperRange;
     }
 }

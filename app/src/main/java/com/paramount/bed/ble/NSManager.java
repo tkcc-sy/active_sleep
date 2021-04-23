@@ -54,6 +54,7 @@ import com.paramount.bed.ble.pojo.NSMattressStatus;
 import com.paramount.bed.ble.pojo.NSRealtimeFeed;
 import com.paramount.bed.ble.pojo.NSSpec;
 import com.paramount.bed.ble.pojo.NSWifiSetting;
+import com.paramount.bed.data.model.DeviceTemplateBedModel;
 import com.paramount.bed.data.model.FirmwareFileModel;
 import com.paramount.bed.data.model.NemuriConstantsModel;
 import com.paramount.bed.data.model.PermissionRequestModel;
@@ -823,7 +824,7 @@ public class NSManager {
         }
     }
 
-    public void sendPresetCommand(NSBedPosition bedPosition) {
+    public void sendPresetCommand(NSBedPosition bedPosition, int currentHeight) {
         if (isBLEReady()) {
             NSOperation.BedOperationType bedOperationType = NSOperation.BedOperationType.PRESET;
             Logger.d("NSManager request SEND_PRESET_COMMAND type : " + NSOperation.PRESET_SET_POSITION + " with param " + bedPosition.toString() + " (catchball)");
@@ -840,8 +841,13 @@ public class NSManager {
             commandData.add((byte) lastButtonCode);//button code
             commandData.add((byte) bedPosition.getHead());
             commandData.add((byte) bedPosition.getLeg());
-            commandData.add((byte) bedPosition.getDefaultHeight());
-            commandData.add((byte) bedPosition.getDefaultTilt());
+            // 「高さ目標値がベッドタイプ=3（INTIME_COMFORT）のデフォルト値（254想定）」の場合は、現在高さを目標値として送信する
+            if (bedPosition.getHeight() == DeviceTemplateBedModel.heightAndTiltDefaultValue_Comfort) {
+                commandData.add((byte) currentHeight);
+            } else {
+                commandData.add((byte) bedPosition.getHeight());
+            }
+            commandData.add((byte) bedPosition.getTilt());
 
             //bcc
             commandData.add(calculateBCC(commandData));
@@ -992,6 +998,7 @@ public class NSManager {
 
             int bedTypeValue = Integer.parseInt(bedDataBitString.substring(0, 4), 2);
             int bedModel = Integer.parseInt(bedDataBitString.substring(4, 8), 2);
+            Logger.i("NSManager response GET_NS_SPEC bedModel = %d", bedModel);
 
             int mattressTypeValue = Integer.parseInt(mattressDataBitString.substring(0, 4), 2);
             int mattModel = Integer.parseInt(mattressDataBitString.substring(4, 8), 2);
@@ -1011,6 +1018,8 @@ public class NSManager {
                 int legUpperLimitData = response[5];
                 int heightLowerLimitData = response[6];
                 int heightUpperLimitData = response[7];
+                int tiltLowerLimitData = response[8];
+                int tiltUpperLimitData = response[9];
                 String lockSettingString = intToPaddedBinaryString(response[10]);
 
                 boolean lockCombiSupported = lockSettingString.charAt(4) == '1';
@@ -1019,7 +1028,7 @@ public class NSManager {
                 boolean lockHeadSupported = lockSettingString.charAt(7) == '1';
 
                 NSBedSpec bedSpec = new NSBedSpec(headLowerLimitData, headUpperLimitData, legLowerLimitData, legUpperLimitData,
-                        heightLowerLimitData, heightUpperLimitData, lockHeightSupported, lockHeadSupported,
+                        heightLowerLimitData, heightUpperLimitData, tiltLowerLimitData, tiltUpperLimitData, lockHeightSupported, lockHeadSupported,
                         lockLegSupported, lockCombiSupported);
 
                 ((NSBedDelegate) delegate).onBedSpecReceived(bedSpec);
@@ -1029,10 +1038,12 @@ public class NSManager {
             int headPos = response[2];
             int legPos = response[3];
             int heightPos = response[4];
+            int tiltPos = response[5];
+            Logger.i("NSManager response GET_BED_POSITION tiltPos = %d", tiltPos);
             int speedSetting = response[8];
             int failCode = response[9];
 
-            NSBedPosition bedPosition = new NSBedPosition(headPos, legPos, heightPos);
+            NSBedPosition bedPosition = new NSBedPosition(headPos, legPos, heightPos, tiltPos);
 
             String lockSettingString = intToPaddedBinaryString(response[6]);
             lockSettingString = lockSettingString.substring(4, 8);
@@ -1055,10 +1066,12 @@ public class NSManager {
                 int headPos = response[3];
                 int legPos = response[4];
                 int heightPos = response[5];
+                int tiltPos = response[6];
                 int failCode = response[7];
 
-                NSBedPosition bedPosition = new NSBedPosition(headPos, legPos, heightPos);
+                NSBedPosition bedPosition = new NSBedPosition(headPos, legPos, heightPos, tiltPos);
                 Logger.i("NSManager response BED_POS " + bedOperationType + " (catchball) " + lastButtonCode + "-" + buttonCode);
+                Logger.i("NSManager response BED_POS tiltPos = %d", tiltPos);
                 switch (bedOperationType) {
                     case NONE:
                         break;

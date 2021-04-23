@@ -300,6 +300,17 @@ public interface UserService {
                                          @Query("app_type") int app_type);
 
     @FormUrlEncoded
+    @POST("User/user_bed_template")
+    Single<BaseResponse> sendBedTemplate(@Field("user_id") Integer user_id,
+                                         @Field("bed_templates_id") Integer bed_templates_id,
+                                         @Field("head") Integer head,
+                                         @Field("leg") Integer leg,
+                                         @Field("tilt") Integer tilt,
+                                         @Field("height") Integer height,
+                                         @Field("bed_type") Integer bed_type,
+                                         @Query("app_type") int app_type);
+
+    @FormUrlEncoded
     @POST("User/user_matress_template")
     Single<BaseResponse> sendMatressTemplate(@Field("user_id") Integer user_id,
                                              @Field("matress_templates_id") Integer matress_templates_id,

@@ -854,7 +854,7 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
 
 
     private void sendPendingLog() {
-        LogProvider.logBedTemplateChange(HomeActivity.this, null, null);
+        LogProvider.logBedTemplateChange(HomeActivity.this, null, null, null);
         LogProvider.logMattressTemplateChange(HomeActivity.this, null, null);
         LogProvider.logBedSettingChange(HomeActivity.this, 0, 0, 0, 0, 0, true);
         LogUserAction.sendPendingLogAction(HomeActivity.this);
@@ -1134,7 +1134,7 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
             public void onDeviceTemplateFetched(List<DeviceTemplateMattressModel> mattressModels, List<DeviceTemplateBedModel> bedModels, List<DeviceTemplateMattressModel> mattressModelDefaults, List<DeviceTemplateBedModel> bedModelDefaults, NemuriConstantsModel nemuriConstantsModel) {
                 nsConstants = nemuriConstantsModel;
             }
-        },UserLogin.getUserLogin().getId());
+        },UserLogin.getUserLogin().getId(), nemuriScanDetail.getInfoType());
     }
 
     @Override
@@ -2328,7 +2328,7 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
                                     }
                                 });
                             });
-                        }, UserLogin.getUserLogin().getId());
+                        }, UserLogin.getUserLogin().getId(), nemuriScanDetail.getInfoType());
             }));
         }));
     }
@@ -2939,6 +2939,12 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
 
                 //1. ASB, 2. Intime
                 int bedType = nemuriScanModel.getInfoType();
+
+                if (bedType == NSSpec.BED_MODEL.INTIME_COMFORT.ordinal()) {
+                    // 「INTIME Comfort」の場合、「INTIME」と同じチュートリアルを表示するため2にする
+                    bedType = 2;
+                }
+
                 if(nemuriScanModel.onlyMattress()){
                     //3.mattress only
                     bedType = 3;

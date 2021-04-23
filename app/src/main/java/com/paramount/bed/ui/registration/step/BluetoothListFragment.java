@@ -324,11 +324,11 @@ public class BluetoothListFragment extends BaseFragment implements NSScanDelegat
 
     private void getDeviceTemplate() {
 //        showProgress();
+        Integer bed_type = selectedNemuriScan == null ? null : selectedNemuriScan.getInfoType();
         if (UserLogin.isUserExist()) {
-            DeviceTemplateProvider.getDeviceTemplate(getContext(), this, UserLogin.getUserLogin().getId());
+            DeviceTemplateProvider.getDeviceTemplate(getContext(), this, UserLogin.getUserLogin().getId(), bed_type);
         } else {
-
-            DeviceTemplateProvider.getDeviceTemplate(getContext(), this, 0);
+            DeviceTemplateProvider.getDeviceTemplate(getContext(), this, 0, bed_type);
         }
     }
 

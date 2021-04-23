@@ -104,7 +104,7 @@ public class ConnectionOptionFragment extends BLEFragment implements DeviceTempl
             userService = ApiClient.getClient(getContext()).create(UserService.class);
             nemuriScanModel = NemuriScanModel.getUnmanagedModel();
             BluetoothListFragment.selectedNemuriScan = nemuriScanModel;
-            DeviceTemplateProvider.getDeviceTemplate(getContext(),this, UserLogin.getUserLogin().getId());
+            DeviceTemplateProvider.getDeviceTemplate(getContext(),this, UserLogin.getUserLogin().getId(), nemuriScanModel.getInfoType());
         }
         return view;
     }

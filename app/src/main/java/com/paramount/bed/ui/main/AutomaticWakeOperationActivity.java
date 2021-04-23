@@ -228,6 +228,7 @@ public class AutomaticWakeOperationActivity extends BaseActivity implements NSSc
 
         nemuriScanModel = NemuriScanModel.get();
         showProgress();
+        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
         DeviceTemplateProvider.getDeviceTemplate(this,
                 (mattressModels, bedModels, mattressModelDefaults, bedModelDefaults, nemuriConstantsModel) -> {
                     nsConstants = nemuriConstantsModel;
@@ -248,7 +249,7 @@ public class AutomaticWakeOperationActivity extends BaseActivity implements NSSc
                         nsManager = NSManager.getInstance(AutomaticWakeOperationActivity.this, AutomaticWakeOperationActivity.this);
                         checkNSDetail();
                     }
-                }, UserLogin.getUserLogin().getId());
+                }, UserLogin.getUserLogin().getId(), bedType);
         if(DisplayUtils.FONTS.bigFontStatus(AutomaticWakeOperationActivity.this)) {
             labelPattern1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 7);
             labelPattern2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 7);

@@ -2,6 +2,9 @@ package com.paramount.bed.data.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.orhanobut.logger.Logger;
+import com.paramount.bed.ble.pojo.NSBedSpec;
+import com.paramount.bed.ble.pojo.NSSpec;
 
 import java.util.ArrayList;
 
@@ -139,6 +142,12 @@ public class NemuriConstantsModel extends RealmObject {
     }
 
     public static NemuriConstantsModel get() {
+        // 高さ閾値の初期値はベッドタイプによって変化する
+        NemuriScanModel nemuriScanModel = NemuriScanModel.get();
+        int bedType = nemuriScanModel == null ? 0 : nemuriScanModel.getInfoType();
+        int heightWarningThreshold = bedType == NSSpec.BED_MODEL.INTIME_COMFORT.ordinal() ? 28 : 31;
+        Logger.d("高さ閾値 内部初期値 %d", heightWarningThreshold);
+
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<NemuriConstantsModel> query = realm.where(NemuriConstantsModel.class);
         NemuriConstantsModel result = query.findFirst();
@@ -153,7 +162,7 @@ public class NemuriConstantsModel extends RealmObject {
             nemuriConstantsModel.upperBedThreshold = 2;
             nemuriConstantsModel.lowerBedThreshold = 2;
             nemuriConstantsModel.bedResponseTimeout = (float) 0.05;
-            nemuriConstantsModel.heightWarningThreshold = 28;
+            nemuriConstantsModel.heightWarningThreshold = heightWarningThreshold;
             nemuriConstantsModel.wifiSettingTimeout = 30;
             nemuriConstantsModel.wifiStatusPollingInterval = 2;
             nemuriConstantsModel.mattressOperationTimeout = (float) 0.25;

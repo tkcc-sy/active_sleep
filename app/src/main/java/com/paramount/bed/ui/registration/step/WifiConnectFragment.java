@@ -158,11 +158,11 @@ public class WifiConnectFragment extends BLEFragment implements NSConnectionDele
         progressView = view.findViewById(R.id.progress_view);
         applyLocalization(view);
         parentActivity = (BaseActivity) getActivity();
+        Integer bedType = currentBedModel == null ? null : currentBedModel.ordinal();
         if (UserLogin.isUserExist()) {
-            DeviceTemplateProvider.getDeviceTemplate(getContext(), this, UserLogin.getUserLogin().getId());
+            DeviceTemplateProvider.getDeviceTemplate(getContext(), this, UserLogin.getUserLogin().getId(), bedType);
         } else {
-
-            DeviceTemplateProvider.getDeviceTemplate(getContext(), this, 0);
+            DeviceTemplateProvider.getDeviceTemplate(getContext(), this, 0, bedType);
         }
         return view;
     }

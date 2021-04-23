@@ -113,13 +113,18 @@ public class NSSpec {
             return BED_MODEL.INTIME;
         }else if(bedModel == BED_MODEL.ACTIVE_SLEEP.ordinal()){
             return BED_MODEL.ACTIVE_SLEEP;
+        }else if(bedModel == BED_MODEL.INTIME_COMFORT.ordinal()) {
+            return BED_MODEL.INTIME_COMFORT;
         }else{
             return BED_MODEL.UNKNOWN;
         }
     }
 
     public enum BED_MODEL {
-        UNKNOWN,INTIME,ACTIVE_SLEEP
+        UNKNOWN,
+        INTIME,
+        ACTIVE_SLEEP,
+        INTIME_COMFORT,
     }
 
     public boolean isFWMode(){
