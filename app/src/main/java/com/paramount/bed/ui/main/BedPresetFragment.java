@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.paramount.bed.R;
 import com.paramount.bed.ble.pojo.NSBedSetting;
+import com.paramount.bed.ble.pojo.NSSpec;
 
 public class BedPresetFragment extends Fragment implements BedPresetStopFragmentChild.BedPresetStopEventListener, BedPresetStartFragmentChild.BedPresetStartEventListener {
 
@@ -127,9 +128,9 @@ public class BedPresetFragment extends Fragment implements BedPresetStopFragment
         return selectedPresetIndex != -1;
     }
 
-    public void applyLock(NSBedSetting bedSetting) {
+    public void applyLock(Integer bedType, NSBedSetting bedSetting) {
         if (startFragmentChild != null) {
-            if (bedSetting.isHeadLocked() || bedSetting.isLegLocked() || bedSetting.isCombiLocked()) {
+            if (bedSetting.isHeadLocked() || bedSetting.isLegLocked() || bedSetting.isCombiLocked() || (bedType == NSSpec.BED_MODEL.INTIME_COMFORT.ordinal() && bedSetting.isHeightLocked())) {
                 startFragmentChild.disableUI();
             } else {
                 startFragmentChild.enableUI();

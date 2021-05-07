@@ -595,6 +595,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     private boolean aboveHeightThresholdFlag = false;
 
     private final int legHeightAddValue = 4;    // 足先高さと比較する場合に、高さ閾値に加算する数値
+    private final int minimumPopupHeightAddValue = -3;    // ポップアップ表示の最低高さを求めるため高さ閾値に加算する数値
     private final int heightAnimationStopTime = 1;  // この時間（秒）の間、高さが変化しなかったら、高さアニメーションを停止する
     private final int checkHeightWarningTime = 2;   // この時間（秒）の間、ベッド位置情報が変化しなかったら、高さ警告ポップアップ表示の判定を行う
 
@@ -1698,9 +1699,8 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
 //        calcLegHeight();    // デバッグ用
 
         // 高さが閾値より大きくなったら高さ警告ポップアップの表示フラグをリセット
-        final int legHeightWarningThreshold = nemuriConstantsModel.heightWarningThreshold + legHeightAddValue;  // 足先高さ用の一旦停止閾値
         if ((currentBedPosition.getTilt() < tiltThreshold && currentBedPosition.getHeight() > nemuriConstantsModel.heightWarningThreshold) ||
-            (currentBedPosition.getTilt() >= tiltThreshold && calcLegHeight() > legHeightWarningThreshold)) {
+            (currentBedPosition.getTilt() >= tiltThreshold && calcLegHeight() > calcLegHeightWarningThreshold())) {
             userWarnedHeight = false;
         }
     }
@@ -2081,18 +2081,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
 //            debugTargetTilt.setText(currentPresetTarget.getTilt() + "°");
         }
 
-        if (isSendingMultiButton) {
-            nsManager.sendArrowCommand(NSOperation.FREE_MULTI_BUTTON);
-            isArrowPressedDown = true;
-        } else {
-            nsManager.sendPresetCommand(currentPresetTarget, currentBedPosition.getHeight());
-        }
-
-        commandRequestCount += 1;
-        if (!isFirst && commandRequestCount != commandResponseCount) {
-            commandTimeoutHandler.postDelayed(commandTimeoutTimer, (long) (nemuriConstantsModel.bedResponseTimeout * 1000));
-        }
-
         // 一旦停止判定
         if (checkHeightWarning(currentPresetTarget.getHeight(), currentPresetTarget.getTilt())) {
             showHeightThresholdAlert();
@@ -2105,7 +2093,23 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                 };
                 sameBedPosHandler.postDelayed(sameBedPosTimer, nemuriConstantsModel.nsBedSameResultTimeout * 1000);
             }
-        } else if ((currentPresetTarget.getHead() >= (currentBedPosition.getHead() - nemuriConstantsModel.lowerBedThreshold) &&
+
+            return;
+        }
+
+        if (isSendingMultiButton) {
+            nsManager.sendArrowCommand(NSOperation.FREE_MULTI_BUTTON);
+            isArrowPressedDown = true;
+        } else {
+            nsManager.sendPresetCommand(currentPresetTarget, currentBedPosition.getHeight());
+        }
+
+        commandRequestCount += 1;
+        if (!isFirst && commandRequestCount != commandResponseCount) {
+            commandTimeoutHandler.postDelayed(commandTimeoutTimer, (long) (nemuriConstantsModel.bedResponseTimeout * 1000));
+        }
+
+        if ((currentPresetTarget.getHead() >= (currentBedPosition.getHead() - nemuriConstantsModel.lowerBedThreshold) &&
                     currentPresetTarget.getHead() <= (currentBedPosition.getHead() + nemuriConstantsModel.upperBedThreshold)) &&
                    (currentPresetTarget.getLeg() >= (currentBedPosition.getLeg() - nemuriConstantsModel.lowerBedThreshold) &&
                     currentPresetTarget.getLeg() <= (currentBedPosition.getLeg() + nemuriConstantsModel.upperBedThreshold))) {
@@ -2208,6 +2212,22 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     }
 
     /**
+     * 足先高さ用の高さ閾値を計算して返す
+     * @return 足先高さ用の高さ閾値
+     */
+    private int calcLegHeightWarningThreshold() {
+        return nemuriConstantsModel.heightWarningThreshold + legHeightAddValue;
+    }
+
+    /**
+     * 高さ一旦停止ポップアップの表示最低高さを計算して返す
+     * @return 表示最低高さ
+     */
+    private int calcMinimumPopupHeight() {
+        return nemuriConstantsModel.heightWarningThreshold + minimumPopupHeightAddValue;
+    }
+
+    /**
      * 高さ閾値フラグの更新
      */
     private void updateAboveHeightThreshold() {
@@ -2220,9 +2240,8 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         // 以下のいずれかの条件を満たす時はフラグをtrue、満たさない時はfalseにする
         // 　ー「傾斜角度が2°未満」かつ「現在高さが閾値（32cm想定）より大きい」
         // 　ー「傾斜角度が2°以上」かつ「足先高さが閾値（35cm想定）より大きい」
-        final int legHeightWarningThreshold = nemuriConstantsModel.heightWarningThreshold + legHeightAddValue;  // 足先高さ用の一旦停止閾値
         aboveHeightThresholdFlag = (currentBedPosition.getTilt() < tiltThreshold && currentBedPosition.getHeight() > nemuriConstantsModel.heightWarningThreshold) ||
-                                   (currentBedPosition.getTilt() >= tiltThreshold && calcLegHeight() > legHeightWarningThreshold);
+                                   (currentBedPosition.getTilt() >= tiltThreshold && calcLegHeight() > calcLegHeightWarningThreshold());
     }
 
     /**
@@ -2251,21 +2270,21 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         calendar.add(Calendar.SECOND, -checkHeightWarningTime);
         if (aboveHeightThresholdFlag) {
             if (headLastUpdateTime.after(calendar.getTime()) || legLastUpdateTime.after(calendar.getTime()) || heightLastUpdateTime.after(calendar.getTime()) || tiltLastUpdateTime.after(calendar.getTime())) {
-                // 「操作開始時の高さが閾値より上（高さ閾値フラグ=true）」かつ「ベッド情報（頭、膝、高さ、傾斜）が1秒以内に変化している」場合はfalse
+                // 「操作開始時の高さが閾値より上（高さ閾値フラグ=true）」かつ「ベッド情報（頭、膝、高さ、傾斜）が2秒以内に変化している」場合はfalse
                 return false;
             }
         }
 
         final int height = currentBedPosition.getTilt() < tiltThreshold ? currentBedPosition.getHeight() : calcLegHeight();
-        final int threshold = currentBedPosition.getTilt() < tiltThreshold ? nemuriConstantsModel.heightWarningThreshold : nemuriConstantsModel.heightWarningThreshold + legHeightAddValue;
+        final int threshold = currentBedPosition.getTilt() < tiltThreshold ? nemuriConstantsModel.heightWarningThreshold : calcLegHeightWarningThreshold();
         if (targetHeight != null && targetTilt != null) {
             // 「目標値が存在する（POSITION動作）」場合
-            // 「現在高さ（傾斜角度2°以上の時は足先高さ）が閾値以下」かつ「現在高さが目標値に達していない」かつ「傾斜角度2°未満の時に傾斜角度が目標値に達していない」の場合はtrue
-            return height <= threshold && (currentBedPosition.getHeight() != targetHeight || (currentBedPosition.getTilt() != targetTilt && currentBedPosition.getTilt() < tiltThreshold));
+            // 「現在高さ（傾斜角度2°以上の時は足先高さ）が表示最低高さ以上」かつ「現在高さ（傾斜角度2°以上の時は足先高さ）が閾値以下」かつ「現在高さが目標値に達していない」かつ「傾斜角度2°未満の時に傾斜角度が目標値に達していない」の場合はtrue
+            return calcMinimumPopupHeight() <= height && height <= threshold && (currentBedPosition.getHeight() != targetHeight || (currentBedPosition.getTilt() != targetTilt && currentBedPosition.getTilt() < tiltThreshold));
         } else {
             // 「目標値が存在しない（FREE動作）」場合
-            // 「現在高さ（傾斜角度2°以上の時は足先高さ）が閾値以下」の場合はtrue
-            return height <= threshold;
+            // 「現在高さ（傾斜角度2°以上の時は足先高さ）が表示最低高さ以上」かつ「現在高さ（傾斜角度2°以上の時は足先高さ）が閾値以下」の場合はtrue
+            return calcMinimumPopupHeight() <= height && height <= threshold;
         }
     }
 
@@ -4385,7 +4404,10 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     public void applyLockWhenBedExist() {
         if (currentNSSpec.isBedExist()) {
             bedManualFragment.applyLock(currentSetting);
-            bedPresetFragment.applyLock(currentSetting);
+            runOnUiThread(() -> {
+                Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+                bedPresetFragment.applyLock(bedType, currentSetting);
+            });
         }
     }
 
