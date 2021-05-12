@@ -180,6 +180,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         currentPagerType = RemotePagerType.PRESET;
         bedCardPager.setCurrentItem(0);
         userWarnedHeight = false;
+        isFirstOperated = false;
         mattressPresetSelectAdjusted = false;
         applyNSSpec();
         showMissingPartAlert();
@@ -212,6 +213,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         mattressCardPager.setCurrentItem(0);
         setMattressNumericIndicator(currentMattressPosition);
         userWarnedHeight = false;
+        isFirstOperated = false;
         mattressPresetSelectAdjusted = false;
         applyNSSpec();
         showMissingPartAlert();
@@ -242,6 +244,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         faqIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(faqIntent);
         userWarnedHeight = false;
+        isFirstOperated = false;
     }
     //MARK END : Main Layout Binding
 
@@ -359,6 +362,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             clearMattressUI();
         }
         userWarnedHeight = false;
+        isFirstOperated = false;
         mattressPresetSelectAdjusted = false;
     }
 
@@ -590,9 +594,18 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         }
     };
 
+    private boolean isFirstOperated = false; // 初回操作済みか否か
+
+    // 高さ閾値と比較して、どの高さからの操作開始かを表す
+    private enum StartOperation_HeightPosition {
+        Higher, // 高さ閾値より高い
+        Equal,  // 高さ閾値と等しい
+        Lower,  // 高さ閾値より低い
+    }
+    private StartOperation_HeightPosition startOperation_heightPosition = StartOperation_HeightPosition.Higher;
+
     private final float legHeightCalcValue = 70.8f;
     private final int tiltThreshold = 2;    // 傾斜角度がこの数値以上の場合は、傾斜有りと判断
-    private boolean aboveHeightThresholdFlag = false;
 
     private final int legHeightAddValue = 4;    // 足先高さと比較する場合に、高さ閾値に加算する数値
     private final int minimumPopupHeightAddValue = -3;    // ポップアップ表示の最低高さを求めるため高さ閾値に加算する数値
@@ -1048,6 +1061,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                 clearMattressUI();
                 setMattressStartBlinking(false);
                 userWarnedHeight = false;
+                isFirstOperated = false;
                 mattressPresetSelectAdjusted = false;
                 if (!PermissionUtil.locationFeatureEnabled(RemoteActivity.this)) {
                     disableMattressUI();
@@ -1696,7 +1710,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         //no animation,only info display
         runOnUiThread(() -> tvHeightIndicator.setText(target.getHeight() + "cm"));
         currentBedPosition.setHeight(target.getHeight());
-//        calcLegHeight();    // デバッグ用
+        calcLegHeight();    // デバッグ用
 
         // 高さが閾値より大きくなったら高さ警告ポップアップの表示フラグをリセット
         if ((currentBedPosition.getTilt() < tiltThreshold && currentBedPosition.getHeight() > nemuriConstantsModel.heightWarningThreshold) ||
@@ -1749,7 +1763,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         }
 
         currentBedPosition.setTilt(target.getTilt());
-//        runOnUiThread(() -> debugTiltIndicator.setText(target.getTilt() + "°"));  // デバッグ用
+        runOnUiThread(() -> debugTiltIndicator.setText("傾斜 " + target.getTilt() + "°"));  // デバッグ用
     }
 
     private void setHeadShadBed(NSBedPosition target) {
@@ -2007,6 +2021,23 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
 
     //MARK : BLE free mode functions
     private void scheduleArrowCommand(boolean isFirst) {
+        if (currentFreeOperation == NSOperation.FREE_DECREASE_HEIGHT) {
+            if (isFirst) {
+                updateStartOperationHeightPosition();
+
+                if (!isFirstOperated) {
+                    isFirstOperated = true;
+
+                    // 一旦停止判定（初回操作）
+                    if (checkHeightWarning_firstOperation(null, null)) {
+                        showHeightThresholdAlert(); // 警告ポップアップ表示
+                        stopBedFreeMode();  // FREE操作終了
+                        return;
+                    }
+                }
+            }
+        }
+
         sendArrowCommand();
         commandRequestCount += 1;
         Logger.v("scheduleArrowCommand commandRequestCount " + commandRequestCount + " commandResponseCount " + commandResponseCount + " waiting for " + nemuriConstantsModel.bedResponseTimeout);
@@ -2023,12 +2054,14 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             currentFreeOperation = NSOperation.FREE_MULTI_BUTTON;
         }
 
-        // 一旦停止判定
         if (currentFreeOperation == NSOperation.FREE_DECREASE_HEIGHT) {
-            if (checkHeightWarning(null, null)) {
-                showHeightThresholdAlert();
-                stopBedFreeMode();
-                return;
+            if (checkNoChangeBedPosition()) {
+                // 一旦停止判定（ベッド情報が2秒間変化なし）
+                if (checkHeightWarning_noChangeBedPosition(null, null)) {
+                    showHeightThresholdAlert();
+                    stopBedFreeMode();
+                    return;
+                }
             }
         }
 
@@ -2074,28 +2107,53 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     @SuppressLint("SetTextI18n")
     private void schedulePresetCommand(boolean isFirst) {
         if (isFirst) {
-            updateAboveHeightThreshold();
-//            debugTargetHead.setText(currentPresetTarget.getHead() + "°");   // デバッグ用
-//            debugTargetLeg.setText(currentPresetTarget.getLeg() + "°");
-//            debugTargetHeight.setText(currentPresetTarget.getHeight() + "cm");
-//            debugTargetTilt.setText(currentPresetTarget.getTilt() + "°");
+            // デバッグ用
+            debugTargetHead.setText("背角度 " + currentPresetTarget.getHead() + "°");
+            debugTargetLeg.setText("膝角度 " + currentPresetTarget.getLeg() + "°");
+            debugTargetHeight.setText("高さ " + currentPresetTarget.getHeight() + "cm");
+            debugTargetTilt.setText("傾斜 " + currentPresetTarget.getTilt() + "°");
+
+            updateStartOperationHeightPosition();
+
+            if (!isFirstOperated) {
+                isFirstOperated = true;
+
+                // 一旦停止判定（初回操作）
+                if (checkHeightWarning_firstOperation(currentPresetTarget.getHeight(), currentPresetTarget.getTilt())) {
+                    showHeightThresholdAlert(); // 警告ポップアップ表示
+                    startTimer_stopPresetOperation();   // POSITION操作終了
+                    return;
+                }
+            }
         }
 
-        // 一旦停止判定
-        if (checkHeightWarning(currentPresetTarget.getHeight(), currentPresetTarget.getTilt())) {
-            showHeightThresholdAlert();
-
-            //stop
-            if (sameBedPosTimer == null) {
-                sameBedPosTimer = () -> {
-                    stopPresetOperation();
-                    sameBedPosTimer = null;
-                };
-                sameBedPosHandler.postDelayed(sameBedPosTimer, nemuriConstantsModel.nsBedSameResultTimeout * 1000);
+        if (checkNoChangeBedPosition()) {
+            // 「背角度と膝角度が目標値に達している」場合
+            if ((currentPresetTarget.getHead() >= (currentBedPosition.getHead() - nemuriConstantsModel.lowerBedThreshold) && currentPresetTarget.getHead() <= (currentBedPosition.getHead() + nemuriConstantsModel.upperBedThreshold)) &&
+                (currentPresetTarget.getLeg() >= (currentBedPosition.getLeg() - nemuriConstantsModel.lowerBedThreshold) && currentPresetTarget.getLeg() <= (currentBedPosition.getLeg() + nemuriConstantsModel.upperBedThreshold))) {
+                // 「ベッドタイプが「INTIME_COMFORT」ではない」場合
+                if (nemuriScanModel.getInfoType() != NSSpec.BED_MODEL.INTIME_COMFORT.ordinal()) {
+                    startTimer_stopPresetOperation();   // POSITION操作終了
+                    return;
+                } else {
+                    // 「高さと傾斜が目標値に達している」場合
+                    if ((currentPresetTarget.getHeight() >= (currentBedPosition.getHeight() - nemuriConstantsModel.lowerBedThreshold) && currentPresetTarget.getHeight() <= (currentBedPosition.getHeight() + nemuriConstantsModel.upperBedThreshold)) &&
+                        (currentPresetTarget.getTilt() >= (currentBedPosition.getTilt() - nemuriConstantsModel.lowerBedThreshold) && currentPresetTarget.getTilt() <= (currentBedPosition.getTilt() + nemuriConstantsModel.upperBedThreshold))) {
+                        startTimer_stopPresetOperation();   // POSITION操作終了
+                        return;
+                    }
+                }
             }
 
-            return;
+            // 一旦停止判定（ベッド情報が2秒間変化なし）
+            if (checkHeightWarning_noChangeBedPosition(currentPresetTarget.getHeight(), currentPresetTarget.getTilt())) {
+                showHeightThresholdAlert(); // 警告ポップアップ表示
+                startTimer_stopPresetOperation();   // POSITION操作終了
+                return;
+            }
         }
+
+        stopTimer_stopPresetOperation();
 
         if (isSendingMultiButton) {
             nsManager.sendArrowCommand(NSOperation.FREE_MULTI_BUTTON);
@@ -2109,32 +2167,25 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             commandTimeoutHandler.postDelayed(commandTimeoutTimer, (long) (nemuriConstantsModel.bedResponseTimeout * 1000));
         }
 
-        if ((currentPresetTarget.getHead() >= (currentBedPosition.getHead() - nemuriConstantsModel.lowerBedThreshold) &&
-                    currentPresetTarget.getHead() <= (currentBedPosition.getHead() + nemuriConstantsModel.upperBedThreshold)) &&
-                   (currentPresetTarget.getLeg() >= (currentBedPosition.getLeg() - nemuriConstantsModel.lowerBedThreshold) &&
-                    currentPresetTarget.getLeg() <= (currentBedPosition.getLeg() + nemuriConstantsModel.upperBedThreshold))) {
-            // ベッドタイプが「INTIME_COMFORT」の時は、高さと傾斜が目標値に達している時のみ停止
-            if (nemuriScanModel.getInfoType() != NSSpec.BED_MODEL.INTIME_COMFORT.ordinal() ||
-               (currentPresetTarget.getHeight() == currentBedPosition.getHeight() &&
-                currentPresetTarget.getTilt() == currentBedPosition.getTilt())) {
-                //stop
-                if (sameBedPosTimer == null) {
-                    sameBedPosTimer = () -> {
-                        stopPresetOperation();
-                        sameBedPosTimer = null;
-                    };
-                    sameBedPosHandler.postDelayed(sameBedPosTimer, nemuriConstantsModel.nsBedSameResultTimeout * 1000);
-                }
-            }
-        } else {
-            if (sameBedPosTimer != null) {
-                sameBedPosHandler.removeCallbacks(sameBedPosTimer);
-                sameBedPosTimer = null;
-            }
-        }
-
         presetCommandHandler.removeCallbacks(presetCommandTimer);
         presetCommandHandler.postDelayed(presetCommandTimer, (long) ((nemuriConstantsModel.commandInterval) * 1000));
+    }
+
+    private void startTimer_stopPresetOperation() {
+        if (sameBedPosTimer == null) {
+            sameBedPosTimer = () -> {
+                stopPresetOperation();
+                sameBedPosTimer = null;
+            };
+            sameBedPosHandler.postDelayed(sameBedPosTimer, nemuriConstantsModel.nsBedSameResultTimeout * 1000);
+        }
+    }
+
+    private void stopTimer_stopPresetOperation() {
+        if (sameBedPosTimer != null) {
+            sameBedPosHandler.removeCallbacks(sameBedPosTimer);
+            sameBedPosTimer = null;
+        }
     }
 
     private void startPresetOperation() {
@@ -2207,7 +2258,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     @SuppressLint("SetTextI18n")
     private int calcLegHeight() {
         int legHeight = (int)(currentBedPosition.getHeight() - (legHeightCalcValue * Math.sin(Math.toRadians(currentBedPosition.getTilt()))));
-//        runOnUiThread(() -> debugLegHeightIndicator.setText(legHeight + "cm"));  // デバッグ用
+        runOnUiThread(() -> debugLegHeightIndicator.setText("足先高さ " + legHeight + "cm"));  // デバッグ用
         return legHeight;
     }
 
@@ -2230,50 +2281,69 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     /**
      * 高さ閾値フラグの更新
      */
-    private void updateAboveHeightThreshold() {
+    private void updateStartOperationHeightPosition() {
         Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
-        if (bedType == null) {
-            aboveHeightThresholdFlag = false;
-            return;
-        }
+        if (bedType == null) return;
 
-        // 以下のいずれかの条件を満たす時はフラグをtrue、満たさない時はfalseにする
-        // 　ー「傾斜角度が2°未満」かつ「現在高さが閾値（32cm想定）より大きい」
-        // 　ー「傾斜角度が2°以上」かつ「足先高さが閾値（35cm想定）より大きい」
-        aboveHeightThresholdFlag = (currentBedPosition.getTilt() < tiltThreshold && currentBedPosition.getHeight() > nemuriConstantsModel.heightWarningThreshold) ||
-                                   (currentBedPosition.getTilt() >= tiltThreshold && calcLegHeight() > calcLegHeightWarningThreshold());
+        final int height = currentBedPosition.getTilt() < tiltThreshold ? currentBedPosition.getHeight() : calcLegHeight();
+        final int threshold = currentBedPosition.getTilt() < tiltThreshold ? nemuriConstantsModel.heightWarningThreshold : calcLegHeightWarningThreshold();
+        
+        // 「現在高さ（傾斜角度が2°以上の場合は、足先高さ）が閾値より大きい」場合は、Higher
+        // 「現在高さ（傾斜角度が2°以上の場合は、足先高さ）が閾値より小さい」場合は、Lower
+        // 「現在高さ（傾斜角度が2°以上の場合は、足先高さ）と閾値が等しい」場合は、Equal
+        if (height > threshold) startOperation_heightPosition = StartOperation_HeightPosition.Higher;
+        else if (height < threshold) startOperation_heightPosition = StartOperation_HeightPosition.Lower;
+        else startOperation_heightPosition = StartOperation_HeightPosition.Equal;
     }
 
     /**
-     * 高さ一旦停止ポップアップの表示チェック
-     * @return true=表示する、false=表示しない
+     * ベッド情報（頭、膝、高さ、傾斜）が2秒間変化なしかどうかのチェック
+     * @return true=変化なし、false=変化あり
      */
-    private boolean checkHeightWarning(Integer targetHeight, Integer targetTilt) {
-        if (userWarnedHeight) {
-            // 「すでにポップアップ表示済み」の場合はfalse
-            return false;
-        }
-
-        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
-        if (bedType != null && bedType != NSSpec.BED_MODEL.INTIME.ordinal() && bedType != NSSpec.BED_MODEL.INTIME_COMFORT.ordinal() && !currentBedSpec.isHeightLockSupported()) {
-            // 「高さをサポートしていないベッド」の場合はfalse
-            return false;
-        }
-
-        if (bedType != null && bedType == NSSpec.BED_MODEL.INTIME.ordinal() && targetHeight != null && targetTilt != null) {
-            // 「ベッドタイプがINTIME」かつ「目標値が存在する（POSITION動作）」場合はfalse
-            return false;
-        }
-
+    private boolean checkNoChangeBedPosition() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.SECOND, -checkHeightWarningTime);
-        if (aboveHeightThresholdFlag) {
-            if (headLastUpdateTime.after(calendar.getTime()) || legLastUpdateTime.after(calendar.getTime()) || heightLastUpdateTime.after(calendar.getTime()) || tiltLastUpdateTime.after(calendar.getTime())) {
-                // 「操作開始時の高さが閾値より上（高さ閾値フラグ=true）」かつ「ベッド情報（頭、膝、高さ、傾斜）が2秒以内に変化している」場合はfalse
-                return false;
-            }
-        }
+        // 「ベッド情報が2秒間変化していない」場合はtrue
+        return !(headLastUpdateTime.after(calendar.getTime()) || legLastUpdateTime.after(calendar.getTime()) || heightLastUpdateTime.after(calendar.getTime()) || tiltLastUpdateTime.after(calendar.getTime()));
+    }
+
+    /**
+     * 高さ一旦停止ポップアップの表示チェック（初回操作の場合）
+     * @return true=表示する、false=表示しない
+     */
+    private boolean checkHeightWarning_firstOperation(Integer targetHeight, Integer targetTilt) {
+        // 「すでにポップアップ表示済み」の場合はfalse
+        if (userWarnedHeight) return false;
+
+        // 「高さをサポートしていないベッド」の場合はfalse
+        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+        if (bedType != NSSpec.BED_MODEL.INTIME.ordinal() && bedType != NSSpec.BED_MODEL.INTIME_COMFORT.ordinal() && !currentBedSpec.isHeightLockSupported()) return false;
+
+        // 「ベッドタイプがINTIME」かつ「目標値が存在する（POSITION操作）」場合はfalse
+        if (bedType == NSSpec.BED_MODEL.INTIME.ordinal() && targetHeight != null && targetTilt != null) return false;
+
+        // 「高さ閾値より大きい高さからの操作開始ではない」場合はtrue、それ以外はfalse
+        return startOperation_heightPosition != StartOperation_HeightPosition.Higher;
+    }
+
+    /**
+     * 高さ一旦停止ポップアップの表示チェック（ベッド情報が2秒間変化なしの場合）
+     * @return true=表示する、false=表示しない
+     */
+    private boolean checkHeightWarning_noChangeBedPosition(Integer targetHeight, Integer targetTilt) {
+        // 「すでにポップアップ表示済み」の場合はfalse
+        if (userWarnedHeight) return false;
+
+        // 「高さをサポートしていないベッド」の場合はfalse
+        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+        if (bedType != NSSpec.BED_MODEL.INTIME.ordinal() && bedType != NSSpec.BED_MODEL.INTIME_COMFORT.ordinal() && !currentBedSpec.isHeightLockSupported()) return false;
+
+        // 「ベッドタイプがINTIME」かつ「目標値が存在する（POSITION操作）」場合はfalse
+        if (bedType == NSSpec.BED_MODEL.INTIME.ordinal() && targetHeight != null && targetTilt != null) return false;
+
+        // 「高さ閾値より大きい高さからの操作開始ではない」場合はfalse
+        if (startOperation_heightPosition != StartOperation_HeightPosition.Higher) return false;
 
         final int height = currentBedPosition.getTilt() < tiltThreshold ? currentBedPosition.getHeight() : calcLegHeight();
         final int threshold = currentBedPosition.getTilt() < tiltThreshold ? nemuriConstantsModel.heightWarningThreshold : calcLegHeightWarningThreshold();
@@ -2963,8 +3033,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         //LOG HERE NS_REMOTE_FREE_START
         bedCardPager.setSwipeLocked(true);
         LogUserAction.sendNewLog(userService, "NS_REMOTE_FREE_START", "1", "", "UI000610");
-
-        updateAboveHeightThreshold();
 
         if (isNemuriScanInitiated) {
             commandTimeoutHandler.removeCallbacks(commandTimeoutTimer);
@@ -4131,7 +4199,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             target.setHead(currentBedPosition.getHead());
             target.setLeg(currentBedPosition.getLeg());
 
-            // 動作禁止値ではない場合、高さと傾斜も更新する
+            // 更新禁止値ではない場合、高さと傾斜も更新する
             DeviceTemplateBedModel preset = bedPresetValues.get(selectedTemplate - 1);
             if (preset.getHeight() != DeviceTemplateBedModel.heightAndTiltDefaultValue_Other) {
                 target.setHeight(currentBedPosition.getHeight());
@@ -4156,7 +4224,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             target.setHead(defaultTemplate.getHead());
             target.setLeg(defaultTemplate.getLeg());
 
-            // 動作禁止値ではない場合、高さと傾斜もリセットする
+            // 更新禁止値ではない場合、高さと傾斜もリセットする
             DeviceTemplateBedModel preset = bedPresetValues.get(selectedTemplate - 1);
             if (preset.getHeight() != DeviceTemplateBedModel.heightAndTiltDefaultValue_Other) {
                 target.setHeight(defaultTemplate.getHeight());
