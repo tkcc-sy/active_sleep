@@ -679,6 +679,7 @@
             android:layout_marginBottom="5dp"
             android:text="POSITION目標値"
             android:textColor="#80DFE9"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/debugTargetHead"
             app:layout_constraintStart_toStartOf="parent" />
 

@@ -36,6 +36,7 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.orhanobut.logger.Logger;
+import com.paramount.bed.BuildConfig;
 import com.paramount.bed.R;
 import com.paramount.bed.ble.NSConstants;
 import com.paramount.bed.ble.NSFailCode;
@@ -635,6 +636,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     @BindView(R.id.debugTargetTilt)
     TextView debugTargetTilt;
 
+    @BindView(R.id.debugTargetTitle)
+    TextView debugTargetTitle;
+
     //MARK : Activity lifecycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -669,6 +673,10 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            debugTargetTitle.setVisibility(View.VISIBLE);
         }
 
         if (DisplayUtils.FONTS.bigFontStatus(RemoteActivity.this)) {
@@ -1710,7 +1718,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         //no animation,only info display
         runOnUiThread(() -> tvHeightIndicator.setText(target.getHeight() + "cm"));
         currentBedPosition.setHeight(target.getHeight());
-        calcLegHeight();    // デバッグ用
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            calcLegHeight();
+        }
 
         // 高さが閾値より大きくなったら高さ警告ポップアップの表示フラグをリセット
         if ((currentBedPosition.getTilt() < tiltThreshold && currentBedPosition.getHeight() > nemuriConstantsModel.heightWarningThreshold) ||
@@ -1763,7 +1773,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         }
 
         currentBedPosition.setTilt(target.getTilt());
-        runOnUiThread(() -> debugTiltIndicator.setText("傾斜 " + target.getTilt() + "°"));  // デバッグ用
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            runOnUiThread(() -> debugTiltIndicator.setText("傾斜 " + target.getTilt() + "°"));
+        }
     }
 
     private void setHeadShadBed(NSBedPosition target) {
@@ -2107,11 +2119,12 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     @SuppressLint("SetTextI18n")
     private void schedulePresetCommand(boolean isFirst) {
         if (isFirst) {
-            // デバッグ用
-            debugTargetHead.setText("背角度 " + currentPresetTarget.getHead() + "°");
-            debugTargetLeg.setText("膝角度 " + currentPresetTarget.getLeg() + "°");
-            debugTargetHeight.setText("高さ " + currentPresetTarget.getHeight() + "cm");
-            debugTargetTilt.setText("傾斜 " + currentPresetTarget.getTilt() + "°");
+            if (BuildConfig.BUILD_TYPE.equals("debug")) {
+                debugTargetHead.setText("背角度 " + currentPresetTarget.getHead() + "°");
+                debugTargetLeg.setText("膝角度 " + currentPresetTarget.getLeg() + "°");
+                debugTargetHeight.setText("高さ " + currentPresetTarget.getHeight() + "cm");
+                debugTargetTilt.setText("傾斜 " + currentPresetTarget.getTilt() + "°");
+            }
 
             updateStartOperationHeightPosition();
 
@@ -2258,7 +2271,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     @SuppressLint("SetTextI18n")
     private int calcLegHeight() {
         int legHeight = (int)(currentBedPosition.getHeight() - (legHeightCalcValue * Math.sin(Math.toRadians(currentBedPosition.getTilt()))));
-        runOnUiThread(() -> debugLegHeightIndicator.setText("足先高さ " + legHeight + "cm"));  // デバッグ用
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            runOnUiThread(() -> debugLegHeightIndicator.setText("足先高さ " + legHeight + "cm"));
+        }
         return legHeight;
     }
 
@@ -2681,7 +2696,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         stopMattressFreeUI();
     }
     //MARK END : dummy ns exclusive functions
-
 
     //MARK : DeviceTemplateFetchListener implementation
     @Override
@@ -4100,7 +4114,9 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             DialogUtil.createCustomYesNo(RemoteActivity.this, "", LanguageProvider.getLanguage("UI000650C038")
                     , LanguageProvider.getLanguage("UI000650C037"), (dialogInterface, i) -> dialogInterface.dismiss(),
                     LanguageProvider.getLanguage("UI000650C036"), (dialogInterface, i) -> {
-                        resetBedTemplate();
+                        showProgress();
+                        Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
+                        DeviceTemplateProvider.getDeviceTemplate(RemoteActivity.this, (mattressModels, bedModels, mattressModelDefaults, bedModelDefaults, nemuriConstantsModel) -> resetBedTemplate(), UserLogin.getUserLogin().getId(), bedType);
                         dialogInterface.dismiss();
                         closeSettingDialog();
                     });
@@ -4223,21 +4239,13 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             DeviceTemplateBedModel defaultTemplate = DeviceTemplateBedModel.getById(selectedTemplate, true);
             target.setHead(defaultTemplate.getHead());
             target.setLeg(defaultTemplate.getLeg());
-
-            // 更新禁止値ではない場合、高さと傾斜もリセットする
-            DeviceTemplateBedModel preset = bedPresetValues.get(selectedTemplate - 1);
-            if (preset.getHeight() != DeviceTemplateBedModel.heightAndTiltDefaultValue_Other) {
-                target.setHeight(defaultTemplate.getHeight());
-            }
-            if (preset.getTilt() != DeviceTemplateBedModel.heightAndTiltDefaultValue_Other) {
-                target.setTilt(defaultTemplate.getTilt());
-            }
+            target.setHeight(defaultTemplate.getHeight());
+            target.setTilt(defaultTemplate.getTilt());
 
             //update data used by remote
             bedPresetValues.set(selectedTemplate - 1, target);
 
             //send log
-            showProgress();
             Integer bedType = nemuriScanModel == null ? null : nemuriScanModel.getInfoType();
             LogProvider.logBedTemplateChange(RemoteActivity.this, target, bedType, () -> runOnUiThread(() -> hideProgress()));
         }
