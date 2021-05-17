@@ -584,6 +584,14 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     private int selectedHardnessIndex = 0;
     //MARK END :  Bed setting vars
 
+    // 現在の高さアニメーション
+    private enum HeightAnimation {
+        None,   // アニメーションなし
+        Up,     // 上昇アニメーション
+        Down,   // 下降アニメーション
+    }
+    private HeightAnimation heightAnimation = HeightAnimation.None;
+
     private final int showTiltIconThreshold = 2;    // 傾斜マーク表示閾値
     private final int tiltIconFadeStopTime = 2000;  // この時間（ms）の間、傾斜が変化しなかったら、傾斜マークの点滅を終了する
     private Handler tiltIconFadeHandler = new Handler();
@@ -1712,7 +1720,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     private void setHeightBed(NSBedPosition target) {
         int diff = target.getHeight() - currentBedPosition.getHeight();
         if ((isArrowPressedDown || isPresetPressedDown) && diff != 0) {
-            animateNSHeightArrow(diff > 0);
+            animateNSHeightArrow(diff > 0 ? HeightAnimation.Up : HeightAnimation.Down);
         }
 
         //no animation,only info display
@@ -1820,7 +1828,12 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         });
     }
 
-    private void animateNSHeightArrow(boolean isUp) {
+    private void animateNSHeightArrow(HeightAnimation animation) {
+        if (nsArrowAnimator != null && animation != heightAnimation) {
+            stopHeightArrowAnimation();
+        }
+
+        heightAnimation = animation;
         if (nsArrowAnimator == null) {
             nsArrowAnimator = new Timer();
             nsArrowAnimator.scheduleAtFixedRate(new TimerTask() {
@@ -1830,7 +1843,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                     calendar.add(Calendar.SECOND, -heightAnimationStopTime);
                     // 高さが1秒以内に変化している場合はアニメーション継続、変化していない場合アニメーション停止
                     if ((isArrowPressedDown || isPresetPressedDown) && heightLastUpdateTime.after(calendar.getTime())) {
-                        runOnUiThread(() -> startHeightArrowAnimation(isUp));
+                        runOnUiThread(() -> startHeightArrowAnimation());
                     } else {
                         stopHeightArrowAnimation();
                     }
@@ -1839,9 +1852,21 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
         }
     }
 
-    private void startHeightArrowAnimation(boolean isUp) {
-        ArrayList<float[]> patterns = isUp ? dimmingPatternUp : dimmingPatternDown;
-        List<View> arrows = isUp ? heightArrowsUp : heightArrowsDown;
+    private void startHeightArrowAnimation() {
+        ArrayList<float[]> patterns;
+        List<View> arrows;
+        switch (heightAnimation) {
+            case Up:
+                patterns = dimmingPatternUp;
+                arrows = heightArrowsUp;
+                break;
+            case Down:
+                patterns = dimmingPatternDown;
+                arrows = heightArrowsDown;
+                break;
+            default:
+                return;
+        }
 
         float[] value = patterns.get(counterDim);
         for (int i = 0; i < arrows.size(); i++) {
@@ -1852,6 +1877,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
     }
 
     private void stopHeightArrowAnimation() {
+        heightAnimation = HeightAnimation.None;
         if (nsArrowAnimator != null) {
             nsArrowAnimator.cancel();
             nsArrowAnimator.purge();
