@@ -1183,7 +1183,7 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
             btnStartBed.setVisibility(View.VISIBLE);
             btnStartMatress.setVisibility(View.VISIBLE);
 
-            if (currentPagerType == RemotePagerType.FREE || (currentTabType == RemoteTabType.BED && currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME_COMFORT)) {
+            if (currentPagerType == RemotePagerType.FREE || (currentTabType == RemoteTabType.BED && (currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME_COMFORT))) {
                 btnStartBed.setVisibility(View.INVISIBLE);
             }
             //TO Set Default By Last Persistence Data
@@ -1257,7 +1257,6 @@ public class RemoteActivity extends BaseActivity implements BedManualFragment.Be
                     currentBedSpec.setHeightLockSupported(NemuriScanModel.get().isHeightSupported());
                 }
             }
-            btnStartBed.setVisibility(currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME || currentNSSpec.getBedType() == NSSpec.BED_MODEL.INTIME_COMFORT ? View.INVISIBLE : View.VISIBLE);
             bedCardPager.setSwipeLocked(false);
             if (bedPresetFragment != null) bedPresetFragment.disableUI();
             if (bedManualFragment != null) bedManualFragment.disableUI();
