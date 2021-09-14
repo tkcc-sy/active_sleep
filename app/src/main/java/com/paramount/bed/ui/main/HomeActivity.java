@@ -1127,6 +1127,7 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
         NemuriScanUtil.fetchSpec(this, nemuriScanDetailModel -> {});
 
         //refresh form policy,device template & home setting
+        Integer infoType = nemuriScanDetail.isValid() ? nemuriScanDetail.getInfoType() : null;
         maxRowProvider.getMaxRow(maxRowModel -> { });
         formPolicyProvider.getFormPolicy(formPolicyModel -> {});
         DeviceTemplateProvider.getDeviceTemplate(this, new DeviceTemplateProvider.DeviceTemplateFetchListener() {
@@ -1134,7 +1135,7 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
             public void onDeviceTemplateFetched(List<DeviceTemplateMattressModel> mattressModels, List<DeviceTemplateBedModel> bedModels, List<DeviceTemplateMattressModel> mattressModelDefaults, List<DeviceTemplateBedModel> bedModelDefaults, NemuriConstantsModel nemuriConstantsModel) {
                 nsConstants = nemuriConstantsModel;
             }
-        },UserLogin.getUserLogin().getId(), nemuriScanDetail.getInfoType());
+        },UserLogin.getUserLogin().getId(), infoType);
     }
 
     @Override
@@ -2298,6 +2299,7 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
         showProgress1();
         maxRowProvider.getMaxRow((maxRowModel) -> runOnUiThread(() -> {
             formPolicyProvider.getFormPolicy((formPolicyModel) -> runOnUiThread(() -> {
+                Integer infoType = nemuriScanDetail.isValid() ? nemuriScanDetail.getInfoType() : null;
                 DeviceTemplateProvider.getDeviceTemplate(this,
                         (mattressModels, bedModels, mattressModelDefaults, bedModelDefaults, nemuriConstantsModel) -> {
                             nsConstants = nemuriConstantsModel;
@@ -2328,7 +2330,7 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
                                     }
                                 });
                             });
-                        }, UserLogin.getUserLogin().getId(), nemuriScanDetail.getInfoType());
+                        }, UserLogin.getUserLogin().getId(), infoType);
             }));
         }));
     }
@@ -2790,15 +2792,16 @@ public class HomeActivity extends BaseActivity implements CalendarWebviewDialog.
     private void updateUIState() {
         runOnUiThread(() -> {
             setView();
-            btnSave.setEnabled(nemuriScanDetail.isBedExist());
-            tvTime.setEnabled(nemuriScanDetail.isBedExist());
-            if (!nemuriScanDetail.isBedExist()) {
+            boolean isBedExist = nemuriScanDetail.isValid() ? nemuriScanDetail.isBedExist() : null;
+            btnSave.setEnabled(isBedExist);
+            tvTime.setEnabled(isBedExist);
+            if (!isBedExist) {
                 tvTime.setTextColor(HomeActivity.this.getColor(R.color.slight_blue));
                 tvTime.setText(LanguageProvider.getLanguage("UI000802C179"));
                 imgPull.setVisibility(View.INVISIBLE);
             }
-            sbSetWake.setEnabled(nemuriScanDetail.isBedExist());
-            sbSetSleep.setEnabled(nemuriScanDetail.isBedExist());
+            sbSetWake.setEnabled(isBedExist);
+            sbSetSleep.setEnabled(isBedExist);
         });
     }
 
